@@ -1,0 +1,127 @@
+// Vehicle taxonomy constants
+
+export interface VehicleType {
+  name: string;
+  icon: string;
+  description?: string;
+}
+
+export const VEHICLE_TYPES: VehicleType[] = [
+  { name: "Sedan", icon: "🚗", description: "Comfortable family car" },
+  { name: "SUV", icon: "🚙", description: "Sport Utility Vehicle" },
+  { name: "Hatchback", icon: "🚗", description: "Compact and practical" },
+  { name: "Coupe", icon: "🏎️", description: "Sporty two-door car" },
+  { name: "Convertible", icon: "🏎️", description: "Open-top sports car" },
+  { name: "Wagon", icon: "🚐", description: "Estate car with extra space" },
+  { name: "Pickup Truck", icon: "🚛", description: "Utility truck" },
+  { name: "Van", icon: "🚐", description: "Commercial van" },
+  { name: "Minivan", icon: "🚐", description: "Family van" },
+  { name: "Crossover", icon: "🚙", description: "SUV-like hatchback" },
+  { name: "Roadster", icon: "🏎️", description: "Two-seat sports car" },
+  { name: "Limousine", icon: "🚗", description: "Luxury sedan" },
+  { name: "Sports Car", icon: "🏎️", description: "High-performance car" },
+  { name: "Luxury Car", icon: "🚗", description: "Premium vehicle" },
+  { name: "Compact Car", icon: "🚗", description: "Small city car" },
+  { name: "Subcompact Car", icon: "🚗", description: "Very small car" },
+  { name: "MPV", icon: "🚐", description: "Multi-Purpose Vehicle" },
+  { name: "Cabriolet", icon: "🏎️", description: "Convertible car" },
+  { name: "Grand Tourer", icon: "🏎️", description: "Luxury sports car" },
+  { name: "Supercar", icon: "🏎️", description: "Ultra-high performance" },
+  { name: "Hypercar", icon: "🏎️", description: "Extreme performance" },
+  { name: "Microcar", icon: "🚗", description: "Very small vehicle" },
+  { name: "Kei Car", icon: "🚗", description: "Japanese mini car" },
+  { name: "Light Truck", icon: "🚛", description: "Small utility truck" }
+];
+
+export const BODY_TYPES = [
+  "Sedan",
+  "SUV",
+  "Hatchback",
+  "Coupe",
+  "Convertible",
+  "Wagon",
+  "Pickup",
+  "Van",
+  "Minivan",
+  "Crossover",
+  "Roadster",
+  "Limousine",
+  "Sports Car",
+  "Luxury Sedan",
+  "Compact",
+  "Subcompact",
+  "MPV",
+  "Cabriolet",
+  "Grand Tourer",
+  "Supercar",
+  "Hypercar",
+  "Microcar",
+  "Kei Car",
+  "Light Truck",
+  "Heavy Truck",
+  "Bus",
+  "Motorcycle",
+  "ATV"
+];
+
+export const FUEL_TYPES = [
+  "Petrol",
+  "Diesel",
+  "Hybrid",
+  "Electric",
+  "Plug-in Hybrid",
+  "CNG",
+  "LPG",
+  "Hydrogen",
+  "Biodiesel",
+  "Ethanol",
+  "Methanol",
+  "Gasoline",
+  "Diesel-Electric",
+  "Solar",
+  "Fuel Cell"
+];
+
+// Mock data for countries (will be replaced with API data later)
+export const VEHICLE_COUNTRIES = [
+  "Japan",
+  "United States",
+  "Canada",
+  "United Kingdom",
+  "Germany",
+  "France",
+  "Australia",
+  "South Korea",
+  "China",
+  "Thailand",
+  "Singapore",
+  "Malaysia",
+  "Indonesia",
+  "Philippines",
+  "Vietnam",
+  "Pakistan",
+  "Bangladesh",
+  "Sri Lanka",
+  "Kenya",
+  "Tanzania",
+  "Ghana",
+  "Nigeria",
+  "South Africa",
+  "UAE",
+  "Saudi Arabia",
+  "Qatar",
+  "Kuwait",
+  "Oman",
+  "Bahrain",
+  "Jordan",
+  "Lebanon",
+  "Israel",
+  "Turkey",
+  "Russia",
+  "Brazil",
+  "Mexico",
+  "Argentina",
+  "Chile",
+  "Colombia",
+  "Peru"
+];
