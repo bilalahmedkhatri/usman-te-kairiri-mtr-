@@ -1,3 +1,4 @@
+'use client';
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/animations/FadeIn';
@@ -25,7 +26,7 @@ function MakeCard({ make }: MakeCardProps) {
         </div>
         <h3 className="font-semibold text-lg group-hover:text-red transition-colors">{make.name}</h3>
         <p className="text-sm text-muted-foreground mt-1">{make.country}</p>
-        
+
         {make.popular && (
           <Badge className="absolute top-3 right-3 bg-red/10 text-red border-0 text-[10px]">
             Popular
@@ -53,7 +54,7 @@ export default function FeaturedMakes() {
             Popular <span className="gradient-text">Japanese</span> Brands
           </h2>
           <p className="text-muted-foreground text-lg">
-            Explore vehicles from Japan's most prestigious automotive manufacturers, 
+            Explore vehicles from Japan's most prestigious automotive manufacturers,
             from legendary sports cars to luxury sedans.
           </p>
         </FadeIn>

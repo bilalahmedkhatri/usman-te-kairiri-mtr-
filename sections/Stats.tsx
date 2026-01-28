@@ -1,3 +1,4 @@
+'use client';
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FadeIn } from '@/components/animations/FadeIn';
@@ -13,10 +14,9 @@ export default function Stats() {
     <section ref={sectionRef} className="w-full py-16 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-red to-orange" />
-      
+
       {/* Pattern Overlay */}
-      <div 
-        className="absolute inset-0 opacity-10"
+      <div className="absolute inset-0 opacity-10"
         style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
           backgroundSize: '40px 40px',

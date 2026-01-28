@@ -1,3 +1,4 @@
+'use client';
 import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, Play, Search, Gauge, Shield, Globe } from 'lucide-react';
@@ -47,14 +48,14 @@ function FloatingCarCard({ car, index }: FloatingCarCardProps) {
     <motion.div
       ref={cardRef}
       initial={{ opacity: 0, scale: 0.8, rotate: pos.rotate * 2 }}
-      animate={{ 
-        opacity: 1, 
-        scale: 1, 
+      animate={{
+        opacity: 1,
+        scale: 1,
         rotate: pos.rotate,
         y: isHovered ? -10 : 0,
       }}
-      transition={{ 
-        duration: 1.2, 
+      transition={{
+        duration: 1.2,
         delay: 0.4 + index * 0.2,
         ease: [0.16, 1, 0.3, 1]
       }}
@@ -62,18 +63,18 @@ function FloatingCarCard({ car, index }: FloatingCarCardProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       className={`absolute ${pos.size} hidden lg:block cursor-pointer`}
-      style={{ 
-        rotateX, 
+      style={{
+        rotateX,
         rotateY,
         transformStyle: 'preserve-3d',
         perspective: 1000,
-        top: pos.top, 
-        right: pos.right, 
-        bottom: pos.bottom 
+        top: pos.top,
+        right: pos.right,
+        bottom: pos.bottom
       }}
     >
       <motion.div
-        animate={{ 
+        animate={{
           y: isHovered ? -10 : 0,
           scale: isHovered ? 1.05 : 1,
         }}
@@ -173,7 +174,7 @@ export default function Hero() {
           }}
         />
         {/* Grid Pattern */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)`,
@@ -209,14 +210,14 @@ export default function Hero() {
                 <span className="gradient-text">Premium</span>{' '}
                 JDM Cars
               </motion.h1>
-              
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-lg text-muted-foreground max-w-lg leading-relaxed"
               >
-                Discover Japan's finest vehicles, from legendary sports cars to 
+                Discover Japan's finest vehicles, from legendary sports cars to
                 luxury sedans. Direct export from verified dealers to your doorstep.
               </motion.p>
             </div>

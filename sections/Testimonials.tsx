@@ -1,3 +1,4 @@
+'use client';
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/animations/FadeIn';
@@ -26,11 +27,10 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
-              className={`w-4 h-4 ${
-                i < testimonial.rating
+              className={`w-4 h-4 ${i < testimonial.rating
                   ? 'fill-yellow-400 text-yellow-400'
                   : 'text-muted-foreground'
-              }`}
+                }`}
             />
           ))}
         </div>
@@ -79,7 +79,7 @@ export default function Testimonials() {
             What Our <span className="gradient-text">Customers</span> Say
           </h2>
           <p className="text-muted-foreground text-lg">
-            Join thousands of satisfied customers who found their dream 
+            Join thousands of satisfied customers who found their dream
             Japanese vehicle through our platform.
           </p>
         </FadeIn>

@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FadeIn } from '@/components/animations/FadeIn';
@@ -26,11 +28,10 @@ export default function CTA() {
     <section ref={sectionRef} className="w-full py-24 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-red via-red to-orange" />
-      
+
       {/* Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-10"
+        <div className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
             backgroundSize: '40px 40px',
@@ -52,7 +53,8 @@ export default function CTA() {
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <FadeIn>
-            <Badge className="bg-white/20 text-white border-0 mb-6">
+            {/* <Badge className="bg-white/20 text-white border-0 mb-6"> */}
+            <Badge className="bg-green/20 text-green-dark border-0 mb-4">
               Get Started Today
             </Badge>
           </FadeIn>
@@ -68,7 +70,7 @@ export default function CTA() {
           {/* Description */}
           <FadeIn delay={0.2}>
             <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
-              Subscribe to get exclusive access to new inventory, special offers, 
+              Subscribe to get exclusive access to new inventory, special offers,
               and expert insights on Japanese car exports.
             </p>
           </FadeIn>
