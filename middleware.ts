@@ -5,10 +5,19 @@ export function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl
 
     // Check if user has session cookie
-    const sessionToken = request.cookies.get('authjs.session-token') ||
-        request.cookies.get('__Secure-authjs.session-token') ||
-        request.cookies.get('next-auth.session-token') ||
-        request.cookies.get('__Secure-next-auth.session-token')
+    const authjsToken = request.cookies.get('authjs.session-token');
+    const secureAuthjsToken = request.cookies.get('__Secure-authjs.session-token');
+    const nextAuthToken = request.cookies.get('next-auth.session-token');
+    const secureNextAuthToken = request.cookies.get('__Secure-next-auth.session-token');
+
+    // console.log('🍪 Cookie Check:', {
+    //     authjsToken: !!authjsToken,
+    //     secureAuthjsToken: !!secureAuthjsToken,
+    //     nextAuthToken: !!nextAuthToken,
+    //     secureNextAuthToken: !!secureNextAuthToken
+    // });
+
+    const sessionToken = authjsToken || secureAuthjsToken || nextAuthToken || secureNextAuthToken;
 
     const isAuth = !!sessionToken
     const isAuthPage = pathname.startsWith('/login') || pathname.startsWith('/register')

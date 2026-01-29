@@ -31,8 +31,8 @@ export default function AuthNotFound() {
                     Page Not Found
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                    The authentication page you're looking for doesn't exist.
-                    Let's get you back on track.
+                    The authentication page you&apos;re looking for doesn&apos;t exist.
+                    Let&apos;s get you back on track.
                 </p>
 
                 {/* Action Buttons */}

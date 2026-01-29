@@ -2,8 +2,8 @@
 
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { AlertCircle, RefreshCcw, Home, UserX } from 'lucide-react';
-import Link from 'next/navigation';
+import { RefreshCcw, Home, UserX } from 'lucide-react';
+import Link from 'next/link';
 
 export default function UsersError({
   error,
@@ -26,11 +26,11 @@ export default function UsersError({
         <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
           <UserX className="w-8 h-8 text-red-600 dark:text-red-400" />
         </div>
-        
+
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
           Users Loading Error
         </h2>
-        
+
         <p className="text-gray-600 dark:text-gray-400 mb-6">
           Failed to load user data. {error.message || 'Please try again.'}
         </p>
@@ -40,7 +40,7 @@ export default function UsersError({
             Error ID: {error.digest}
           </p>
         )}
-        
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -51,7 +51,7 @@ export default function UsersError({
             <RefreshCcw className="w-4 h-4" />
             Try Again
           </motion.button>
-          
+
           <Link href="/">
             <motion.button
               whileHover={{ scale: 1.02 }}

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  transpilePackages: ['framer-motion'],
+  transpilePackages: ['framer-motion', 'recharts'],
   images: {
     domains: ['localhost', 'images.unsplash.com'],
     remotePatterns: [

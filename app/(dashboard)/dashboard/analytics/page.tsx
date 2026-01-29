@@ -2,11 +2,15 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  BarChart3, TrendingUp, Users, Car, Anchor, DollarSign,
+import {
+  TrendingUp, Users, DollarSign,
   Calendar, Filter, Download, Activity, Ship
 } from 'lucide-react';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import dynamic from 'next/dynamic';
+
+const SalesTrendChart = dynamic(() => import('@/components/dashboard/charts').then(mod => mod.SalesTrendChart), { ssr: false });
+const RevenueTrendChart = dynamic(() => import('@/components/dashboard/charts').then(mod => mod.RevenueTrendChart), { ssr: false });
+const VehicleTypesChart = dynamic(() => import('@/components/dashboard/charts').then(mod => mod.VehicleTypesChart), { ssr: false });
 
 const MotionDiv = motion.div;
 const MotionButton = motion.button;
@@ -41,7 +45,7 @@ export default function AnalyticsPage() {
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">Analytics & Reports</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Track sales, inventory, and performance metrics</p>
         </div>
-        
+
         <div className="flex flex-wrap gap-2">
           <MotionButton
             whileHover={{ scale: 1.02 }}
@@ -142,15 +146,7 @@ export default function AnalyticsPage() {
           className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-800"
         >
           <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-4">Sales Trend</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={salesData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis dataKey="month" stroke="#6b7280" />
-              <YAxis stroke="#6b7280" />
-              <Tooltip />
-              <Line type="monotone" dataKey="sales" stroke="#3b82f6" strokeWidth={2} />
-            </LineChart>
-          </ResponsiveContainer>
+          <SalesTrendChart data={salesData} />
         </MotionDiv>
 
         {/* Revenue Trend */}
@@ -159,15 +155,7 @@ export default function AnalyticsPage() {
           className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-800"
         >
           <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-4">Revenue Trend</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={salesData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis dataKey="month" stroke="#6b7280" />
-              <YAxis stroke="#6b7280" />
-              <Tooltip />
-              <Bar dataKey="revenue" fill="#8b5cf6" />
-            </BarChart>
-          </ResponsiveContainer>
+          <RevenueTrendChart data={salesData} />
         </MotionDiv>
 
         {/* Vehicle Types Distribution */}
@@ -176,24 +164,7 @@ export default function AnalyticsPage() {
           className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-800"
         >
           <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-4">Vehicle Types</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={vehicleTypes}
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                fill="#8884d8"
-                dataKey="value"
-                label
-              >
-                {vehicleTypes.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
+          <VehicleTypesChart data={vehicleTypes} colors={[]} />
         </MotionDiv>
 
         {/* Top Ports */}
