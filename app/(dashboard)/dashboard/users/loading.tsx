@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Users, UserPlus, Filter, Search } from 'lucide-react';
 
 const shimmerVariants = {
   animate: {

@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import Image from 'next/image';
 
 interface ModalContainerProps {
   isOpen: boolean;
@@ -42,13 +43,14 @@ export function ModalContainer({ isOpen, onClose, children, title }: ModalContai
           >
             {/* Fixed background image */}
             <div className="absolute inset-0 opacity-10">
-              <img
+              <Image
                 src={bgImage}
                 alt="Vehicle background"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
             </div>
-            
+
             {/* Header */}
             <div className="relative flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
               {title && <h2 className="text-xl font-bold text-gray-800 dark:text-white">{title}</h2>}
@@ -59,7 +61,7 @@ export function ModalContainer({ isOpen, onClose, children, title }: ModalContai
                 <X className="w-5 h-5 text-gray-600 dark:text-gray-400" />
               </button>
             </div>
-            
+
             {/* Content */}
             <div className="relative p-0">
               {children}

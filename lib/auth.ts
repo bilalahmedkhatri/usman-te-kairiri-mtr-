@@ -45,7 +45,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
                     // Return user object (without password)
                     return {
-                        id: user.id,
+                        id: String(user.id), // Convert to string for NextAuth
                         email: user.email,
                         name: user.name,
                         role: user.role,
@@ -87,7 +87,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             if (session.user) {
                 session.user.id = token.id as string
                 session.user.role = token.role as string
-                session.user.siteId = token.siteId as string | null
+                session.user.siteId = token.siteId as number | null
             }
             return session
         },

@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
             site = await prisma.site.create({
                 data: {
                     domain: 'localhost',
-                    name: 'Hokira International',
+                    name: 'TE KAIRIRI MOTORS',
                     isActive: true,
                 },
             })
@@ -77,7 +77,8 @@ export async function POST(request: NextRequest) {
             return NextResponse.json(
                 {
                     error: 'Validation failed',
-                    details: error.errors.map((err) => ({
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    details: (error as any).errors.map((err: any) => ({
                         field: err.path.join('.'),
                         message: err.message,
                     })),

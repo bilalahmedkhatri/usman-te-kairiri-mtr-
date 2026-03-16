@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
+import {
   Mail, Lock, Eye, EyeOff, AlertCircle, Loader2, ArrowRight,
   Car, Ship, Key, ShieldCheck, Sparkles
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 const MotionDiv = motion.div;
@@ -27,7 +28,7 @@ export default function LoginPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState<{email?: string; password?: string}>({});
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -75,14 +76,14 @@ export default function LoginPage() {
     // Simulate login with auto-site detection
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
       // Site auto-detection would happen here in real app
       // const currentSite = detectSiteFromDomain();
-      
+
       console.log('Login successful');
       router.push('/dashboard');
-      
-    } catch (error) {
+
+    } catch {
       setLoginError('Invalid credentials. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -97,10 +98,12 @@ export default function LoginPage() {
         animate={{ opacity: 1, x: 0 }}
         className="hidden lg:flex w-1/2 relative overflow-hidden"
       >
-        <img
+        <Image
           src={bgImage}
           alt="Premium Vehicle"
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
+          priority
         />
         <MotionDiv
           initial={{ opacity: 0, y: 20 }}
@@ -163,11 +166,10 @@ export default function LoginPage() {
                   whileFocus={{ scale: 1.02 }}
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="your@email.com"
-                  className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${
-                    errors.email ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
-                  } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
+                  className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${errors.email ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
+                    } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
                   required
                 />
               </div>
@@ -201,11 +203,10 @@ export default function LoginPage() {
                   whileFocus={{ scale: 1.02 }}
                   type={showPassword ? 'text' : 'password'}
                   value={formData.password}
-                  onChange={(e) => setFormData({...formData, password: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   placeholder="••••••••"
-                  className={`w-full pl-10 pr-12 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${
-                    errors.password ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
-                  } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
+                  className={`w-full pl-10 pr-12 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${errors.password ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
+                    } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
                   required
                 />
                 <MotionButton
@@ -244,12 +245,12 @@ export default function LoginPage() {
                 <input
                   type="checkbox"
                   checked={formData.remember_me}
-                  onChange={(e) => setFormData({...formData, remember_me: e.target.checked})}
+                  onChange={(e) => setFormData({ ...formData, remember_me: e.target.checked })}
                   className="w-5 h-5 rounded"
                 />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Remember me</span>
               </label>
-              
+
               <Link href="/forgot-password" className="text-sm text-blue-500 hover:text-blue-600">
                 Forgot password?
               </Link>

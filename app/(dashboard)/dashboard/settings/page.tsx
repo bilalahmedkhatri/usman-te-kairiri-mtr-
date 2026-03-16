@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Settings, User, Globe, Shield, CreditCard, Bell, Palette,
-  ChevronRight, Save, X, Key, Mail, Smartphone, Database, Edit2
+import {
+  Settings, Globe, Shield, CreditCard, Bell, Palette,
+  Save, Key
 } from 'lucide-react';
 
 const MotionDiv = motion.div;
@@ -44,11 +44,10 @@ export default function SettingsPage() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 rounded-xl font-medium transition-colors flex items-center gap-2 ${
-                activeTab === tab.id
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
+              className={`px-4 py-2 rounded-xl font-medium transition-colors flex items-center gap-2 ${activeTab === tab.id
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
             >
               <Icon className="w-4 h-4" />
               {tab.label}
@@ -70,8 +69,8 @@ export default function SettingsPage() {
 
 function GeneralSettings() {
   const [formData, setFormData] = useState({
-    companyName: 'Hokira International',
-    email: 'admin@hokira.com',
+    companyName: 'TE KAIRIRI MOTORS',
+    email: 'admin@tekairiri.com',
     phone: '+254712345678',
     address: 'Nairobi, Kenya',
     timezone: 'Africa/Nairobi',
@@ -92,7 +91,7 @@ function GeneralSettings() {
           <input
             type="text"
             value={formData.companyName}
-            onChange={(e) => setFormData({...formData, companyName: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
           />
         </div>
@@ -101,7 +100,7 @@ function GeneralSettings() {
           <input
             type="email"
             value={formData.email}
-            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
           />
         </div>
@@ -110,7 +109,7 @@ function GeneralSettings() {
           <input
             type="tel"
             value={formData.phone}
-            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
           />
         </div>
@@ -119,7 +118,7 @@ function GeneralSettings() {
           <input
             type="text"
             value={formData.address}
-            onChange={(e) => setFormData({...formData, address: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, address: e.target.value })}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
           />
         </div>
@@ -127,7 +126,7 @@ function GeneralSettings() {
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Timezone</label>
           <select
             value={formData.timezone}
-            onChange={(e) => setFormData({...formData, timezone: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, timezone: e.target.value })}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
           >
             <option value="Africa/Nairobi">Africa/Nairobi</option>
@@ -139,7 +138,7 @@ function GeneralSettings() {
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Default Currency</label>
           <select
             value={formData.currency}
-            onChange={(e) => setFormData({...formData, currency: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
           >
             <option value="JPY">Japanese Yen (JPY)</option>
@@ -149,7 +148,7 @@ function GeneralSettings() {
           </select>
         </div>
       </div>
-      
+
       <div className="mt-6 flex justify-end">
         <MotionButton
           whileHover={{ scale: 1.02 }}
@@ -166,11 +165,11 @@ function GeneralSettings() {
 
 function SiteSettings() {
   const [siteData, setSiteData] = useState({
-    domain: 'hokirainternational.org',
-    name: 'Hokira International',
+    domain: 'tekairirimotor.com',
+    name: 'TE KAIRIRI MOTORS',
     theme: 'blue',
     logo: '',
-    contactEmail: 'info@hokira.com',
+    contactEmail: 'info@tekairiri.com',
     phone: '+254712345678',
     whatsapp: '+254712345678',
     address: 'Nairobi, Kenya',
@@ -189,7 +188,7 @@ function SiteSettings() {
           <input
             type="text"
             value={siteData.domain}
-            onChange={(e) => setSiteData({...siteData, domain: e.target.value})}
+            onChange={(e) => setSiteData({ ...siteData, domain: e.target.value })}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
           />
         </div>
@@ -198,7 +197,7 @@ function SiteSettings() {
           <input
             type="text"
             value={siteData.name}
-            onChange={(e) => setSiteData({...siteData, name: e.target.value})}
+            onChange={(e) => setSiteData({ ...siteData, name: e.target.value })}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
           />
         </div>
@@ -206,7 +205,7 @@ function SiteSettings() {
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Theme Color</label>
           <select
             value={siteData.theme}
-            onChange={(e) => setSiteData({...siteData, theme: e.target.value})}
+            onChange={(e) => setSiteData({ ...siteData, theme: e.target.value })}
             className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
           >
             <option value="blue">Blue</option>
@@ -221,7 +220,7 @@ function SiteSettings() {
             <input
               type="email"
               value={siteData.contactEmail}
-              onChange={(e) => setSiteData({...siteData, contactEmail: e.target.value})}
+              onChange={(e) => setSiteData({ ...siteData, contactEmail: e.target.value })}
               className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
             />
           </div>
@@ -230,7 +229,7 @@ function SiteSettings() {
             <input
               type="tel"
               value={siteData.phone}
-              onChange={(e) => setSiteData({...siteData, phone: e.target.value})}
+              onChange={(e) => setSiteData({ ...siteData, phone: e.target.value })}
               className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
             />
           </div>
@@ -241,7 +240,7 @@ function SiteSettings() {
             <input
               type="tel"
               value={siteData.whatsapp}
-              onChange={(e) => setSiteData({...siteData, whatsapp: e.target.value})}
+              onChange={(e) => setSiteData({ ...siteData, whatsapp: e.target.value })}
               className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
             />
           </div>
@@ -250,7 +249,7 @@ function SiteSettings() {
             <input
               type="text"
               value={siteData.address}
-              onChange={(e) => setSiteData({...siteData, address: e.target.value})}
+              onChange={(e) => setSiteData({ ...siteData, address: e.target.value })}
               className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
             />
           </div>
@@ -319,7 +318,7 @@ function SecuritySettings() {
 }
 
 function BillingSettings() {
-  const [billingData, setBillingData] = useState({
+  const [billingData] = useState({
     plan: 'professional',
     status: 'active',
     nextBilling: '2024-08-01',
@@ -437,9 +436,8 @@ function AppearanceSettings() {
             <MotionButton
               whileHover={{ scale: 1.02 }}
               onClick={() => setTheme('light')}
-              className={`p-4 rounded-xl border-2 ${
-                theme === 'light' ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700'
-              } bg-white`}
+              className={`p-4 rounded-xl border-2 ${theme === 'light' ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700'
+                } bg-white`}
             >
               <div className="w-full h-8 bg-blue-500 rounded mb-2"></div>
               <p className="text-sm font-medium">Light</p>
@@ -447,9 +445,8 @@ function AppearanceSettings() {
             <MotionButton
               whileHover={{ scale: 1.02 }}
               onClick={() => setTheme('dark')}
-              className={`p-4 rounded-xl border-2 ${
-                theme === 'dark' ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700'
-              } bg-gray-900`}
+              className={`p-4 rounded-xl border-2 ${theme === 'dark' ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700'
+                } bg-gray-900`}
             >
               <div className="w-full h-8 bg-gray-700 rounded mb-2"></div>
               <p className="text-sm font-medium text-white">Dark</p>
@@ -457,9 +454,8 @@ function AppearanceSettings() {
             <MotionButton
               whileHover={{ scale: 1.02 }}
               onClick={() => setTheme('auto')}
-              className={`p-4 rounded-xl border-2 ${
-                theme === 'auto' ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700'
-              } bg-gradient-to-b from-white to-gray-900`}
+              className={`p-4 rounded-xl border-2 ${theme === 'auto' ? 'border-blue-500' : 'border-gray-300 dark:border-gray-700'
+                } bg-gradient-to-b from-white to-gray-900`}
             >
               <div className="w-full h-8 bg-gradient-to-r from-blue-500 to-gray-700 rounded mb-2"></div>
               <p className="text-sm font-medium">Auto</p>

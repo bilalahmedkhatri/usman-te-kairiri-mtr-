@@ -21,7 +21,7 @@ export default function TermsPaymentPage() {
             <ul className="list-none space-y-2 text-sm text-foreground">
               <li><strong>Bank Name:</strong> Sumitomo Mitsui Banking Corporation</li>
               <li><strong>Branch:</strong> Yokohama Branch</li>
-              <li><strong>Account Name:</strong> Cars International Co., Ltd.</li>
+              <li><strong>Account Name:</strong> TE KAIRIRI MOTORS Co., Ltd.</li>
               <li><strong>Swift Code:</strong> SMBCJPJT</li>
             </ul>
           </div>
@@ -50,7 +50,7 @@ export default function TermsPaymentPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4">4. Warranty & Claims</h2>
           <p className="text-muted-foreground leading-relaxed">
-            Vehicles are sold "as is". While we provide accurate inspection sheets, we do not offer
+            Vehicles are sold &quot;as is&quot;. While we provide accurate inspection sheets, we do not offer
             warranties on used vehicles exported outside of Japan. Claims for substantial discrepancies
             must be made within 7 days of vehicle arrival at the destination port, supported by
             independent survey reports.

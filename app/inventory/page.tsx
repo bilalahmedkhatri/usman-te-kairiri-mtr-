@@ -83,11 +83,11 @@ export default function InventoryPage() {
       case "newest":
         return sorted.sort((a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime());
       case "price-asc":
-        return sorted.sort((a, b) => a.price - b.price);
+        return sorted.sort((a, b) => (a.price || 0) - (b.price || 0));
       case "price-desc":
-        return sorted.sort((a, b) => b.price - a.price);
+        return sorted.sort((a, b) => (b.price || 0) - (a.price || 0));
       case "year-desc":
-        return sorted.sort((a, b) => b.year - a.year);
+        return sorted.sort((a, b) => (b.year || 0) - (a.year || 0));
       case "mileage-asc":
         return sorted.sort((a, b) => (a.specs?.mileage || 0) - (b.specs?.mileage || 0));
       case "popular":

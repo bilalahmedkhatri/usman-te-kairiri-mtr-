@@ -3,8 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Search, Plus, Edit2, Trash2, Anchor, MapPin, Globe,
-  Filter, Ship, MoreVertical
+  Search, Plus, Edit2, Trash2, Anchor, MapPin
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -44,7 +43,7 @@ export default function PortsPage() {
   const [typeFilter, setTypeFilter] = useState('all');
 
   // Mock port data based on schema
-  const ports: Port[] = [
+  const ports: Port[] = useMemo(() => [
     { id: 1, name: 'Yokohama', country: 'Japan', region: 'East Asia', is_destination: false, created_at: '2024-01-01' },
     { id: 2, name: 'Mombasa', country: 'Kenya', region: 'East Africa', is_destination: true, created_at: '2024-01-01' },
     { id: 3, name: 'Durban', country: 'South Africa', region: 'Southern Africa', is_destination: true, created_at: '2024-01-01' },
@@ -52,7 +51,7 @@ export default function PortsPage() {
     { id: 5, name: 'Kobe', country: 'Japan', region: 'East Asia', is_destination: false, created_at: '2024-01-01' },
     { id: 6, name: 'Dar es Salaam', country: 'Tanzania', region: 'East Africa', is_destination: true, created_at: '2024-01-01' },
     { id: 7, name: 'Lusaka', country: 'Zambia', region: 'Southern Africa', is_destination: true, created_at: '2024-01-01' },
-  ];
+  ], []);
 
   const filteredPorts = useMemo(() => {
     return ports.filter(port => {
@@ -64,7 +63,7 @@ export default function PortsPage() {
         (typeFilter === 'origin' && !port.is_destination);
       return matchesSearch && matchesRegion && matchesType;
     });
-  }, [searchTerm, regionFilter, typeFilter]);
+  }, [searchTerm, regionFilter, typeFilter, ports]);
 
   const regions = [...new Set(ports.map(p => p.region))];
 
@@ -207,8 +206,8 @@ export default function PortsPage() {
                   </td>
                   <td className="px-4 sm:px-6 py-4">
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${port.is_destination
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                        : 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400'
+                      ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                      : 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400'
                       }`}>
                       {port.is_destination ? 'Destination' : 'Origin'}
                     </span>

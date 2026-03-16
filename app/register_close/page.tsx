@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  User, Mail, Lock, Eye, EyeOff, UserPlus, ShieldCheck, Sparkles,
-  AlertCircle, Loader2, ArrowRight, Car, Ship, Key, MapPin, Phone
+import {
+  User, Mail, Lock, Eye, EyeOff, UserPlus, ShieldCheck, Sparkles, CheckCircle,
+  AlertCircle, Loader2, ArrowRight, Car, Key, MapPin, Phone
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 const MotionDiv = motion.div;
@@ -27,7 +28,7 @@ export default function RegisterPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState<{email?: string; password?: string; name?: string}>({});
+  const [errors, setErrors] = useState<{ email?: string; password?: string; name?: string }>({});
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -75,7 +76,7 @@ export default function RegisterPage() {
     // Auto-detect site and register
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       // Site would be auto-detected here
       const registrationData = {
         ...formData,
@@ -83,16 +84,16 @@ export default function RegisterPage() {
         created_at: new Date().toISOString(),
         // site_id would be auto-detected from domain
       };
-      
+
       console.log('Registering user:', registrationData);
       setSuccessMessage('Account created successfully! Redirecting...');
-      
+
       setTimeout(() => {
         router.push('/login');
       }, 1500);
-      
-    } catch (error) {
-      setErrors({email: 'Email already exists'});
+
+    } catch {
+      setErrors({ email: 'Email already exists' });
     } finally {
       setIsSubmitting(false);
     }
@@ -106,10 +107,12 @@ export default function RegisterPage() {
         animate={{ opacity: 1, x: 0 }}
         className="hidden lg:flex w-1/2 relative overflow-hidden"
       >
-        <img
+        <Image
           src={bgImage}
           alt="Premium Vehicle"
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
+          priority
         />
         <MotionDiv
           initial={{ opacity: 0, y: 20 }}
@@ -172,11 +175,10 @@ export default function RegisterPage() {
                   whileFocus={{ scale: 1.02 }}
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="John Doe"
-                  className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${
-                    errors.name ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
-                  } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
+                  className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${errors.name ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
+                    } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
                   required
                 />
               </div>
@@ -210,11 +212,10 @@ export default function RegisterPage() {
                   whileFocus={{ scale: 1.02 }}
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="john@example.com"
-                  className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${
-                    errors.email ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
-                  } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
+                  className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${errors.email ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
+                    } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
                   required
                 />
               </div>
@@ -248,11 +249,10 @@ export default function RegisterPage() {
                   whileFocus={{ scale: 1.02 }}
                   type={showPassword ? 'text' : 'password'}
                   value={formData.password}
-                  onChange={(e) => setFormData({...formData, password: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   placeholder="••••••••"
-                  className={`w-full pl-10 pr-12 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${
-                    errors.password ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
-                  } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
+                  className={`w-full pl-10 pr-12 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${errors.password ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
+                    } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
                   required
                 />
                 <MotionButton
@@ -297,7 +297,7 @@ export default function RegisterPage() {
                 <input
                   type="tel"
                   value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   placeholder="+254712345678"
                   className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
                 />
@@ -317,7 +317,7 @@ export default function RegisterPage() {
                 <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <select
                   value={formData.country}
-                  onChange={(e) => setFormData({...formData, country: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                   className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
                 >
                   <option value="">Select Country</option>

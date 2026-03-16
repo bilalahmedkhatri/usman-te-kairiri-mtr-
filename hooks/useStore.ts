@@ -156,7 +156,7 @@ export const useStore = create<StoreState>()(
       setSearchQuery: (query) => set({ searchQuery: query }),
     }),
     {
-      name: 'jdm-export-store',
+      name: 'Japanese-export-store',
       partialize: (state) => ({
         wishlist: state.wishlist,
         cart: state.cart,

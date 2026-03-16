@@ -45,12 +45,21 @@ export interface Dealer {
   };
 }
 
+export type UserRole =
+  | 'admin'
+  | 'manager'
+  | 'user'
+  | 'dealer'
+  | 'supplier'
+  | 'buyer'
+  | 'viewer';
+
 export interface User {
   id: string;
   name: string;
   email: string;
   avatar?: string;
-  role: 'buyer' | 'dealer' | 'admin';
+  role: UserRole;
   wishlist: string[];
   inquiries: Inquiry[];
   createdAt: string;

@@ -1,222 +1,393 @@
-import { PrismaClient } from '@prisma/client'
-import bcrypt from 'bcrypt'
+import { PrismaClient, VehicleStatus } from '@prisma/client';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function main() {
-    console.log('🌱 Starting database seed...')
+    console.log('🚗 Seeding vehicles...');
 
-    // Create default site
-    const site = await prisma.site.upsert({
-        where: { domain: 'localhost' },
-        update: {},
-        create: {
-            domain: 'localhost',
-            name: 'Hokira International',
-            isActive: true,
-            themeConfig: {
-                primaryColor: 'hsl(0 72% 51%)',
-                secondaryColor: 'hsl(24 95% 53%)',
-                logo: '/logo.png',
+    // Get siteId (use the first site or create a default one)
+    let site = await prisma.site.findFirst();
+    if (!site) {
+        site = await prisma.site.create({
+            data: {
+                domain: 'default.carexport.com',
+                name: 'Default Car Export Site',
+                isActive: true,
             },
-            contactInfo: {
-                email: 'info@hokirainternational.org',
-                phone: '+1234567890',
-                address: 'Tokyo, Japan',
-                whatsapp: '+1234567890',
-            },
-            defaultCurrency: 'USD',
-        },
-    })
-    console.log('✅ Created site:', site.name)
-
-    // Create admin user
-    const hashedPassword = await bcrypt.hash('admin123', 12)
-
-    const admin = await prisma.user.upsert({
-        where: { email: 'admin@example.com' },
-        update: {},
-        create: {
-            email: 'admin@example.com',
-            name: 'Admin User',
-            password: hashedPassword,
-            role: 'ADMIN',
-            siteId: site.id,
-            emailVerified: new Date(),
-        },
-    })
-    console.log('✅ Created admin user:', admin.email)
-
-    // Create test buyer
-    const buyerPassword = await bcrypt.hash('buyer123', 12)
-
-    const buyer = await prisma.user.upsert({
-        where: { email: 'buyer@example.com' },
-        update: {},
-        create: {
-            email: 'buyer@example.com',
-            name: 'Test Buyer',
-            password: buyerPassword,
-            role: 'BUYER',
-            siteId: site.id,
-            country: 'Kenya',
-            phone: '+254123456789',
-        },
-    })
-    console.log('✅ Created buyer user:', buyer.email)
-
-    // Create currencies
-    const currencies = [
-        { code: 'USD', symbol: '$', name: 'US Dollar' },
-        { code: 'JPY', symbol: '¥', name: 'Japanese Yen' },
-        { code: 'EUR', symbol: '€', name: 'Euro' },
-        { code: 'GBP', symbol: '£', name: 'British Pound' },
-        { code: 'KES', symbol: 'KSh', name: 'Kenyan Shilling' },
-    ]
-
-    for (const currency of currencies) {
-        await prisma.currency.upsert({
-            where: { code: currency.code },
-            update: {},
-            create: currency,
-        })
+        });
+        console.log(`✅ Created default site: ${site.name}`);
     }
-    console.log('✅ Created currencies')
 
-    // Create ports
-    const ports = [
-        { name: 'Yokohama', country: 'Japan', region: 'East Asia', isDestination: false },
-        { name: 'Tokyo', country: 'Japan', region: 'East Asia', isDestination: false },
-        { name: 'Mombasa', country: 'Kenya', region: 'East Africa', isDestination: true },
-        { name: 'Dar es Salaam', country: 'Tanzania', region: 'East Africa', isDestination: true },
-        { name: 'Durban', country: 'South Africa', region: 'Southern Africa', isDestination: true },
-        { name: 'Dubai', country: 'UAE', region: 'Middle East', isDestination: true },
-    ]
+    // Get dealer users for vehicle assignment
+    const dealers = await prisma.user.findMany({
+        where: { role: 'DEALER' },
+        select: { id: true, email: true, name: true },
+    });
 
-    for (const port of ports) {
-        await prisma.port.create({
-            data: port,
-        })
+    if (dealers.length === 0) {
+        console.error('❌ No dealers found! Please run user seed first.');
+        return;
     }
-    console.log('✅ Created ports')
 
-    // Create sample vehicles
-    const vehicles = [
+    console.log(`📋 Found ${dealers.length} dealers`);
+
+    // Vehicle data based on the image directories
+    const vehiclesData = [
+        // Honda Black (folder: Honda_black) - 14 images
         {
-            stockNumber: 'TYT-001',
-            vinChassis: 'JT2BF18K0X0123456',
-            make: 'Toyota',
-            model: 'Harrier',
-            yearManufacture: 2018,
-            yearRegistration: 2018,
-            priceFob: 15000,
-            status: 'AVAILABLE' as const,
-            featured: true,
-            siteId: site.id,
-            specs: {
-                create: {
-                    engineCode: '2AZ-FE',
-                    engineCc: 2400,
-                    fuelType: 'Petrol',
-                    transmission: 'FAT',
-                    driveType: '4WD',
-                    steering: 'RHD',
-                    seats: 5,
-                    doors: 5,
-                    colorExterior: 'Pearl White',
-                    colorInterior: 'Black Leather',
-                    trimGrade: '240G Premium',
-                    mileageKm: 45000,
-                    vehicleType: 'SUV',
-                    options: {
-                        sunroof: true,
-                        leather: true,
-                        navigation: true,
-                        backCamera: true,
-                    },
-                },
-            },
-            logistics: {
-                create: {
-                    lengthCm: 470,
-                    widthCm: 183,
-                    heightCm: 169,
-                    m3: 14.5,
-                    weightKg: 1650,
-                    originCountry: 'Japan',
-                    inspectionStatus: 'passed',
-                    exportCertStatus: true,
-                },
-            },
-        },
-        {
-            stockNumber: 'TYT-002',
-            vinChassis: 'JT2BF18K0X0123457',
-            make: 'Toyota',
-            model: 'Land Cruiser',
+            stockNumber: 'HND-BLK-2020-001',
+            vinChassis: 'JHMGE8H59CC123456',
+            make: 'Honda',
+            model: 'Vezel',
             yearManufacture: 2020,
             yearRegistration: 2020,
-            priceFob: 45000,
-            status: 'AVAILABLE' as const,
+            priceFob: 1850000,
+            status: VehicleStatus.AVAILABLE,
             featured: true,
             siteId: site.id,
-            specs: {
-                create: {
-                    engineCode: '1VD-FTV',
-                    engineCc: 4500,
-                    fuelType: 'Diesel',
-                    transmission: 'FAT',
-                    driveType: '4WD',
-                    steering: 'RHD',
-                    seats: 7,
-                    doors: 5,
-                    colorExterior: 'Black',
-                    colorInterior: 'Beige Leather',
-                    trimGrade: 'ZX',
-                    mileageKm: 25000,
-                    vehicleType: 'SUV',
-                    options: {
-                        sunroof: true,
-                        leather: true,
-                        navigation: true,
-                        backCamera: true,
-                        cruiseControl: true,
-                    },
+            spec: {
+                engineCode: 'L15B',
+                engineCc: 1500,
+                fuelType: 'Hybrid',
+                transmission: 'CVT',
+                driveType: '4WD',
+                steering: 'Right',
+                seats: 5,
+                doors: 5,
+                colorExterior: 'Black',
+                colorInterior: 'Black',
+                trimGrade: 'Z',
+                mileageKm: 45000,
+                vehicleType: 'SUV',
+                options: {
+                    features: ['LED Headlights', 'Push Start', 'Reverse Camera', 'Navigation', 'Leather Seats'],
                 },
             },
             logistics: {
-                create: {
-                    lengthCm: 490,
-                    widthCm: 197,
-                    heightCm: 188,
-                    m3: 18.2,
-                    weightKg: 2500,
-                    originCountry: 'Japan',
-                    inspectionStatus: 'passed',
-                    exportCertStatus: true,
+                originCountry: 'Japan',
+                currentPortId: 'Yokohama',
+                inspectionStatus: 'Passed',
+                exportCertStatus: true,
+            },
+            images: [
+                { url: '/static/vehicle_images/Honda_black/WhatsApp Image 2026-01-28 at 12.52.01 PM.jpeg', isPrimary: true, order: 0 },
+                { url: '/static/vehicle_images/Honda_black/WhatsApp Image 2026-01-28 at 12.52.01 PM (1).jpeg', order: 1 },
+                { url: '/static/vehicle_images/Honda_black/WhatsApp Image 2026-01-28 at 12.52.01 PM (2).jpeg', order: 2 },
+                { url: '/static/vehicle_images/Honda_black/WhatsApp Image 2026-01-28 at 12.52.02 PM.jpeg', order: 3 },
+                { url: '/static/vehicle_images/Honda_black/WhatsApp Image 2026-01-28 at 12.52.02 PM (1).jpeg', order: 4 },
+                { url: '/static/vehicle_images/Honda_black/WhatsApp Image 2026-01-28 at 12.52.02 PM (2).jpeg', order: 5 },
+                { url: '/static/vehicle_images/Honda_black/WhatsApp Image 2026-01-28 at 12.52.02 PM (3).jpeg', order: 6 },
+                { url: '/static/vehicle_images/Honda_black/WhatsApp Image 2026-01-28 at 12.52.03 PM.jpeg', order: 7 },
+            ],
+        },
+
+        // Subaru White (folder: Saberu_White) - 13 images
+        {
+            stockNumber: 'SBR-WHT-2021-002',
+            vinChassis: 'JF2GPAAC5MH234567',
+            make: 'Subaru',
+            model: 'Impreza Sport',
+            yearManufacture: 2021,
+            yearRegistration: 2021,
+            priceFob: 2150000,
+            status: VehicleStatus.AVAILABLE,
+            featured: true,
+            siteId: site.id,
+            spec: {
+                engineCode: 'FB20',
+                engineCc: 2000,
+                fuelType: 'Petrol',
+                transmission: 'CVT',
+                driveType: 'AWD',
+                steering: 'Right',
+                seats: 5,
+                doors: 5,
+                colorExterior: 'White Pearl',
+                colorInterior: 'Black',
+                trimGrade: '2.0i-S EyeSight',
+                mileageKm: 32000,
+                vehicleType: 'Sedan',
+                options: {
+                    features: ['EyeSight Safety', 'Sunroof', 'Leather Seats', 'Harman Kardon Audio', 'LED Lights'],
                 },
             },
+            logistics: {
+                originCountry: 'Japan',
+                currentPortId: 'Tokyo',
+                inspectionStatus: 'Passed',
+                exportCertStatus: true,
+            },
+            images: [
+                { url: '/static/vehicle_images/Saberu_White/WhatsApp Image 2026-01-28 at 12.49.10 PM.jpeg', isPrimary: true, order: 0 },
+                { url: '/static/vehicle_images/Saberu_White/WhatsApp Image 2026-01-28 at 12.49.11 PM.jpeg', order: 1 },
+                { url: '/static/vehicle_images/Saberu_White/WhatsApp Image 2026-01-28 at 12.49.11 PM (1).jpeg', order: 2 },
+                { url: '/static/vehicle_images/Saberu_White/WhatsApp Image 2026-01-28 at 12.49.12 PM.jpeg', order: 3 },
+                { url: '/static/vehicle_images/Saberu_White/WhatsApp Image 2026-01-28 at 12.49.12 PM (1).jpeg', order: 4 },
+                { url: '/static/vehicle_images/Saberu_White/WhatsApp Image 2026-01-28 at 12.49.12 PM (2).jpeg', order: 5 },
+                { url: '/static/vehicle_images/Saberu_White/WhatsApp Image 2026-01-28 at 12.49.12 PM (3).jpeg', order: 6 },
+                { url: '/static/vehicle_images/Saberu_White/WhatsApp Image 2026-01-28 at 12.49.13 PM.jpeg', order: 7 },
+            ],
         },
-    ]
 
-    for (const vehicle of vehicles) {
-        await prisma.vehicle.create({
-            data: vehicle,
-        })
+        // Honda Black CR-V (folder: Honda_black_CVR) - 14 images
+        {
+            stockNumber: 'HND-CRV-2019-003',
+            vinChassis: 'JHLRE48759C345678',
+            make: 'Honda',
+            model: 'CR-V',
+            yearManufacture: 2019,
+            yearRegistration: 2019,
+            priceFob: 2450000,
+            status: VehicleStatus.AVAILABLE,
+            featured: false,
+            siteId: site.id,
+            spec: {
+                engineCode: 'L15B',
+                engineCc: 1500,
+                fuelType: 'Petrol Turbo',
+                transmission: 'CVT',
+                driveType: '4WD',
+                steering: 'Right',
+                seats: 7,
+                doors: 5,
+                colorExterior: 'Black',
+                colorInterior: 'Beige',
+                trimGrade: 'EX Masterpiece',
+                mileageKm: 58000,
+                vehicleType: 'SUV',
+                options: {
+                    features: ['Honda Sensing', '3rd Row Seats', 'Power Tailgate', 'Sunroof', 'Heated Seats'],
+                },
+            },
+            logistics: {
+                originCountry: 'Japan',
+                currentPortId: 'Osaka',
+                inspectionStatus: 'Passed',
+                exportCertStatus: true,
+            },
+            images: [
+                { url: '/static/vehicle_images/Honda_black_CVR/WhatsApp Image 2026-01-28 at 12.47.36 PM.jpeg', isPrimary: true, order: 0 },
+                { url: '/static/vehicle_images/Honda_black_CVR/WhatsApp Image 2026-01-28 at 12.47.36 PM (1).jpeg', order: 1 },
+                { url: '/static/vehicle_images/Honda_black_CVR/WhatsApp Image 2026-01-28 at 12.47.36 PM (2).jpeg', order: 2 },
+                { url: '/static/vehicle_images/Honda_black_CVR/WhatsApp Image 2026-01-28 at 12.47.37 PM.jpeg', order: 3 },
+                { url: '/static/vehicle_images/Honda_black_CVR/WhatsApp Image 2026-01-28 at 12.47.37 PM (1).jpeg', order: 4 },
+                { url: '/static/vehicle_images/Honda_black_CVR/WhatsApp Image 2026-01-28 at 12.47.37 PM (2).jpeg', order: 5 },
+                { url: '/static/vehicle_images/Honda_black_CVR/WhatsApp Image 2026-01-28 at 12.47.38 PM.jpeg', order: 6 },
+                { url: '/static/vehicle_images/Honda_black_CVR/WhatsApp Image 2026-01-28 at 12.47.38 PM (1).jpeg', order: 7 },
+            ],
+        },
+
+        // Honda Blue Fit (folder: Honda_blue_fit) - 13 images
+        {
+            stockNumber: 'HND-FIT-2020-004',
+            vinChassis: 'JHMGK5H76LC456789',
+            make: 'Honda',
+            model: 'Fit',
+            yearManufacture: 2020,
+            yearRegistration: 2020,
+            priceFob: 1350000,
+            status: VehicleStatus.AVAILABLE,
+            featured: false,
+            siteId: site.id,
+            spec: {
+                engineCode: 'L13B',
+                engineCc: 1300,
+                fuelType: 'Hybrid',
+                transmission: 'e-CVT',
+                driveType: 'FF',
+                steering: 'Right',
+                seats: 5,
+                doors: 5,
+                colorExterior: 'Blue',
+                colorInterior: 'Black',
+                trimGrade: 'Home',
+                mileageKm: 28000,
+                vehicleType: 'Hatchback',
+                options: {
+                    features: ['Honda Sensing', 'Push Start', 'LED Lights', 'Cruise Control', 'USB Charging'],
+                },
+            },
+            logistics: {
+                originCountry: 'Japan',
+                currentPortId: 'Nagoya',
+                inspectionStatus: 'Passed',
+                exportCertStatus: true,
+            },
+            images: [
+                { url: '/static/vehicle_images/Honda_blue_fit/WhatsApp Image 2026-01-28 at 12.09.23 PM.jpeg', isPrimary: true, order: 0 },
+                { url: '/static/vehicle_images/Honda_blue_fit/WhatsApp Image 2026-01-28 at 12.09.24 PM.jpeg', order: 1 },
+                { url: '/static/vehicle_images/Honda_blue_fit/WhatsApp Image 2026-01-28 at 12.09.24 PM (1).jpeg', order: 2 },
+                { url: '/static/vehicle_images/Honda_blue_fit/WhatsApp Image 2026-01-28 at 12.09.24 PM (2).jpeg', order: 3 },
+                { url: '/static/vehicle_images/Honda_blue_fit/WhatsApp Image 2026-01-28 at 12.09.24 PM (3).jpeg', order: 4 },
+                { url: '/static/vehicle_images/Honda_blue_fit/WhatsApp Image 2026-01-28 at 12.09.25 PM.jpeg', order: 5 },
+                { url: '/static/vehicle_images/Honda_blue_fit/WhatsApp Image 2026-01-28 at 12.09.25 PM (1).jpeg', order: 6 },
+                { url: '/static/vehicle_images/Honda_blue_fit/WhatsApp Image 2026-01-28 at 12.09.25 PM (2).jpeg', order: 7 },
+            ],
+        },
+
+        // Nissan Red Juke (folder: Nissan_red_juke) - 12 images
+        {
+            stockNumber: 'NSN-JUK-2018-005',
+            vinChassis: 'SJNFAAE11U1567890',
+            make: 'Nissan',
+            model: 'Juke',
+            yearManufacture: 2018,
+            yearRegistration: 2018,
+            priceFob: 1580000,
+            status: VehicleStatus.AVAILABLE,
+            featured: true,
+            siteId: site.id,
+            spec: {
+                engineCode: 'HR15DE',
+                engineCc: 1500,
+                fuelType: 'Petrol',
+                transmission: 'CVT',
+                driveType: 'FF',
+                steering: 'Right',
+                seats: 5,
+                doors: 5,
+                colorExterior: 'Red',
+                colorInterior: 'Black/Red',
+                trimGrade: '15RX V Selection',
+                mileageKm: 62000,
+                vehicleType: 'SUV',
+                options: {
+                    features: ['Sport Mode', 'Alloy Wheels', 'Fog Lights', 'Climate Control', 'Bluetooth'],
+                },
+            },
+            logistics: {
+                originCountry: 'Japan',
+                currentPortId: 'Yokohama',
+                inspectionStatus: 'Passed',
+                exportCertStatus: true,
+            },
+            images: [
+                { url: '/static/vehicle_images/Nissan_red_juke/WhatsApp Image 2026-01-28 at 12.10.35 PM.jpeg', isPrimary: true, order: 0 },
+                { url: '/static/vehicle_images/Nissan_red_juke/WhatsApp Image 2026-01-28 at 12.10.35 PM (1).jpeg', order: 1 },
+                { url: '/static/vehicle_images/Nissan_red_juke/WhatsApp Image 2026-01-28 at 12.10.36 PM.jpeg', order: 2 },
+                { url: '/static/vehicle_images/Nissan_red_juke/WhatsApp Image 2026-01-28 at 12.10.36 PM (1).jpeg', order: 3 },
+                { url: '/static/vehicle_images/Nissan_red_juke/WhatsApp Image 2026-01-28 at 12.10.36 PM (2).jpeg', order: 4 },
+                { url: '/static/vehicle_images/Nissan_red_juke/WhatsApp Image 2026-01-28 at 12.10.36 PM (3).jpeg', order: 5 },
+                { url: '/static/vehicle_images/Nissan_red_juke/WhatsApp Image 2026-01-28 at 12.10.37 PM.jpeg', order: 6 },
+                { url: '/static/vehicle_images/Nissan_red_juke/WhatsApp Image 2026-01-28 at 12.10.37 PM (1).jpeg', order: 7 },
+            ],
+        },
+
+        // Nissan Red X-Trail (folder: Nissan_red_xtrail) - 13 images
+        {
+            stockNumber: 'NSN-XTR-2019-006',
+            vinChassis: 'SJNFBAN32U1678901',
+            make: 'Nissan',
+            model: 'X-Trail',
+            yearManufacture: 2019,
+            yearRegistration: 2019,
+            priceFob: 2650000,
+            status: VehicleStatus.RESERVED,
+            featured: true,
+            siteId: site.id,
+            spec: {
+                engineCode: 'MR20DD',
+                engineCc: 2000,
+                fuelType: 'Petrol',
+                transmission: 'CVT',
+                driveType: '4WD',
+                steering: 'Right',
+                seats: 7,
+                doors: 5,
+                colorExterior: 'Red',
+                colorInterior: 'Black',
+                trimGrade: '20Xi',
+                mileageKm: 48000,
+                vehicleType: 'SUV',
+                options: {
+                    features: ['ProPILOT', '3rd Row Seats', 'Around View Monitor', 'Power Seats', 'Intelligent Key'],
+                },
+            },
+            logistics: {
+                originCountry: 'Japan',
+                currentPortId: 'Kobe',
+                inspectionStatus: 'Passed',
+                exportCertStatus: true,
+            },
+            images: [
+                { url: '/static/vehicle_images/Nissan_red_xtrail/WhatsApp Image 2026-01-28 at 12.05.01 PM.jpeg', isPrimary: true, order: 0 },
+                { url: '/static/vehicle_images/Nissan_red_xtrail/WhatsApp Image 2026-01-28 at 12.05.02 PM.jpeg', order: 1 },
+                { url: '/static/vehicle_images/Nissan_red_xtrail/WhatsApp Image 2026-01-28 at 12.05.02 PM (1).jpeg', order: 2 },
+                { url: '/static/vehicle_images/Nissan_red_xtrail/WhatsApp Image 2026-01-28 at 12.05.02 PM (2).jpeg', order: 3 },
+                { url: '/static/vehicle_images/Nissan_red_xtrail/WhatsApp Image 2026-01-28 at 12.05.03 PM.jpeg', order: 4 },
+                { url: '/static/vehicle_images/Nissan_red_xtrail/WhatsApp Image 2026-01-28 at 12.05.03 PM (1).jpeg', order: 5 },
+                { url: '/static/vehicle_images/Nissan_red_xtrail/WhatsApp Image 2026-01-28 at 12.05.03 PM (2).jpeg', order: 6 },
+                { url: '/static/vehicle_images/Nissan_red_xtrail/WhatsApp Image 2026-01-28 at 12.05.04 PM.jpeg', order: 7 },
+            ],
+        },
+    ];
+
+    console.log(`\n📝 Creating ${vehiclesData.length} vehicles...\n`);
+
+    let dealerIndex = 0;
+
+    for (const vehicleData of vehiclesData) {
+        // Distribute vehicles among dealers
+        const currentDealer = dealers[dealerIndex % dealers.length];
+
+        const vehicle = await prisma.vehicle.create({
+            data: {
+                stockNumber: vehicleData.stockNumber,
+                vinChassis: vehicleData.vinChassis,
+                make: vehicleData.make,
+                model: vehicleData.model,
+                yearManufacture: vehicleData.yearManufacture,
+                yearRegistration: vehicleData.yearRegistration,
+                priceFob: vehicleData.priceFob,
+                status: vehicleData.status,
+                featured: vehicleData.featured,
+                siteId: vehicleData.siteId,
+                specs: {
+                    create: vehicleData.spec,
+                },
+                logistics: {
+                    create: vehicleData.logistics,
+                },
+                images: {
+                    create: vehicleData.images.map((img) => ({
+                        url: img.url,
+                        altText: `${vehicleData.make} ${vehicleData.model} ${vehicleData.yearManufacture}`,
+                        isPrimary: img.isPrimary || false,
+                        order: img.order,
+                    })),
+                },
+            },
+            include: {
+                specs: true,
+                logistics: true,
+                images: true,
+            },
+        });
+
+        console.log(
+            `✅ Created: ${vehicle.make} ${vehicle.model} ${vehicle.yearManufacture} - ${vehicle.stockNumber} (Dealer: ${currentDealer.name})`
+        );
+        console.log(`   📸 ${vehicle.images.length} images added`);
+        console.log(`   💰 Price: ¥${vehicle.priceFob.toLocaleString()}`);
+        console.log(`   📊 Status: ${vehicle.status}\n`);
+
+        dealerIndex++;
     }
-    console.log('✅ Created sample vehicles')
 
-    console.log('🎉 Seed completed successfully!')
-    console.log('\n📝 Test Credentials:')
-    console.log('Admin: admin@example.com / admin123')
-    console.log('Buyer: buyer@example.com / buyer123')
+    console.log('\n✨ Vehicle seed completed successfully!');
+    console.log('\n📊 Summary:');
+    console.log(`   Total vehicles: ${vehiclesData.length}`);
+    console.log(`   Available: ${vehiclesData.filter((v) => v.status === 'AVAILABLE').length}`);
+    console.log(`   Reserved: ${vehiclesData.filter((v) => v.status === 'RESERVED').length}`);
+    console.log(`   Featured: ${vehiclesData.filter((v) => v.featured).length}`);
+    console.log(`   Total images: ${vehiclesData.reduce((sum, v) => sum + v.images.length, 0)}`);
 }
 
 main()
     .catch((e) => {
-        console.error('❌ Seed failed:', e)
-        process.exit(1)
+        console.error('❌ Error during vehicle seeding:', e);
+        process.exit(1);
     })
     .finally(async () => {
-        await prisma.$disconnect()
-    })
+        await prisma.$disconnect();
+    });

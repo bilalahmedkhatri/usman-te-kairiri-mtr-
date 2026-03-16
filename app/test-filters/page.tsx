@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { AdvancedFilters } from "@/components/advanced-filters";
+import { AdvancedFilters, type FilterState } from "@/components/advanced-filters";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function FiltersTestPage() {
-    const [activeFilters, setActiveFilters] = useState<any>(null);
+    const [activeFilters, setActiveFilters] = useState<FilterState | null>(null);
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -49,14 +49,14 @@ export default function FiltersTestPage() {
                                     <li>Drag mileage slider (dual thumbs)</li>
                                     <li>Select condition checkboxes</li>
                                     <li>Toggle feature checkboxes (grid layout)</li>
-                                    <li>Click "Clear All Filters" to reset</li>
+                                    <li>Click &quot;Clear All Filters&quot; to reset</li>
                                 </ul>
                             </div>
 
                             <div>
                                 <h4 className="font-semibold mb-2">Mobile (&lt;1024px):</h4>
                                 <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                                    <li>Filters should show as "Filters" button</li>
+                                    <li>Filters should show as &quot;Filters&quot; button</li>
                                     <li>Click button to open slide-in sheet from left</li>
                                     <li>All filters accessible in scrollable sheet</li>
                                     <li>Active filter count badge on button</li>
@@ -71,7 +71,7 @@ export default function FiltersTestPage() {
                                 <ul className="list-disc list-inside space-y-1 text-xs text-blue-800 dark:text-blue-200">
                                     <li>Filter state updates immediately above</li>
                                     <li>Active filter count badge updates</li>
-                                    <li>Mileage displays as "Xk - Yk km"</li>
+                                    <li>Mileage displays as &quot;Xk - Yk km&quot;</li>
                                     <li>Clear button disabled when no filters active</li>
                                 </ul>
                             </div>

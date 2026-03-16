@@ -1,0 +1,20 @@
+# Firebase App Hosting configuration for Next.js frontend
+kind: AppHostingConfiguration
+apiVersion: v1
+runConfig:
+  # Specify the runtime environment
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+  # Environment Variables
+  env:
+    - variable: NEXT_PUBLIC_API_URL
+      # Replace with your Cloud Run backend URL after deployment
+      value: "https://your-backend-app-url.a.run.app"
+    - variable: ENVIRONMENT
+      value: "production"
+# Secrets configuration (optional, if you use Auth/Prisma on frontend)
+# secrets:
+#   - variable: DATABASE_URL
+#     secret: your-database-url-secret
+#     version: latest

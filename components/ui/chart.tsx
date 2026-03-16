@@ -27,7 +27,7 @@ import { cn } from "@/lib/utils"
 const ChartContainer = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
-    config: any
+    config: Record<string, unknown>
     children: React.ComponentProps<
       typeof ResponsiveContainer
     >["children"]
@@ -116,7 +116,7 @@ const ChartTooltipRow = React.forwardRef<
   React.ComponentProps<"div"> & {
     color: string
   }
->(({ color, className, ...props }, ref) => {
+>(({ className, ...props }, ref) => {
   return (
     <div
       ref={ref}
@@ -132,7 +132,7 @@ const ChartTooltipCell = React.forwardRef<
   React.ComponentProps<"div"> & {
     color: string
   }
->(({ color, className, ...props }, ref) => {
+>(({ className, ...props }, ref) => {
   return (
     <div
       ref={ref}

@@ -21,7 +21,7 @@ export function VehicleFilters({
   filters,
   onFiltersChange,
 }: VehicleFiltersProps) {
-  const updateFilter = (key: keyof VehicleFilters, value: any) => {
+  const updateFilter = (key: keyof VehicleFilters, value: string | number | undefined) => {
     onFiltersChange({ ...filters, [key]: value || undefined });
   };
 

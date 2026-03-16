@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import {
   User, Mail, Phone, MapPin, Building, Save, X, Camera,
-  Lock, Globe, Edit2, ArrowRight, CreditCard
+  Lock, Globe, Edit2, ArrowRight
 } from 'lucide-react';
 
 const MotionDiv = motion.div;
@@ -17,7 +17,7 @@ export default function ProfilePage() {
     email: 'john@example.com',
     phone: '+254712345678',
     country: 'Kenya',
-    company: 'Hokira International',
+    company: 'TE KAIRIRI MOTORS',
     role: 'buyer',
   });
 
@@ -43,7 +43,7 @@ export default function ProfilePage() {
             <Camera className="w-5 h-5 text-gray-700 dark:text-gray-300" />
           </MotionButton>
         </div>
-        
+
         <div className="px-6 py-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
             <div className="relative -mt-16">
@@ -57,7 +57,7 @@ export default function ProfilePage() {
                 <Camera className="w-4 h-4 text-white" />
               </MotionButton>
             </div>
-            
+
             <div className="flex-1">
               <h1 className="text-2xl font-bold text-gray-800 dark:text-white">{formData.name}</h1>
               <p className="text-gray-500 dark:text-gray-400">{formData.email}</p>
@@ -102,7 +102,7 @@ export default function ProfilePage() {
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   disabled={!isEditing}
                   className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white disabled:opacity-50"
                 />
@@ -116,7 +116,7 @@ export default function ProfilePage() {
                 <input
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   disabled={!isEditing}
                   className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white disabled:opacity-50"
                 />
@@ -130,7 +130,7 @@ export default function ProfilePage() {
                 <input
                   type="tel"
                   value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   disabled={!isEditing}
                   className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white disabled:opacity-50"
                 />
@@ -143,7 +143,7 @@ export default function ProfilePage() {
                 <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <select
                   value={formData.country}
-                  onChange={(e) => setFormData({...formData, country: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                   disabled={!isEditing}
                   className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white disabled:opacity-50"
                 >
@@ -162,7 +162,7 @@ export default function ProfilePage() {
                 <input
                   type="text"
                   value={formData.company}
-                  onChange={(e) => setFormData({...formData, company: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                   disabled={!isEditing}
                   className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white disabled:opacity-50"
                 />

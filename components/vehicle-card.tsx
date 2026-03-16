@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Vehicle } from "@/lib/api";
 import { formatCurrency } from "@/lib/format";
 
@@ -82,7 +82,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
 }
 
 interface NewArrivalsProps {
-  vehicles: any[];
+  vehicles: Vehicle[];
   isLoading: boolean;
 }
 

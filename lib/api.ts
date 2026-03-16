@@ -47,7 +47,9 @@ export interface VehicleSpecs {
   trim_grade?: string;
   mileage_km?: number;
   vehicle_type?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   options?: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
@@ -62,7 +64,6 @@ export interface VehicleLogistics {
   hs_code?: string;
   current_port?: { id: number; name: string };
   inspection_status?: string;
-  [key: string]: any;
 }
 
 export interface Vehicle {
@@ -148,6 +149,7 @@ export const vehicleApi = {
     const response = await api.get(`/api/${slug}/vehicles`, { params: filters });
 
     // Transform
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return response.data.map((v: any) => ({
       ...v,
       id: v.id,
@@ -191,14 +193,14 @@ export const taxonomyApi = {
     return response.data;
   },
 
-  getModels: async (make?: string): Promise<string[]> => {
+  getModels: async (): Promise<string[]> => {
     // Models might be global or site specific, for now using global structure if not isolated in API
     // If main.py defined models inside tenant path, update here. 
     // Assuming taxonomy handles models logic or generic listing.
     // Let's assume we query vehicles to get models for the site
     const slug = getTenantSlug();
     // Re-using taxonomy for models or a raw vehicle query if no specific models endpoint
-    const response = await api.get(`/api/${slug}/taxonomy`);
+    await api.get(`/api/${slug}/taxonomy`);
     // In a real app we'd have a specific /api/{slug}/models endpoint
     return [];
   },

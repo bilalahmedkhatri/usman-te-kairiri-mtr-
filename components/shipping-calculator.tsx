@@ -11,7 +11,7 @@ import { formatCurrency } from "@/lib/format";
 import { Loader2 } from "lucide-react";
 
 interface ShippingCalculatorProps {
-  vehicleId: string;
+  vehicleId?: number;
 }
 
 export function ShippingCalculator({ vehicleId }: ShippingCalculatorProps) {
@@ -21,8 +21,10 @@ export function ShippingCalculator({ vehicleId }: ShippingCalculatorProps) {
   );
 
   const { mutate: calculateShipping, isPending } = useMutation({
-    mutationFn: (port: string) =>
-      vehicleApi.calculateShipping(vehicleId, port),
+    mutationFn: (port: string) => {
+      if (!vehicleId) throw new Error("Vehicle ID is required");
+      return vehicleApi.calculateShipping(vehicleId, port);
+    },
     onSuccess: (data) => {
       setCalculation(data);
     },
@@ -35,6 +37,10 @@ export function ShippingCalculator({ vehicleId }: ShippingCalculatorProps) {
   const handleCalculate = () => {
     if (!shippingPort.trim()) {
       alert("Please enter a shipping port");
+      return;
+    }
+    if (!vehicleId) {
+      alert("No vehicle selected for shipping calculation.");
       return;
     }
     calculateShipping(shippingPort);

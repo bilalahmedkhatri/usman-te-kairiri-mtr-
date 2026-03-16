@@ -12,7 +12,7 @@ const reviews = [
     rating: 5,
     date: "2024-01-15",
     vehicle: "2019 Toyota Land Cruiser",
-    comment: "The team at Cars International made the import process incredibly smooth. The condition of the Land Cruiser exceeded my expectations. Highly recommended!",
+    comment: "The team at TE KAIRIRI MOTORS made the import process incredibly smooth. The condition of the Land Cruiser exceeded my expectations. Highly recommended!",
     avatar: "MT"
   },
   {

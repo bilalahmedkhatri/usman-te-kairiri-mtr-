@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion as MotionButton } from 'framer-motion';
-import { 
+import { motion } from 'framer-motion';
+import {
   Mail, Lock, Eye, EyeOff, AlertCircle, Loader2, ArrowRight
 } from 'lucide-react';
 import { ModalContainer } from './modal-container';
@@ -16,7 +16,7 @@ interface LoginModalProps {
 export function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState<{email?: string; password?: string}>({});
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -53,7 +53,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
       console.log('Login successful');
       onClose();
       window.location.href = '/dashboard';
-    } catch (error) {
+    } catch {
       setLoginError('Invalid credentials');
     } finally {
       setIsSubmitting(false);
@@ -73,11 +73,10 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <input
               type="email"
               value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="your@email.com"
-              className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${
-                errors.email ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
-              } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
+              className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${errors.email ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
+                } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
             />
           </div>
           {errors.email && (
@@ -98,11 +97,10 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <input
               type={showPassword ? 'text' : 'password'}
               value={formData.password}
-              onChange={(e) => setFormData({...formData, password: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               placeholder="••••••••"
-              className={`w-full pl-10 pr-12 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${
-                errors.password ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
-              } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
+              className={`w-full pl-10 pr-12 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${errors.password ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
+                } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
             />
             <button
               type="button"
@@ -126,7 +124,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <input
               type="checkbox"
               checked={formData.remember_me}
-              onChange={(e) => setFormData({...formData, remember_me: e.target.checked})}
+              onChange={(e) => setFormData({ ...formData, remember_me: e.target.checked })}
               className="w-5 h-5 rounded"
             />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Remember me</span>
@@ -145,7 +143,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
         )}
 
         {/* Submit Button */}
-        <MotionButton
+        <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           type="submit"
@@ -163,7 +161,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <ArrowRight className="w-4 h-4" />
             </>
           )}
-        </MotionButton>
+        </motion.button>
 
         {/* Sign Up Link */}
         <div className="text-center">

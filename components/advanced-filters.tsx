@@ -16,7 +16,7 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 
-interface FilterState {
+export interface FilterState {
     transmission: string[];
     fuelType: string[];
     mileageRange: [number, number];

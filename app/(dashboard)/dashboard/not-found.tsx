@@ -15,14 +15,14 @@ export default function GlobalNotFound() {
         <div className="w-20 h-20 bg-yellow-100 dark:bg-yellow-900/20 rounded-full flex items-center justify-center mx-auto mb-6">
           <Globe className="w-10 h-10 text-yellow-600 dark:text-yellow-400" />
         </div>
-        
+
         <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-2">404</h1>
         <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4">Page Not Found</h2>
-        
+
         <p className="text-gray-600 dark:text-gray-400 mb-8">
-          The page you're looking for doesn't exist or you don't have access to it.
+          The page you&apos;re looking for doesn&apos;t exist or you don&apos;t have access to it.
         </p>
-        
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/">
             <motion.button
@@ -34,7 +34,7 @@ export default function GlobalNotFound() {
               Back to Dashboard
             </motion.button>
           </Link>
-          
+
           <button
             onClick={() => window.history.back()}
             className="px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"

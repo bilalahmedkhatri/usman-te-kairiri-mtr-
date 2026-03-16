@@ -49,7 +49,7 @@ export function FeaturesGrid({ features = [] }: FeaturesGridProps) {
                 Features
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 text-sm">
-                {displayFeatures.map((feature, index) => (
+                {displayFeatures.map((feature) => (
                     <div
                         key={feature.name}
                         className={cn(

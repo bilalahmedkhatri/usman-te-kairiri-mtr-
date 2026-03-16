@@ -164,7 +164,7 @@ export default function AnalyticsPage() {
           className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-800"
         >
           <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-4">Vehicle Types</h2>
-          <VehicleTypesChart data={vehicleTypes} colors={[]} />
+          <VehicleTypesChart data={vehicleTypes} />
         </MotionDiv>
 
         {/* Top Ports */}

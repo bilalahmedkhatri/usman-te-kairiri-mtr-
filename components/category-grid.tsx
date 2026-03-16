@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Car, Truck, Zap, Activity, Users, Box, ArrowRight } from "lucide-react";
+import { Car, Truck, Zap, Users, Box } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const categories = [

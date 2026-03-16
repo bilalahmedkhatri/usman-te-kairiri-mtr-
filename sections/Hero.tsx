@@ -3,10 +3,12 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, Play, Search, Gauge, Shield, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cars } from '@/data/cars';
+import Image from 'next/image';
+import type { HeroCar } from '@/app/actions/get-hero-cars';
+
 
 interface FloatingCarCardProps {
-  car: typeof cars[0];
+  car: HeroCar;
   index: number;
 }
 
@@ -68,9 +70,9 @@ function FloatingCarCard({ car, index }: FloatingCarCardProps) {
         rotateY,
         transformStyle: 'preserve-3d',
         perspective: 1000,
-        top: pos.top,
+        ...(pos.top !== undefined && { top: pos.top }),
+        ...(pos.bottom !== undefined && { bottom: pos.bottom }),
         right: pos.right,
-        bottom: pos.bottom
       }}
     >
       <motion.div
@@ -82,8 +84,10 @@ function FloatingCarCard({ car, index }: FloatingCarCardProps) {
         className="bg-card rounded-2xl overflow-hidden shadow-soft-lg hover:shadow-soft-xl transition-shadow duration-300"
       >
         <div className="relative">
-          <img
+          <Image
             src={car.images[0]}
+            width={200}
+            height={150}
             alt={`${car.make} ${car.model}`}
             className="w-full h-40 object-cover"
           />
@@ -97,7 +101,11 @@ function FloatingCarCard({ car, index }: FloatingCarCardProps) {
   );
 }
 
-export default function Hero() {
+interface HeroProps {
+  cars: HeroCar[];
+}
+
+export default function Hero({ cars = [] }: HeroProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -132,7 +140,7 @@ export default function Hero() {
     backgroundY.set((mousePosition.y - 0.5) * 20);
   }, [mousePosition, backgroundX, backgroundY]);
 
-  const featuredCars = cars.slice(0, 3);
+  const featuredCars = cars;
 
   return (
     <section
@@ -142,7 +150,7 @@ export default function Hero() {
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] rounded-full opacity-20"
+          className="absolute -top-1/4 -right-1/4 w-[800px] h-[550px] rounded-full opacity-20"
           style={{
             background: 'radial-gradient(circle, hsl(0 72% 51% / 0.3) 0%, transparent 70%)',
             x: backgroundX,
@@ -158,7 +166,7 @@ export default function Hero() {
           }}
         />
         <motion.div
-          className="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] rounded-full opacity-15"
+          className="absolute -bottom-1/4 -left-1/4 w-[900px] h-[600px] rounded-full opacity-15"
           style={{
             background: 'radial-gradient(circle, hsl(24 95% 53% / 0.3) 0%, transparent 70%)',
             x: useTransform(backgroundX, v => -v * 0.5),
@@ -173,14 +181,7 @@ export default function Hero() {
             ease: 'easeInOut',
           }}
         />
-        {/* Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px',
-          }}
-        />
+
       </div>
 
       <div className="relative w-full section-padding">
@@ -204,11 +205,11 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight"
+                className="text-5xl sm:text-6xl lg:text-9xl xl:text-12xl font-bold leading-[1.1] tracking-tight"
               >
                 Your Gateway to{' '}
-                <span className="gradient-text">Premium</span>{' '}
-                JDM Cars
+                <span className="gradient-text">Premium Japanese</span>{' '}
+                Cars
               </motion.h1>
 
               <motion.p
@@ -230,9 +231,9 @@ export default function Hero() {
               className="flex flex-wrap gap-8"
             >
               {[
-                { value: '15,000+', label: 'Cars Exported' },
-                { value: '500+', label: 'Verified Dealers' },
-                { value: '50', label: 'Countries' },
+                { value: '530+', label: 'Cars Exported' },
+                { value: '20+', label: 'Verified Dealers' },
+                { value: '10+', label: 'Countries' },
               ].map((stat, index) => (
                 <div key={index} className="flex flex-col">
                   <span className="text-2xl font-bold gradient-text">{stat.value}</span>
@@ -250,7 +251,7 @@ export default function Hero() {
             >
               <div className={`
                 relative flex items-center gap-2 bg-card rounded-2xl border transition-all duration-300
-                ${isSearchFocused ? 'border-red shadow-jdm' : 'border-border/50'}
+                ${isSearchFocused ? 'border-red shadow-Japanese' : 'border-border/50'}
               `}>
                 <Search className="w-5 h-5 text-muted-foreground ml-4" />
                 <input
@@ -275,7 +276,7 @@ export default function Hero() {
             >
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-red to-orange hover:from-red/90 hover:to-orange/90 text-white font-semibold rounded-xl px-8 shadow-jdm hover:shadow-red/30 transition-all duration-300 group"
+                className="bg-gradient-to-r from-red to-orange hover:from-red/90 hover:to-orange/90 text-white font-semibold rounded-xl px-8 shadow-Japanese hover:shadow-red/30 transition-all duration-300 group"
               >
                 Browse Inventory
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />

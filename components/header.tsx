@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 import { JapanTime } from "@/components/japan-time";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
+import { Logo } from "@/components/Logo";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -42,7 +43,7 @@ export function Header() {
             className="flex items-center gap-3"
           >
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl font-bold font-heading text-primary">Cars International</span>
+              <Logo variant="horizontal" />
             </Link>
           </motion.div>
 
@@ -61,19 +62,19 @@ export function Header() {
 
           {/* Actions */}
           <div className="hidden md:flex items-center gap-4">
-            <JapanTime />
+            {/* <JapanTime /> */}
             <div className="h-6 w-px bg-border/50" />
-            <ModeToggle />
+            {/* <ModeToggle /> */}
             <Link href="/login">
               <Button variant="outline" size="sm" className="rounded-full px-6">
                 Sign In
               </Button>
             </Link>
-            <Link href="/register">
+            {/* <Link href="/register">
               <Button size="sm" className="rounded-full px-6">
                 Get Started
               </Button>
-            </Link>
+            </Link> */}
           </div>
 
           {/* Mobile Toggle */}

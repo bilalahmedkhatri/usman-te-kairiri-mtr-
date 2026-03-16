@@ -5,9 +5,9 @@ import type { Vehicle } from '@/lib/api';
 interface ComparisonStore {
     vehicles: Vehicle[];
     addVehicle: (vehicle: Vehicle) => void;
-    removeVehicle: (vehicleId: string) => void;
+    removeVehicle: (vehicleId: number) => void;
     clearAll: () => void;
-    isInComparison: (vehicleId: string) => boolean;
+    isInComparison: (vehicleId: number) => boolean;
 }
 
 export const useComparison = create<ComparisonStore>()(

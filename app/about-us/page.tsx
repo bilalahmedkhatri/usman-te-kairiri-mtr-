@@ -24,7 +24,7 @@ export default function AboutPage() {
         variants={fadeIn}
         className="text-center mb-16"
       >
-        <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6">About Cars International</h1>
+        <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6">About TE KAIRIRI MOTORS</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           We bridge the gap between premium Japanese vehicles and the world, built on three decades of trust and excellence.
         </p>

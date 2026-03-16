@@ -25,7 +25,7 @@ export function HeroSection() {
                         transition={{ duration: 0.6 }}
                     >
                         <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-sm font-medium mb-6">
-                            ✨ Japan's Premium Export Service
+                            ✨ Japan&apos;s Premium Export Service
                         </div>
 
                         <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
@@ -36,7 +36,7 @@ export function HeroSection() {
                         </h1>
 
                         <p className="text-xl text-slate-200 mb-10 leading-relaxed max-w-lg">
-                            Access exclusive JDM auctions and premium inventory.
+                            Access exclusive Japanese auctions and premium inventory.
                             We handle inspection, logistics, and shipping to 50+ countries.
                         </p>
 

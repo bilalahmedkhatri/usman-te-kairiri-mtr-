@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useComparison } from "@/lib/store/comparison-store";
+import { type Vehicle } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,14 +30,14 @@ export default function ComparisonPage() {
     }
 
     const specs = [
-        { label: "Year", key: (v: any) => v.year, icon: Calendar },
-        { label: "Mileage", key: (v: any) => v.specs.mileage ? `${(v.specs.mileage / 1000).toFixed(0)}k km` : "N/A", icon: Gauge },
-        { label: "Fuel Type", key: (v: any) => v.specs.fuel_type || "N/A", icon: Fuel },
-        { label: "Transmission", key: (v: any) => v.specs.transmission || "N/A", icon: null },
-        { label: "Engine", key: (v: any) => v.specs.engine || "N/A", icon: null },
-        { label: "Drive", key: (v: any) => v.specs.drive || "N/A", icon: null },
-        { label: "Color", key: (v: any) => v.specs.color || "N/A", icon: null },
-        { label: "Location", key: (v: any) => v.location || "Japan", icon: MapPin },
+        { label: "Year", key: (v: Vehicle) => v.year, icon: Calendar },
+        { label: "Mileage", key: (v: Vehicle) => v.specs?.mileage_km ? `${(v.specs.mileage_km / 1000).toFixed(0)}k km` : "N/A", icon: Gauge },
+        { label: "Fuel Type", key: (v: Vehicle) => v.specs?.fuel_type || "N/A", icon: Fuel },
+        { label: "Transmission", key: (v: Vehicle) => v.specs?.transmission || "N/A", icon: null },
+        { label: "Engine", key: (v: Vehicle) => v.specs?.engine_cc ? `${v.specs.engine_cc}cc` : "N/A", icon: null },
+        { label: "Drive", key: (v: Vehicle) => v.specs?.drive_type || "N/A", icon: null },
+        { label: "Color", key: (v: Vehicle) => v.specs?.color_exterior || "N/A", icon: null },
+        { label: "Location", key: (v: Vehicle) => v.location || "Japan", icon: MapPin },
     ];
 
     return (
@@ -92,7 +93,7 @@ export default function ComparisonPage() {
                                 {vehicle.make} {vehicle.model}
                             </h3>
                             <p className="text-2xl font-bold text-primary font-heading">
-                                {formatCurrency(vehicle.price)}
+                                {formatCurrency(vehicle.price || 0)}
                             </p>
                         </motion.div>
                     ))}
@@ -142,7 +143,7 @@ export default function ComparisonPage() {
                                     {vehicle.make} {vehicle.model}
                                 </h3>
                                 <p className="text-xl font-bold text-primary font-heading">
-                                    {formatCurrency(vehicle.price)}
+                                    {formatCurrency(vehicle.price || 0)}
                                 </p>
                             </div>
                             <button

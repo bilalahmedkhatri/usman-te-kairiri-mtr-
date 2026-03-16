@@ -9,6 +9,7 @@ import { Eye, EyeOff, Loader2, Mail, Lock } from 'lucide-react'
 import { loginSchema, type LoginInput } from '@/lib/validations/auth'
 import { loginAction } from '@/app/actions/auth'
 import { Button } from '@/components/ui/button'
+import { Logo } from '@/components/Logo'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import toast from 'react-hot-toast'
@@ -55,12 +56,15 @@ export default function LoginForm() {
             <div className="glass rounded-2xl p-8 shadow-soft-xl">
                 {/* Header */}
                 <div className="mb-8 text-center">
-                    <h1 className="text-3xl font-bold gradient-text mb-2">
+                    <div className="flex justify-center mb-6">
+                        <Logo variant="stacked" />
+                    </div>
+                    {/* <h1 className="text-3xl font-bold gradient-text mb-2">
                         Welcome Back
                     </h1>
                     <p className="text-muted-foreground">
                         Sign in to your account to continue
-                    </p>
+                    </p> */}
                 </div>
 
                 {/* Form */}
@@ -141,7 +145,7 @@ export default function LoginForm() {
                 </form>
 
                 {/* Divider */}
-                <div className="relative my-6">
+                {/* <div className="relative my-6">
                     <div className="absolute inset-0 flex items-center">
                         <div className="w-full border-t border-border"></div>
                     </div>
@@ -150,10 +154,10 @@ export default function LoginForm() {
                             Or continue with
                         </span>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Social Login Placeholders */}
-                <div className="grid grid-cols-2 gap-4">
+                {/* <div className="grid grid-cols-2 gap-4">
                     <Button
                         type="button"
                         variant="outline"
@@ -170,7 +174,7 @@ export default function LoginForm() {
                     >
                         GitHub
                     </Button>
-                </div>
+                </div> */}
 
                 {/* Sign Up Link */}
                 <p className="mt-6 text-center text-sm text-muted-foreground">

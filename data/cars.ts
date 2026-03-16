@@ -1,16 +1,16 @@
 import type { Car, CarMake, Dealer, Testimonial, Stat, FAQ, BlogPost } from '@/types';
 
 export const carMakes: CarMake[] = [
-  { id: 'toyota', name: 'Toyota', logo: '/images/makes/toyota.svg', country: 'Japan', popular: true },
-  { id: 'honda', name: 'Honda', logo: '/images/makes/honda.svg', country: 'Japan', popular: true },
-  { id: 'nissan', name: 'Nissan', logo: '/images/makes/nissan.svg', country: 'Japan', popular: true },
-  { id: 'mazda', name: 'Mazda', logo: '/images/makes/mazda.svg', country: 'Japan', popular: true },
-  { id: 'subaru', name: 'Subaru', logo: '/images/makes/subaru.svg', country: 'Japan', popular: true },
-  { id: 'mitsubishi', name: 'Mitsubishi', logo: '/images/makes/mitsubishi.svg', country: 'Japan', popular: false },
-  { id: 'lexus', name: 'Lexus', logo: '/images/makes/lexus.svg', country: 'Japan', popular: true },
-  { id: 'acura', name: 'Acura', logo: '/images/makes/acura.svg', country: 'Japan', popular: false },
-  { id: 'infiniti', name: 'Infiniti', logo: '/images/makes/infiniti.svg', country: 'Japan', popular: false },
-  { id: 'suzuki', name: 'Suzuki', logo: '/images/makes/suzuki.svg', country: 'Japan', popular: false },
+  { id: 'toyota', name: 'Toyota', logo: '/companies_icons/toyota-1.png', country: 'Japan', popular: true },
+  { id: 'honda', name: 'Honda', logo: '/companies_icons/honda-1.png', country: 'Japan', popular: true },
+  { id: 'nissan', name: 'Nissan', logo: '/companies_icons/nissan-1.png', country: 'Japan', popular: true },
+  { id: 'mazda', name: 'Mazda', logo: '/companies_icons/mazda.png', country: 'Japan', popular: true },
+  { id: 'subaru', name: 'Subaru', logo: '/companies_icons/subaru-1.png', country: 'Japan', popular: true },
+  { id: 'mitsubishi', name: 'Mitsubishi', logo: '/companies_icons/mitsubishi-1png', country: 'Japan', popular: false },
+  { id: 'lexus', name: 'Lexus', logo: '/companies_icons/lexus-1.png', country: 'Japan', popular: true },
+  { id: 'acura', name: 'Acura', logo: '/companies_icons/acura-1.png', country: 'Japan', popular: false },
+  { id: 'infiniti', name: 'Infiniti', logo: '/companies_icons/infiniti-1.png', country: 'Japan', popular: false },
+  { id: 'suzuki', name: 'Suzuki', logo: '/companies_icons/suzuki-1.png', country: 'Japan', popular: false },
 ];
 
 export const dealers: Dealer[] = [
@@ -45,7 +45,7 @@ export const dealers: Dealer[] = [
   },
   {
     id: 'dealer-3',
-    name: 'JDM Performance Hub',
+    name: 'Japanese Performance Hub',
     location: 'Yokohama, Japan',
     rating: 4.7,
     totalReviews: 189,
@@ -54,7 +54,7 @@ export const dealers: Dealer[] = [
     specialty: ['Mitsubishi', 'Subaru', 'Honda'],
     contact: {
       phone: '+81-45-3456-7890',
-      email: 'contact@jdmperformance.jp',
+      email: 'contact@Japaneseperformance.jp',
     },
   },
 ];
@@ -185,7 +185,7 @@ export const cars: Car[] = [
     rating: 4.9,
     reviews: 15,
     badge: 'Rare',
-    description: 'A true JDM legend - the Mazda RX-7 Spirit R, the final and most desirable version of the iconic rotary sports car. This 2002 example has been enthusiast-owned and meticulously maintained. The legendary 13B-REW twin-rotor engine produces 276hp in stock form.',
+    description: 'A true Japanese legend - the Mazda RX-7 Spirit R, the final and most desirable version of the iconic rotary sports car. This 2002 example has been enthusiast-owned and meticulously maintained. The legendary 13B-REW twin-rotor engine produces 276hp in stock form.',
     dealer: dealers[2],
     specs: [
       { label: 'Horsepower', value: '276 hp' },
@@ -249,7 +249,7 @@ export const cars: Car[] = [
     features: ['V8 Engine', 'Convertible Top', 'Mark Levinson Audio', 'Lexus Safety System+', 'Heated/Cooled Seats', 'Premium Leather', 'Remote Touch'],
     condition: 'New',
     status: 'Available',
-rating: 4.9,
+    rating: 4.9,
     reviews: 34,
     badge: 'Luxury',
     description: 'The Lexus LC 500 Convertible represents the pinnacle of Japanese luxury and performance. The naturally aspirated 5.0L V8 produces 471hp with an intoxicating exhaust note. This 2023 model features the stunning Structural Blue paint and has only delivery miles.',
@@ -336,7 +336,7 @@ export const testimonials: Testimonial[] = [
     name: 'Michael Chen',
     role: 'Car Enthusiast',
     company: 'USA',
-    content: 'JDM Export made my dream of owning a Supra a reality. The process was smooth, transparent, and the car arrived in perfect condition. Highly recommend!',
+    content: 'Japanese Export made my dream of owning a Supra a reality. The process was smooth, transparent, and the car arrived in perfect condition. Highly recommend!',
     rating: 5,
     avatar: '/images/avatars/avatar-1.jpg',
     carBought: 'Toyota Supra GR 2024',
@@ -356,7 +356,7 @@ export const testimonials: Testimonial[] = [
     name: 'David Martinez',
     role: 'Dealer',
     company: 'Canada',
-    content: 'As a dealer, I appreciate the quality of vehicles and the professional communication from Japanese suppliers. Best platform for JDM imports.',
+    content: 'As a dealer, I appreciate the quality of vehicles and the professional communication from Japanese suppliers. Best platform for Japanese imports.',
     rating: 5,
     avatar: '/images/avatars/avatar-3.jpg',
     carBought: 'Multiple vehicles',
@@ -364,10 +364,10 @@ export const testimonials: Testimonial[] = [
 ];
 
 export const stats: Stat[] = [
-  { value: '15,000+', label: 'Cars Exported' },
-  { value: '500+', label: 'Trusted Dealers' },
-  { value: '50', label: 'Countries Served' },
-  { value: '98', label: 'Customer Satisfaction', suffix: '%' },
+  { value: '530+', label: 'Cars Exported' },
+  { value: '20+', label: 'Trusted Dealers' },
+  { value: '10', label: 'Countries Served' },
+  { value: '28', label: 'Customer Satisfaction', suffix: '%' },
 ];
 
 export const faqs: FAQ[] = [
@@ -406,7 +406,7 @@ export const faqs: FAQ[] = [
 export const blogPosts: BlogPost[] = [
   {
     id: '1',
-    title: 'Top 10 JDM Cars to Import in 2024',
+    title: 'Top 10 Japanese Cars to Import in 2024',
     excerpt: 'Discover the best Japanese domestic market vehicles that are now legal for import to various countries.',
     content: '',
     image: '/images/blog/blog-1.jpg',

@@ -6,14 +6,17 @@ import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { LogOut } from 'lucide-react';
 import { Home, Users, Car, Anchor, BarChart3, Settings } from 'lucide-react';
+import Image from 'next/image';
 
 interface SidebarProps {
     sidebarOpen: boolean;
     onLogout: () => void;
     userRole?: string;
+    logo?: React.ReactNode | string;
+    onToggleSide?: () => void;
 }
 
-export function Sidebar({ sidebarOpen, onLogout, userRole = 'BUYER' }: SidebarProps) {
+export function Sidebar({ sidebarOpen, onLogout, userRole = 'BUYER', logo, onToggleSide }: SidebarProps) {
     const pathname = usePathname();
 
     const allNavigation = [
@@ -36,16 +39,26 @@ export function Sidebar({ sidebarOpen, onLogout, userRole = 'BUYER' }: SidebarPr
                         animate={{ opacity: 1 }}
                         className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white"
                     >
-                        Vehicle Export System
+                        {logo ? (
+                            typeof logo === 'string' ? (
+                                <div className="relative h-8 w-full">
+                                    <Image src={logo} alt="Logo" fill className="object-contain object-left" />
+                                </div>
+                            ) : (
+                                <div className="w-full">{logo}</div>
+                            )
+                        ) : (
+                            "Vehicle Export System"
+                        )}
                     </motion.h1>
                 )}
             </div>
 
-            <nav className="flex-1 space-y-1 px-2">
+            <nav className="flex-1 space-y-4 px-2">
                 {navigation.map((item) => {
                     const isActive = pathname === item.href;
                     return (
-                        <Link href={item.href} key={item.href}>
+                        <Link href={item.href} key={item.href} className="my-4">
                             <motion.button
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
@@ -73,6 +86,17 @@ export function Sidebar({ sidebarOpen, onLogout, userRole = 'BUYER' }: SidebarPr
                     <LogOut className="w-5 h-5" />
                     {sidebarOpen && <span className="ml-3 font-medium">Logout</span>}
                 </motion.button>
+
+                {onToggleSide && sidebarOpen && (
+                    <motion.button
+                        onClick={onToggleSide}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full flex items-center justify-center py-2 text-xs text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors mt-2"
+                    >
+                        Switch Sidebar Side
+                    </motion.button>
+                )}
             </div>
         </div>
     );

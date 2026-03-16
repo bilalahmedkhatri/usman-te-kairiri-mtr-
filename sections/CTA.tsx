@@ -1,5 +1,4 @@
 'use client';
-
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FadeIn } from '@/components/animations/FadeIn';
@@ -27,11 +26,12 @@ export default function CTA() {
   return (
     <section ref={sectionRef} className="w-full py-24 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-red via-red to-orange" />
+      <div className="absolute inset-0 bg-gradient-to-r" />
 
       {/* Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 opacity-10"
+        <div
+          className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
             backgroundSize: '40px 40px',
@@ -53,17 +53,16 @@ export default function CTA() {
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <FadeIn>
-            {/* <Badge className="bg-white/20 text-white border-0 mb-6"> */}
-            <Badge className="bg-green/20 text-green-dark border-0 mb-4">
+            <Badge className="bg-red/20 text-red border-0 mb-4 hover:bg-red/20 hover:text-red">
               Get Started Today
             </Badge>
           </FadeIn>
 
           {/* Headline */}
           <FadeIn delay={0.1}>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h2 className="text-5xl sm:text-6xl lg:text-9xl font-bold mb-4">
               Ready to find your{' '}
-              <span className="text-white/80">dream JDM car</span>?
+              <span className="gradient-text">Dream Japanese</span>{' '}car ?
             </h2>
           </FadeIn>
 
@@ -85,7 +84,7 @@ export default function CTA() {
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-11 py-6 rounded-xl border-0 text-foreground"
+                  className="pl-12 py-6 rounded-xl border-0 text-foreground"
                   disabled={isSubmitted}
                 />
               </div>
@@ -113,7 +112,7 @@ export default function CTA() {
           {/* Trust Text */}
           <FadeIn delay={0.4}>
             <p className="text-white/60 text-sm mt-4">
-              Join 10,000+ car enthusiasts. Unsubscribe anytime.
+              Join 1,000+ car enthusiasts. Unsubscribe anytime.
             </p>
           </FadeIn>
         </div>

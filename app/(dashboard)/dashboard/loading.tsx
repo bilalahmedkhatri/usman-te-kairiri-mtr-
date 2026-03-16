@@ -1,9 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { 
-  BarChart3, Users, Car, Anchor, DollarSign
-} from 'lucide-react';
 
 const shimmerVariants = {
   animate: {

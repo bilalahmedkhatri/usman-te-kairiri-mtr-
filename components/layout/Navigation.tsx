@@ -1,13 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Menu, 
-  X, 
-  Search, 
-  Heart, 
-  ShoppingCart, 
-  Sun, 
+import {
+  Menu,
+  X,
+  Search,
+  Heart,
+  ShoppingCart,
+  Sun,
   Moon,
   Car,
   ChevronDown
@@ -46,11 +46,10 @@ export function Navigation({ onThemeToggle }: NavigationProps) {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
           ? 'py-3 bg-background/80 backdrop-blur-xl border-b border-border/50'
           : 'py-5 bg-transparent'
-      }`}
+        }`}
     >
       <div className="w-full section-padding">
         <div className="flex items-center justify-between">
@@ -60,11 +59,11 @@ export function Navigation({ onThemeToggle }: NavigationProps) {
             whileHover={{ scale: 1.02 }}
             className="flex items-center gap-2"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red to-orange flex items-center justify-center shadow-jdm">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red to-orange flex items-center justify-center shadow-Japanese">
               <Car className="w-6 h-6 text-white" />
             </div>
             <div className="hidden sm:block">
-              <span className="text-lg font-bold tracking-tight">JDM Export</span>
+              <span className="text-lg font-bold tracking-tight">Japanese Export</span>
               <span className="block text-[10px] text-muted-foreground -mt-0.5">Japanese Car Marketplace</span>
             </div>
           </motion.a>
@@ -153,7 +152,7 @@ export function Navigation({ onThemeToggle }: NavigationProps) {
 
             {/* Get Started Button */}
             <Button
-              className="hidden md:flex bg-gradient-to-r from-red to-orange hover:from-red/90 hover:to-orange/90 text-white font-medium rounded-xl shadow-jdm transition-all duration-300"
+              className="hidden md:flex bg-gradient-to-r from-red to-orange hover:from-red/90 hover:to-orange/90 text-white font-medium rounded-xl shadow-Japanese transition-all duration-300"
             >
               Sign In
             </Button>

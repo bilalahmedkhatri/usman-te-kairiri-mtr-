@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { settingsApi } from "@/lib/api";
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Logo } from "@/components/Logo";
 
 export function Footer() {
   const { data: settings } = useQuery({
@@ -29,7 +30,7 @@ export function Footer() {
           <div>
             <div className="mb-4">
               <Link href="/" className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-primary">Cars International</span>
+                <Logo variant="horizontal" />
               </Link>
             </div>
             {settings?.address && (
@@ -184,16 +185,16 @@ export function Footer() {
         </div>
 
         {/* Bottom Section with Big Font */}
-        <div className="border-t mt-12 pt-8">
-          <div className="text-center">
-            <p className="text-2xl md:text-3xl font-bold text-primary mb-2">
-              Cars International
+        <div className="border-t mt-10 pt-8 ">
+          <div className="text-center my-20">
+            <p className="text-7xl md:text-9xl font-bold text-primary mb-2 leading-tight gradient-text">
+              TE-KAIRIRI-MOTORS
             </p>
-            <p className="text-lg text-muted-foreground mb-4">
+            <p className="text-lg text-muted-foreground mt-8">
               Your Trusted Partner in Vehicle Export Worldwide
             </p>
             <p className="text-sm text-muted-foreground">
-              © {copyrightYear} {settings?.company_name || "Cars International"}. All rights reserved.
+              © {copyrightYear} {settings?.company_name || "TE KAIRIRI MOTORS"}. All rights reserved.
             </p>
           </div>
         </div>

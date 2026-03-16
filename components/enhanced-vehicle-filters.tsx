@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import type { VehicleFilters } from "@/lib/api";
-import { taxonomyApi, vehicleApi } from "@/lib/api";
+import { taxonomyApi } from "@/lib/api";
 import { VEHICLE_TYPES, FUEL_TYPES, VEHICLE_COUNTRIES, BODY_TYPES } from "@/lib/constants";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 interface EnhancedVehicleFiltersProps {
   filters: VehicleFilters;
@@ -35,7 +35,7 @@ export function EnhancedVehicleFilters({
     enabled: !!filters.make,
   });
 
-  const updateFilter = (key: keyof VehicleFilters, value: any) => {
+  const updateFilter = (key: keyof VehicleFilters, value: unknown) => {
     onFiltersChange({ ...filters, [key]: value || undefined });
   };
 
@@ -44,6 +44,7 @@ export function EnhancedVehicleFilters({
     if (filters.make && !models?.includes(filters.model || "")) {
       updateFilter("model", undefined);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.make, models]);
 
   return (

@@ -16,7 +16,7 @@ const fontHeading = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-    title: "Cars International - Premium Vehicle Export from Japan",
+    title: "TE KAIRIRI MOTORS - Premium Vehicle Export from Japan",
     description: "Professional vehicle export services from Japan. Browse our extensive inventory of cars, trucks, and specialized vehicles. Worldwide shipping available.",
 };
 

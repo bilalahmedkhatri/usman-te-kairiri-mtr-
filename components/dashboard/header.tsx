@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Search, Bell, Settings, User, Menu, Sun, Moon, ChevronLeft } from 'lucide-react';
+import { Search, Bell, Menu, Sun, Moon, ChevronLeft, LogOut, User } from 'lucide-react';
+import { signOut } from 'next-auth/react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface HeaderProps {
     sidebarOpen: boolean;
@@ -17,6 +19,7 @@ interface HeaderProps {
         image?: string | null;
     };
     isMobile?: boolean; // To conditionally render mobile/desktop triggers
+    logo?: React.ReactNode | string;
 }
 
 export function Header({
@@ -24,7 +27,8 @@ export function Header({
     setSidebarOpen,
     mobileMenuOpen,
     setMobileMenuOpen,
-    user
+    // user prop is available if needed for future profile section
+    logo
 }: HeaderProps) {
     const { theme, setTheme } = useTheme();
 
@@ -59,6 +63,17 @@ export function Header({
                     </div>
                 </div>
 
+                {/* Logo Section for Mobile/Centered */}
+                {logo && (
+                    <div className="flex-1 flex justify-center lg:hidden absolute left-1/2 transform -translate-x-1/2">
+                        {typeof logo === 'string' ? (
+                            <Image src={logo} alt="Logo" width={40} height={40} className="object-contain" />
+                        ) : (
+                            logo
+                        )}
+                    </div>
+                )}
+
                 <div className="flex items-center space-x-2 sm:space-x-4 ml-4">
                     <motion.button
                         whileHover={{ scale: 1.05 }}
@@ -87,6 +102,25 @@ export function Header({
                         aria-label="Toggle sidebar"
                     >
                         <ChevronLeft className={`w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400 transition-transform ${!sidebarOpen ? 'rotate-180' : ''}`} />
+                    </motion.button>
+
+                    <Link href="/dashboard/profile">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            aria-label="Profile"
+                        >
+                            <User className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400" />
+                        </motion.button>
+                    </Link>
+
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors hidden sm:block"
+                        onClick={() => signOut({ callbackUrl: '/' })}
+                        aria-label="Logout"
+                    >
+                        <LogOut className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400" />
                     </motion.button>
                 </div>
             </div>

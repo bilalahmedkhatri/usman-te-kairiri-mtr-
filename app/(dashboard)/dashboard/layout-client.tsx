@@ -6,6 +6,7 @@ import { signOut } from 'next-auth/react';
 import type { Session } from 'next-auth';
 import { Sidebar } from '@/components/dashboard/sidebar';
 import { Header } from '@/components/dashboard/header';
+import { Logo } from '@/components/Logo';
 
 interface DashboardLayoutClientProps {
     children: React.ReactNode;
@@ -16,25 +17,31 @@ export default function DashboardLayoutClient({
     children,
     session
 }: DashboardLayoutClientProps) {
-    // We can use a client-side mounting check to avoid hydration mismatch on initial render
-    // regarding the sidebar/menu state, although strictly not necessary if defaults are good.
     const [mounted, setMounted] = useState(false);
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(true); // Default open on desktop
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [sidebarSide, setSidebarSide] = useState<'left' | 'right'>('left'); // Configurable side
 
     useEffect(() => {
         setMounted(true);
+        // Responsive check: auto-close sidebar on small screens if needed
+        const handleResize = () => {
+            if (window.innerWidth < 1024) {
+                setSidebarOpen(false);
+            } else {
+                setSidebarOpen(true);
+            }
+        };
+
+        // Initial check
+        handleResize();
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Prevent hydration mismatch by returning null or a skeleton until mounted
-    // if using next-themes or specific client-only state that affects structure.
-    // However, for layout structure, we usually want it to render.
-    // The theme is handled by ThemeProvider, so we don't need manual logic here.
-
     if (!mounted) {
-        // Optional: return null or a loading state if you want to be super strict,
-        // but often redundant with modern Next.js + next-themes
-        // return null; 
+        return null;
     }
 
     const handleLogout = () => {
@@ -43,6 +50,14 @@ export default function DashboardLayoutClient({
 
     const userRole = session?.user?.role;
     const userProfile = session?.user || {};
+
+
+
+    // Dynamic Logo (can be URL or Component)
+    const logo = <Logo variant="stacked" />; // Replace with actual logo URL or component
+
+    // Layout direction based on sidebar side
+    const flexDirection = sidebarSide === 'left' ? 'flex-row' : 'flex-row-reverse';
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
@@ -59,51 +74,56 @@ export default function DashboardLayoutClient({
                 )}
             </AnimatePresence>
 
-            <div className="flex">
-                {/* Desktop Sidebar */}
+            <div className={`flex ${flexDirection}`}>
+                {/* Desktop Sticky Sidebar */}
                 <motion.aside
                     initial={false}
                     animate={{ width: sidebarOpen ? 256 : 80 }}
-                    className={`hidden lg:block bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 min-h-screen transition-all duration-300`}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className={`hidden lg:block bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 sticky top-0 h-screen overflow-y-auto shrink-0 z-20 ${sidebarSide === 'right' ? 'border-l border-r-0' : ''}`}
                 >
                     <Sidebar
                         sidebarOpen={sidebarOpen}
                         onLogout={handleLogout}
                         userRole={userRole}
+                        logo={logo}
+                        onToggleSide={() => setSidebarSide(sidebarSide === 'left' ? 'right' : 'left')}
                     />
                 </motion.aside>
 
-                {/* Mobile Sidebar */}
+                {/* Mobile Sidebar (Drawer) */}
                 <AnimatePresence>
                     {mobileMenuOpen && (
                         <motion.aside
-                            initial={{ x: '-100%' }}
+                            initial={{ x: sidebarSide === 'left' ? '-100%' : '100%' }}
                             animate={{ x: 0 }}
-                            exit={{ x: '-100%' }}
-                            transition={{ type: 'tween' }}
-                            className="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 z-50 lg:hidden"
+                            exit={{ x: sidebarSide === 'left' ? '-100%' : '100%' }}
+                            transition={{ type: 'tween', duration: 0.3 }}
+                            className={`fixed inset-y-0 ${sidebarSide === 'left' ? 'left-0' : 'right-0'} w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 z-50 lg:hidden shadow-2xl`}
                         >
                             <Sidebar
                                 sidebarOpen={true}
                                 onLogout={handleLogout}
                                 userRole={userRole}
+                                logo={logo}
                             />
                         </motion.aside>
                     )}
                 </AnimatePresence>
 
                 {/* Main Content */}
-                <div className="flex-1 flex flex-col w-full">
+                <div className="flex-1 flex flex-col min-w-0">
                     <Header
                         sidebarOpen={sidebarOpen}
                         setSidebarOpen={setSidebarOpen}
                         mobileMenuOpen={mobileMenuOpen}
                         setMobileMenuOpen={setMobileMenuOpen}
                         user={userProfile}
+                        logo={logo}
                     />
 
                     {/* Page Content */}
-                    <main className="flex-1 overflow-auto p-4 sm:p-6">
+                    <main className="flex-1 p-4 sm:p-6 overflow-x-hidden">
                         {children}
                     </main>
                 </div>

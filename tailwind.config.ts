@@ -57,7 +57,7 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // JDM Theme Colors
+        // Japanese Theme Colors
         red: {
           DEFAULT: "hsl(0 72% 51%)",
           50: "hsl(0 86% 97%)",

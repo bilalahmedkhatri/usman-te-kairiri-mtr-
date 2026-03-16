@@ -1,3 +1,4 @@
+'use client';
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/animations/FadeIn';
@@ -9,7 +10,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 
 export default function FeaturedInventory() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  
+
   const featuredCars = cars.slice(0, 6);
 
   return (
@@ -18,15 +19,23 @@ export default function FeaturedInventory() {
         {/* Section Header */}
         <FadeIn className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <Badge className="bg-red/20 text-red border-0 mb-4">
+            {/* <Badge className="bg-red/20 text-red border-0 mb-4">
+              <Sparkles className="w-3 h-3 mr-1" />
+              Featured Inventory
+            </Badge> */}
+
+            <Badge className="bg-red/20 text-red border-0 mb-4 hover:bg-red/20 hover:text-red">
               <Sparkles className="w-3 h-3 mr-1" />
               Featured Inventory
             </Badge>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+            {/* <h2 className="text-3xl sm:text-4xl lg:text-9xl font-bold mb-4">
+              Premium <span className="gradient-text">Selection</span>
+            </h2> */}
+            <h2 className="text-5xl sm:text-6xl lg:text-9xl font-bold mb-4">
               Premium <span className="gradient-text">Selection</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-xl">
-              Hand-picked vehicles from our verified dealer network, 
+              Hand-picked vehicles from our verified dealer network,
               featuring the finest Japanese automobiles available for export.
             </p>
           </div>
@@ -55,7 +64,7 @@ export default function FeaturedInventory() {
         >
           <Button
             size="lg"
-            className="bg-gradient-to-r from-red to-orange hover:from-red/90 hover:to-orange/90 text-white font-semibold rounded-xl px-8 shadow-jdm transition-all duration-300 group"
+            className="bg-gradient-to-r from-red to-orange hover:from-red/90 hover:to-orange/90 text-white font-semibold rounded-xl px-8 shadow-Japanese transition-all duration-300 group"
           >
             Browse Full Inventory
             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />

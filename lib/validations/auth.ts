@@ -29,18 +29,6 @@ export const registerSchema = z.object({
         .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
         .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
         .regex(/[0-9]/, 'Password must contain at least one number'),
-    confirmPassword: z
-        .string()
-        .min(1, 'Please confirm your password'),
-    phone: z
-        .string()
-        .optional(),
-    country: z
-        .string()
-        .optional(),
-}).refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ['confirmPassword'],
 })
 
 export type RegisterInput = z.infer<typeof registerSchema>

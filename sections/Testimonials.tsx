@@ -28,8 +28,8 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
             <Star
               key={i}
               className={`w-4 h-4 ${i < testimonial.rating
-                  ? 'fill-yellow-400 text-yellow-400'
-                  : 'text-muted-foreground'
+                ? 'fill-yellow-400 text-yellow-400'
+                : 'text-muted-foreground'
                 }`}
             />
           ))}
@@ -74,8 +74,8 @@ export default function Testimonials() {
       <div className="w-full section-padding relative">
         {/* Section Header */}
         <FadeIn className="text-center max-w-2xl mx-auto mb-16">
-          <Badge className="bg-green/20 text-green-dark border-0 mb-4">Testimonials</Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <Badge className="bg-red/20 text-red border-0 mb-4 hover:bg-red/20 hover:text-red">Testimonials</Badge>
+          <h2 className="text-5xl sm:text-6xl lg:text-9xl font-bold mb-4">
             What Our <span className="gradient-text">Customers</span> Say
           </h2>
           <p className="text-muted-foreground text-lg">

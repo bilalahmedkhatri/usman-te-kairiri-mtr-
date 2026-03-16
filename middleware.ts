@@ -1,57 +1,60 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { getToken } from 'next-auth/jwt';
+import { UserRole } from '@prisma/client';
+import { canAccessRoute, getDashboardRoute } from './lib/permissions';
 
-export function middleware(request: NextRequest) {
-    const { pathname } = request.nextUrl
+export async function middleware(request: NextRequest) {
+    const token = await getToken({
+        req: request,
+        secret: process.env.NEXTAUTH_SECRET,
+    });
 
-    // Check if user has session cookie
-    const authjsToken = request.cookies.get('authjs.session-token');
-    const secureAuthjsToken = request.cookies.get('__Secure-authjs.session-token');
-    const nextAuthToken = request.cookies.get('next-auth.session-token');
-    const secureNextAuthToken = request.cookies.get('__Secure-next-auth.session-token');
+    const { pathname } = request.nextUrl;
 
-    // console.log('🍪 Cookie Check:', {
-    //     authjsToken: !!authjsToken,
-    //     secureAuthjsToken: !!secureAuthjsToken,
-    //     nextAuthToken: !!nextAuthToken,
-    //     secureNextAuthToken: !!secureNextAuthToken
-    // });
+    // Allow access to auth pages for unauthenticated users
+    if (!token) {
+        // Redirect to login if trying to access protected routes
+        if (pathname.startsWith('/dashboard')) {
+            const loginUrl = new URL('/login', request.url);
+            loginUrl.searchParams.set('callbackUrl', pathname);
+            return NextResponse.redirect(loginUrl);
+        }
+        return NextResponse.next();
+    }
 
-    const sessionToken = authjsToken || secureAuthjsToken || nextAuthToken || secureNextAuthToken;
+    // User is authenticated
+    const userRole = token.role as UserRole;
 
-    const isAuth = !!sessionToken
-    const isAuthPage = pathname.startsWith('/login') || pathname.startsWith('/register')
-    const isProtectedRoute = pathname.startsWith('/dashboard') || pathname.startsWith('/profile')
+    // Redirect from /dashboard to role-specific dashboard
+    if (pathname === '/dashboard') {
+        const roleDashboard = getDashboardRoute(userRole);
+        return NextResponse.redirect(new URL(roleDashboard, request.url));
+    }
 
-    console.log('🛡️ Middleware:', {
-        pathname,
-        isAuth,
-        isProtectedRoute,
-        hasToken: !!sessionToken,
-        tokenName: sessionToken?.name
-    })
+    // Check if user has permission to access the route
+    if (!canAccessRoute(userRole, pathname)) {
+        // Redirect to unauthorized page or their dashboard
+        const dashboardUrl = getDashboardRoute(userRole);
+        return NextResponse.redirect(new URL(dashboardUrl, request.url));
+    }
 
     // Redirect authenticated users away from auth pages
-    if (isAuthPage && isAuth) {
-        return NextResponse.redirect(new URL('/dashboard', request.url))
+    if (pathname.startsWith('/login') || pathname.startsWith('/register')) {
+        const dashboardUrl = getDashboardRoute(userRole);
+        return NextResponse.redirect(new URL(dashboardUrl, request.url));
     }
 
-    // Redirect unauthenticated users to login
-    if (isProtectedRoute && !isAuth) {
-        const from = pathname + (request.nextUrl.search || '')
-        return NextResponse.redirect(
-            new URL(`/login?from=${encodeURIComponent(from)}`, request.url)
-        )
-    }
-
-    return NextResponse.next()
+    return NextResponse.next();
 }
 
+// Specify which routes should use this middleware
 export const config = {
     matcher: [
         '/dashboard/:path*',
-        '/profile/:path*',
         '/login',
         '/register',
+        '/cart/:path*',
+        '/wishlist/:path*',
     ],
-}
+};

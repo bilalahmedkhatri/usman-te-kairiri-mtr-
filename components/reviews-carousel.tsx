@@ -34,8 +34,8 @@ export function ReviewsCarousel() {
     reviews.some((r) => r.country.toLowerCase().includes(country.toLowerCase()))
   );
 
-  const displayCountries = countriesWithReviews.length > 0 
-    ? countriesWithReviews 
+  const displayCountries = countriesWithReviews.length > 0
+    ? countriesWithReviews
     : COUNTRIES;
 
   useEffect(() => {
@@ -61,11 +61,10 @@ export function ReviewsCarousel() {
             {displayCountries.map((country, index) => (
               <span
                 key={country}
-                className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                  index === currentIndex
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-muted-foreground"
-                }`}
+                className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${index === currentIndex
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground"
+                  }`}
               >
                 {country}
               </span>
@@ -90,7 +89,7 @@ export function ReviewsCarousel() {
                     </div>
                   )}
                   {review.content && (
-                    <p className="text-muted-foreground italic">"{review.content}"</p>
+                    <p className="text-muted-foreground italic">&quot;{review.content}&quot;</p>
                   )}
                   {review.customer_name && (
                     <p className="text-sm font-medium mt-1">— {review.customer_name}</p>

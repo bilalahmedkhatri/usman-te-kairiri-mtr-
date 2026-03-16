@@ -12,7 +12,7 @@ export default function NotFound() {
             <h2 className="text-4xl font-bold font-heading mb-4 -mt-12 relative z-10">Page Not Found</h2>
             <p className="text-muted-foreground max-w-md mb-8 text-lg relative z-10">
                 Sorry, the page you are looking for does not exist or has been moved.
-                Let's get you back on the road.
+                Let&apos;s get you back on the road.
             </p>
 
             <Link href="/">

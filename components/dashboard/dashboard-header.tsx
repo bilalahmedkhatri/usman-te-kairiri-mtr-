@@ -20,9 +20,8 @@ export function DashboardHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 transition-all duration-300 ${
-        scrolled ? "py-2 shadow-lg" : "py-4 shadow-sm"
-      }`}
+      className={`sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 transition-all duration-300 ${scrolled ? "py-2 shadow-lg" : "py-4 shadow-sm"
+        }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
@@ -34,7 +33,7 @@ export function DashboardHeader() {
             className="flex items-center gap-3"
           >
             <Link href="/dashboard" className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-primary">Cars International</span>
+              <span className="text-2xl font-bold text-primary">TE KAIRIRI MOTORS</span>
             </Link>
           </motion.div>
 

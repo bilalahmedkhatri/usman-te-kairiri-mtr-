@@ -21,35 +21,30 @@ import {
 } from "@/components/ui/input-group"
 
 function Form({
-  className,
   ...props
 }: React.ComponentProps<typeof FormProvider>) {
   return <FormProvider {...props} />
 }
 
 function FormField({
-  className,
   ...props
 }: React.ComponentProps<typeof Field>) {
   return <Field {...props} />
 }
 
 function FormFieldControl({
-  className,
   ...props
 }: React.ComponentProps<typeof FieldControl>) {
   return <FieldControl {...props} />
 }
 
 function FormFieldLabel({
-  className,
   ...props
 }: React.ComponentProps<typeof FieldLabel>) {
   return <FieldLabel {...props} />
 }
 
 function FormFieldError({
-  className,
   ...props
 }: React.ComponentProps<typeof FieldError>) {
   return <FieldError {...props} />
@@ -65,6 +60,7 @@ const FormInputGroupRight = InputGroupRight
 const FormInputGroupText = InputGroupText
 
 function useForm<T extends object>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   schema: any,
   options?: Parameters<typeof useHookForm>[0]
 ) {

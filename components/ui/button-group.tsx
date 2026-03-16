@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -32,13 +31,5 @@ function ButtonGroupItem({
   )
 }
 
-// TODO: Finish this component
-function ButtonGroupIndicator(
-  props: React.ComponentProps<typeof Slot> & {
-    orientation: "horizontal" | "vertical"
-  }
-) {
-  return <div {...props}></div>
-}
 
 export { ButtonGroup, ButtonGroupItem }

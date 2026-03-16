@@ -5,7 +5,7 @@ import {
     LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell
 } from 'recharts';
 
-export const SalesTrendChart = ({ data }: { data: any[] }) => (
+export const SalesTrendChart = ({ data }: { data: Record<string, string | number>[] }) => (
     <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -17,7 +17,7 @@ export const SalesTrendChart = ({ data }: { data: any[] }) => (
     </ResponsiveContainer>
 );
 
-export const RevenueTrendChart = ({ data }: { data: any[] }) => (
+export const RevenueTrendChart = ({ data }: { data: Record<string, string | number>[] }) => (
     <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -29,7 +29,7 @@ export const RevenueTrendChart = ({ data }: { data: any[] }) => (
     </ResponsiveContainer>
 );
 
-export const VehicleTypesChart = ({ data, colors }: { data: any[], colors: string[] }) => (
+export const VehicleTypesChart = ({ data }: { data: Record<string, string | number>[] }) => (
     <ResponsiveContainer width="100%" height={300}>
         <PieChart>
             <Pie

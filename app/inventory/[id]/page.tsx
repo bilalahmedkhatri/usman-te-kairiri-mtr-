@@ -91,7 +91,7 @@ export default function VehicleDetailPage({
               <div className="flex flex-wrap items-center gap-4 text-muted-foreground mt-2">
                 <div className="flex items-center gap-1">
                   <span className="font-semibold text-foreground">Stock:</span>
-                  <span>{vehicle.stock_number || `T-${vehicle.id.slice(0, 6).toUpperCase()}`}</span>
+                  <span>{vehicle.stock_number || `T-${String(vehicle.id).slice(0, 6).toUpperCase()}`}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <MapPin className="w-4 h-4" />
@@ -117,7 +117,7 @@ export default function VehicleDetailPage({
             <p className="text-sm text-blue-900 dark:text-blue-100 mb-1 font-bold">FOB Price</p>
             <div className="flex items-baseline gap-2">
               <p className="text-4xl font-bold text-blue-700 dark:text-blue-400 font-heading">
-                {formatCurrency(vehicle.price)}
+                {formatCurrency(vehicle.price || 0)}
               </p>
             </div>
             <p className="text-xs text-blue-700 dark:text-blue-300 mt-2">
@@ -157,7 +157,7 @@ export default function VehicleDetailPage({
               <CompareButton vehicle={vehicle} className="w-full" />
 
               <ShippingCalculatorWidget
-                vehiclePrice={vehicle.price}
+                vehiclePrice={vehicle.price || 0}
                 vehicleM3={vehicle.specs?.cargo_capacity || 14}
               />
 

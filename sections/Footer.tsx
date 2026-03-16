@@ -1,9 +1,10 @@
+'use client';
 import { motion } from 'framer-motion';
-import { 
-  Car, 
-  Twitter, 
-  Facebook, 
-  Instagram, 
+import {
+  Car,
+  Twitter,
+  Facebook,
+  Instagram,
   Youtube,
   Mail,
   MapPin,
@@ -12,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Logo } from '@/components/Logo';
 
 const footerLinks = {
   inventory: [
@@ -64,17 +66,11 @@ export default function Footer() {
               whileHover={{ scale: 1.02 }}
               className="flex items-center gap-2"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red to-orange flex items-center justify-center shadow-jdm">
-                <Car className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <span className="text-xl font-bold tracking-tight">JDM Export</span>
-                <span className="block text-[10px] text-muted-foreground -mt-0.5">Japanese Car Marketplace</span>
-              </div>
+              <Logo variant="horizontal" />
             </motion.a>
 
             <p className="text-sm text-muted-foreground max-w-xs">
-              Your trusted gateway to premium Japanese vehicles. 
+              Your trusted gateway to premium Japanese vehicles.
               Direct export from verified dealers to customers worldwide.
             </p>
 
@@ -82,7 +78,7 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="w-4 h-4" />
-                <span>support@jdmexport.com</span>
+                <span>support@Japaneseexport.com</span>
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4" />
@@ -189,7 +185,7 @@ export default function Footer() {
       <div className="w-full section-padding py-6 border-t border-border/50">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2024 JDM Export. All rights reserved.
+            © 2024 Japanese Export. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             {footerLinks.legal.map((link, index) => (

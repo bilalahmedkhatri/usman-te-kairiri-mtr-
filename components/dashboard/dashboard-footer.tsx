@@ -20,7 +20,7 @@ export function DashboardFooter() {
           {/* Company Info */}
           <div>
             <h3 className="font-semibold mb-4">
-              {settings?.company_name || "Cars International"}
+              {settings?.company_name || "TE KAIRIRI MOTORS"}
             </h3>
             {settings?.address && (
               <p className="text-sm text-muted-foreground mb-2">
@@ -135,7 +135,7 @@ export function DashboardFooter() {
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
           <p>
-            © {copyrightYear} {settings?.company_name || "Cars International"}. All rights reserved.
+            © {copyrightYear} {settings?.company_name || "TE KAIRIRI MOTORS"}. All rights reserved.
           </p>
         </div>
       </div>

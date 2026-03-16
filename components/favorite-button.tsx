@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 
 interface FavoriteButtonProps {
-    vehicleId: string;
+    vehicleId: number;
     className?: string;
 }
 

@@ -62,7 +62,7 @@ export default function AuthLayout({ children, showBackButton = true }: AuthLayo
                 )}
 
                 {/* Logo */}
-                <motion.div
+                {/* <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
@@ -70,13 +70,13 @@ export default function AuthLayout({ children, showBackButton = true }: AuthLayo
                 >
                     <Link href="/" className="inline-block">
                         <h2 className="text-2xl font-bold gradient-text">
-                            Hokira International
+                            TE KAIRIRI MOTORS
                         </h2>
                         <p className="text-sm text-muted-foreground mt-1">
                             Premium Vehicle Exports
                         </p>
                     </Link>
-                </motion.div>
+                </motion.div> */}
 
                 {/* Form Content */}
                 {children}
@@ -88,7 +88,7 @@ export default function AuthLayout({ children, showBackButton = true }: AuthLayo
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="mt-8 text-center text-xs text-muted-foreground"
                 >
-                    <p>© 2024 Hokira International. All rights reserved.</p>
+                    <p>© 2024 TE KAIRIRI MOTORS. All rights reserved.</p>
                 </motion.div>
             </div>
         </div>

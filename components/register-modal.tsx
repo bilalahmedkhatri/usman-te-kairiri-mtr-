@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion as MotionButton } from 'framer-motion';
-import { 
+import { motion } from 'framer-motion';
+import {
   User, Mail, Lock, Eye, CheckCircle, EyeOff, AlertCircle, Loader2, ArrowRight, Phone, MapPin
 } from 'lucide-react';
 import { ModalContainer } from './modal-container';
@@ -10,7 +10,7 @@ import { ModalContainer } from './modal-container';
 export function RegisterModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState<{email?: string; password?: string; name?: string}>({});
+  const [errors, setErrors] = useState<{ email?: string; password?: string; name?: string }>({});
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -54,8 +54,8 @@ export function RegisterModal({ isOpen, onClose }: { isOpen: boolean; onClose: (
         onClose();
         window.location.href = '/login';
       }, 1500);
-    } catch (error) {
-      setErrors({email: 'Email already exists'});
+    } catch {
+      setErrors({ email: 'Email already exists' });
     } finally {
       setIsSubmitting(false);
     }
@@ -74,11 +74,10 @@ export function RegisterModal({ isOpen, onClose }: { isOpen: boolean; onClose: (
             <input
               type="text"
               value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="John Doe"
-              className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${
-                errors.name ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
-              } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
+              className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${errors.name ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
+                } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
             />
           </div>
           {errors.name && (
@@ -99,11 +98,10 @@ export function RegisterModal({ isOpen, onClose }: { isOpen: boolean; onClose: (
             <input
               type="email"
               value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="john@example.com"
-              className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${
-                errors.email ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
-              } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
+              className={`w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${errors.email ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
+                } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
             />
           </div>
           {errors.email && (
@@ -124,11 +122,10 @@ export function RegisterModal({ isOpen, onClose }: { isOpen: boolean; onClose: (
             <input
               type={showPassword ? 'text' : 'password'}
               value={formData.password}
-              onChange={(e) => setFormData({...formData, password: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               placeholder="••••••••"
-              className={`w-full pl-10 pr-12 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${
-                errors.password ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
-              } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
+              className={`w-full pl-10 pr-12 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border ${errors.password ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
+                } focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white`}
             />
             <button
               type="button"
@@ -156,7 +153,7 @@ export function RegisterModal({ isOpen, onClose }: { isOpen: boolean; onClose: (
             <input
               type="tel"
               value={formData.phone}
-              onChange={(e) => setFormData({...formData, phone: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               placeholder="+254712345678"
               className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
             />
@@ -172,7 +169,7 @@ export function RegisterModal({ isOpen, onClose }: { isOpen: boolean; onClose: (
             <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
             <select
               value={formData.country}
-              onChange={(e) => setFormData({...formData, country: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, country: e.target.value })}
               className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
             >
               <option value="">Select Country</option>
@@ -193,7 +190,7 @@ export function RegisterModal({ isOpen, onClose }: { isOpen: boolean; onClose: (
         )}
 
         {/* Submit Button */}
-        <MotionButton
+        <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           type="submit"
@@ -211,7 +208,7 @@ export function RegisterModal({ isOpen, onClose }: { isOpen: boolean; onClose: (
               <ArrowRight className="w-4 h-4" />
             </>
           )}
-        </MotionButton>
+        </motion.button>
 
         {/* Login Link */}
         <div className="text-center">

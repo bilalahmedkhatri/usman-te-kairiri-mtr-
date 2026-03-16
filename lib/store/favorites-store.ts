@@ -1,13 +1,12 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { Vehicle } from '@/lib/api';
 
 interface FavoritesStore {
-    favorites: string[]; // Vehicle IDs
-    addFavorite: (vehicleId: string) => void;
-    removeFavorite: (vehicleId: string) => void;
-    toggleFavorite: (vehicleId: string) => void;
-    isFavorite: (vehicleId: string) => boolean;
+    favorites: number[]; // Vehicle IDs
+    addFavorite: (vehicleId: number) => void;
+    removeFavorite: (vehicleId: number) => void;
+    toggleFavorite: (vehicleId: number) => void;
+    isFavorite: (vehicleId: number) => boolean;
     clearAll: () => void;
 }
 
