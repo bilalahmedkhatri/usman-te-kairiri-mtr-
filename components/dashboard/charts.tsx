@@ -42,7 +42,7 @@ export const VehicleTypesChart = ({ data }: { data: Record<string, string | numb
                 label
             >
                 {data.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
+                    <Cell key={`cell-${index}`} fill={entry.color as string} />
                 ))}
             </Pie>
             <Tooltip />

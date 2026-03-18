@@ -64,9 +64,9 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
 
             {/* Year and Mileage with Light Color */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>Year: {vehicle.year}</span>
-              {vehicle.specs.mileage && (
-                <span>{vehicle.specs.mileage.toLocaleString()} miles</span>
+              <span>Year: {vehicle.year || vehicle.year_manufacture}</span>
+              {vehicle.specs?.mileage_km && (
+                <span>{vehicle.specs.mileage_km.toLocaleString()} km</span>
               )}
             </div>
 

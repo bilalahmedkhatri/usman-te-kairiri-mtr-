@@ -107,6 +107,9 @@ model Vehicle {
   yearManufacture  Int               @map("year_manufacture")
   yearRegistration Int?              @map("year_registration")
   priceFob         Decimal           @map("price_fob") @db.Decimal(12, 2)
+  priceRetail      Decimal?          @map("price_retail") @db.Decimal(12, 2)
+  currency         String?           @default("JPY") @map("currency")
+  description      String?           @map("description")
   status           VehicleStatus     @default(AVAILABLE)
   featured         Boolean           @default(false)
   createdAt        DateTime          @default(now()) @map("created_at")
@@ -118,6 +121,8 @@ model Vehicle {
   images           VehicleImage[]
   logistics        VehicleLogistics?
   specs            VehicleSpec?
+  documents        VehicleDocument[]
+  history          VehicleHistory?
   site             Site              @relation(fields: [siteId], references: [id])
   wishlists        Wishlist[]
 
@@ -129,45 +134,65 @@ model Vehicle {
 }
 
 model VehicleSpec {
-  id            Int      @id @default(autoincrement())
-  vehicleId     Int      @unique @map("vehicle_id")
-  engineCode    String?  @map("engine_code")
-  engineCc      Int?     @map("engine_cc")
-  fuelType      String?  @map("fuel_type")
-  transmission  String?
-  driveType     String?  @map("drive_type")
-  steering      String?
-  seats         Int?
-  doors         Int?
-  colorExterior String?  @map("color_exterior")
-  colorInterior String?  @map("color_interior")
-  trimGrade     String?  @map("trim_grade")
-  mileageKm     Int?     @map("mileage_km")
-  vehicleType   String?  @map("vehicle_type")
-  options       Json?
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
-  vehicle       Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  id               Int      @id @default(autoincrement())
+  vehicleId        Int      @unique @map("vehicle_id")
+  engineCode       String?  @map("engine_code")
+  engineCc         Int?     @map("engine_cc")
+  fuelType         String?  @map("fuel_type")
+  transmission     String?
+  driveType        String?  @map("drive_type")
+  steering         String?
+  seats            Int?
+  doors            Int?
+  colorExterior    String?  @map("color_exterior")
+  colorInterior    String?  @map("color_interior")
+  trimGrade        String?  @map("trim_grade")
+  mileageKm        Int?     @map("mileage_km")
+  vehicleType      String?  @map("vehicle_type")
+  // Engine performance
+  powerKw          Int?     @map("power_kw")
+  powerHp          Int?     @map("power_hp")
+  torqueNm         Int?     @map("torque_nm")
+  // Weight & dimensions (for display; shipping dimensions live in VehicleLogistics)
+  weightKg         Int?     @map("weight_kg")
+  dimensions       String?  @map("dimensions") // e.g. "4690×1730×1315"
+  // Economy & emissions
+  fuelConsumption  String?  @map("fuel_consumption") // e.g. "15.6 km/L"
+  emissionStandard String?  @map("emission_standard") // e.g. "Euro 5"
+  options          Json?
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  vehicle          Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 
   @@map("vehicle_specs")
 }
 
 model VehicleLogistics {
-  id               Int      @id @default(autoincrement())
-  vehicleId        Int      @unique @map("vehicle_id")
-  lengthCm         Int?     @map("length_cm")
-  widthCm          Int?     @map("width_cm")
-  heightCm         Int?     @map("height_cm")
-  m3               Decimal? @db.Decimal(5, 2)
-  weightKg         Int?     @map("weight_kg")
-  currentPortId    String?  @map("current_port_id")
-  originCountry    String?  @map("origin_country")
-  hsCode           String?  @map("hs_code")
-  inspectionStatus String?  @map("inspection_status")
-  exportCertStatus Boolean  @default(false) @map("export_cert_status")
-  createdAt        DateTime @default(now()) @map("created_at")
-  updatedAt        DateTime @updatedAt @map("updated_at")
-  vehicle          Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  id               Int       @id @default(autoincrement())
+  vehicleId        Int       @unique @map("vehicle_id")
+  // Shipping dimensions
+  lengthCm         Int?      @map("length_cm")
+  widthCm          Int?      @map("width_cm")
+  heightCm         Int?      @map("height_cm")
+  m3               Decimal?  @db.Decimal(5, 2)
+  weightKg         Int?      @map("weight_kg")
+  // Port information
+  currentPortId    String?   @map("current_port_id")
+  currentPortName  String?   @map("current_port_name")
+  originCountry    String?   @map("origin_country")
+  originPort       String?   @map("origin_port")
+  // Customs & compliance
+  hsCode           String?   @map("hs_code")
+  exportCertStatus Boolean   @default(false) @map("export_cert_status")
+  // Inspection & shipping
+  inspectionStatus String?   @map("inspection_status")
+  inspectionDate   DateTime? @map("inspection_date")
+  importDate       DateTime? @map("import_date")
+  shippingStatus   String?   @map("shipping_status")
+  etaDestination   DateTime? @map("eta_destination")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+  vehicle          Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 
   @@map("vehicle_logistics")
 }
@@ -177,7 +202,7 @@ model VehicleImage {
   vehicleId Int      @map("vehicle_id")
   url       String
   altText   String?  @map("alt_text")
-  order     Int      @default(0)
+  sortOrder Int      @default(0) @map("order")
   isPrimary Boolean  @default(false) @map("is_primary")
   createdAt DateTime @default(now()) @map("created_at")
   vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
@@ -403,4 +428,46 @@ enum InquiryStatus {
   IN_PROGRESS
   RESOLVED
   CLOSED
+}
+
+// ============================================
+// VEHICLE DOCUMENTS & HISTORY
+// ============================================
+
+enum DocumentType {
+  TITLE
+  INSPECTION
+  EXPORT_CERT
+  CUSTOMS
+  AUCTION_SHEET
+  SERVICE_RECORD
+  OTHER
+}
+
+model VehicleDocument {
+  id        Int          @id @default(autoincrement())
+  vehicleId Int          @map("vehicle_id")
+  type      DocumentType @default(OTHER)
+  title     String?      @map("title")
+  url       String       @map("url")
+  createdAt DateTime     @default(now()) @map("created_at")
+  updatedAt DateTime     @updatedAt @map("updated_at")
+  vehicle   Vehicle      @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId])
+  @@index([type])
+  @@map("vehicle_documents")
+}
+
+model VehicleHistory {
+  id              Int      @id @default(autoincrement())
+  vehicleId       Int      @unique @map("vehicle_id")
+  previousOwners  String?  @map("previous_owners")  // Free text, e.g. "2 owners (corporate)"
+  serviceHistory  String?  @map("service_history")   // Summary of service records
+  accidentHistory String?  @map("accident_history")  // e.g. "No accidents reported"
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+  vehicle         Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@map("vehicle_history")
 }

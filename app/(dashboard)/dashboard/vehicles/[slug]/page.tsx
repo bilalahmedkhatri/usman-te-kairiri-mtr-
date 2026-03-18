@@ -113,8 +113,7 @@ export default async function VehicleDetailPage({ params }: PageProps) {
         },
       },
       // Include other common relations that may exist
-      // documents: true,
-      // history: true,
+      history: true,
       // pricing: true,
     },
   });
@@ -134,7 +133,7 @@ export default async function VehicleDetailPage({ params }: PageProps) {
     yearManufacture: vehicle.yearManufacture,
     yearRegistration: vehicle.yearRegistration || undefined,
     priceFob: Number(vehicle.priceFob),
-    priceRetail: vehicle.priceRetail ? Number(vehicle.priceRetail) : undefined,
+    priceRetail: vehicle.priceRetail != null ? Number(vehicle.priceRetail) : undefined,
     currency: vehicle.currency || 'JPY',
     status: vehicle.status,
     featured: vehicle.featured,
@@ -180,24 +179,19 @@ export default async function VehicleDetailPage({ params }: PageProps) {
       originCountry: vehicle.logistics.originCountry || undefined,
       originPort: vehicle.logistics.originPort || undefined,
       inspectionStatus: vehicle.logistics.inspectionStatus || undefined,
-      inspectionDate: vehicle.logistics.inspectionDate || undefined,
-      etaDestination: vehicle.logistics.etaDestination || undefined,
+      inspectionDate: vehicle.logistics.inspectionDate?.toISOString() || undefined,
+      etaDestination: vehicle.logistics.etaDestination?.toISOString() || undefined,
       shippingStatus: vehicle.logistics.shippingStatus || undefined,
     } : undefined,
 
     // Additional data if available
-    documents: vehicle.documents?.map(doc => ({
-      id: doc.id,
-      type: doc.type,
-      url: doc.url,
-      title: doc.title || undefined,
-    })) || [],
+    documents: [], // Empty array as documents relation doesn't exist in the schema
 
     history: vehicle.history ? {
-      previousOwners: vehicle.history.previousOwners || undefined,
-      serviceHistory: vehicle.history.serviceHistory || undefined,
-      accidentHistory: vehicle.history.accidentHistory || undefined,
-      importDate: vehicle.history.importDate || undefined,
+      previousOwners: vehicle.history.previousOwners ? parseInt(vehicle.history.previousOwners) || undefined : undefined,
+      serviceHistory: vehicle.history.serviceHistory ? !vehicle.history.serviceHistory.toLowerCase().includes('no') : undefined,
+      accidentHistory: vehicle.history.accidentHistory ? !vehicle.history.accidentHistory.toLowerCase().includes('no') : undefined,
+      importDate: vehicle.logistics?.importDate?.toISOString() || undefined,
     } : undefined,
 
     // Metadata

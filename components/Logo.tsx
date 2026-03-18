@@ -10,7 +10,7 @@ export interface LogoProps {
 export const Logo: React.FC<LogoProps> = ({
     className,
     variant = 'horizontal',
-    theme = 'light'
+    // theme = 'light'
 }) => {
     // Colors
     const colors = {
@@ -21,8 +21,8 @@ export const Logo: React.FC<LogoProps> = ({
         white: '#FFFFFF',
     };
 
-    const textColor = theme === 'dark' ? colors.white : colors.blue;
-    const sloganColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.7)' : colors.blue;
+    // const textColor = theme === 'dark' ? colors.white : colors.blue;
+    // const sloganColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.7)' : colors.blue;
 
     // SVG Geometry
     const Icon = () => (

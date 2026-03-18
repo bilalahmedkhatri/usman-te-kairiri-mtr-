@@ -131,15 +131,19 @@ export default function EditUserPage() {
 
     try {
       // API call would go here
-      let updateData;
+      let updateData: Partial<UserFormData> | UserFormData;
       if (!changePassword) {
-        const { password: _password, confirmPassword: _confirmPassword, ...rest } = formData;
+        const rest = { ...formData };
+        // @ts-expect-error: password might not exist on rest
+        delete rest.password;
+        // @ts-expect-error: confirmPassword might not exist on rest
+        delete rest.confirmPassword;
         updateData = rest;
       } else {
         updateData = formData;
       }
 
-      console.log('Updating user:', updateData);
+      console.log('Updating user:', updateData, 'for ID:', userId);
 
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
@@ -148,7 +152,7 @@ export default function EditUserPage() {
       setTimeout(() => {
         router.push('/dashboard/users');
       }, 1500);
-    } catch (_err) {
+    } catch {
       setErrors({ email: 'Failed to update user. Please try again.' });
     } finally {
       setIsSubmitting(false);
@@ -333,19 +337,26 @@ export default function EditUserPage() {
 
                 {/* Avatar Upload */}
                 <div className="md:col-span-2">
-                  <Label htmlFor="avatar">Profile Picture</Label>
-                  <div className="mt-1 border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer">
-                    <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
+                  <div
+                    className="mt-1 border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => document.getElementById('avatar')?.click()}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') document.getElementById('avatar')?.click(); }}
+                    aria-label="Upload new profile picture"
+                  >
+                    <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-2" aria-hidden="true" />
                     <p className="text-sm text-muted-foreground">Click to upload new picture or drag and drop</p>
                     <p className="text-xs text-muted-foreground mt-1">PNG, JPG up to 5MB</p>
-                    <input
-                      id="avatar"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleAvatarChange}
-                      className="hidden"
-                    />
                   </div>
+                  <label htmlFor="avatar">Profile Picture</label>
+                  <input
+                    id="avatar"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarChange}
+                    className="hidden"
+                  />
                   {formData.avatar && (
                     <p className="text-sm text-muted-foreground mt-2">
                       New file selected: {formData.avatar.name}
@@ -379,6 +390,7 @@ export default function EditUserPage() {
                       value={formData.role}
                       onChange={(e) => handleInputChange('role', e.target.value as UserFormData['role'])}
                       className="w-full mt-1 px-3 py-2 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+                      aria-label="User Role"
                     >
                       <option value="user">User</option>
                       <option value="manager">Manager</option>
@@ -398,6 +410,7 @@ export default function EditUserPage() {
                       value={formData.status}
                       onChange={(e) => handleInputChange('status', e.target.value as UserFormData['status'])}
                       className="w-full mt-1 px-3 py-2 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+                      aria-label="User Status"
                     >
                       <option value="active">Active</option>
                       <option value="inactive">Inactive</option>

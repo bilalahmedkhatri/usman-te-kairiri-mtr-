@@ -1,6 +1,7 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 import bcrypt from 'bcrypt';
 
 export type UserRole = 'ADMIN' | 'MANAGER' | 'USER' | 'DEALER' | 'SUPPLIER' | 'BUYER' | 'VIEWER';
@@ -40,7 +41,7 @@ export async function getUsers(params: GetUsersParams = {}): Promise<GetUsersRes
 
     try {
         // Build where clause for filtering
-        const where: any = {};
+        const where: Prisma.UserWhereInput = {};
 
         // Search across multiple fields
         if (params.search && params.search.trim()) {
@@ -54,12 +55,12 @@ export async function getUsers(params: GetUsersParams = {}): Promise<GetUsersRes
 
         // Filter by role
         if (params.role && params.role !== 'all') {
-            where.role = params.role.toUpperCase();
+            where.role = params.role.toUpperCase() as UserRole;
         }
 
         // Filter by status
         if (params.status && params.status !== 'all') {
-            where.status = params.status.toUpperCase();
+            where.status = params.status.toUpperCase() as UserStatus;
         }
 
         // Get total count for pagination

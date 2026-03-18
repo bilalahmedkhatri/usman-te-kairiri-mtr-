@@ -59,7 +59,7 @@ export default function FeaturedMakes() {
             Popular <span className="gradient-text">Japanese</span> Brands
           </h2>
           <p className="text-muted-foreground text-lg">
-            Explore vehicles from Japan's most prestigious automotive manufacturers,
+            Explore vehicles from Japan&apos;s most prestigious automotive manufacturers,
             from legendary sports cars to luxury sedans.
           </p>
         </FadeIn>

@@ -218,7 +218,7 @@ export default function Hero({ cars = [] }: HeroProps) {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-lg text-muted-foreground max-w-lg leading-relaxed"
               >
-                Discover Japan's finest vehicles, from legendary sports cars to
+                Discover Japan&apos;s finest vehicles, from legendary sports cars to
                 luxury sedans. Direct export from verified dealers to your doorstep.
               </motion.p>
             </div>

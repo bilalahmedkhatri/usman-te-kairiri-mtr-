@@ -37,7 +37,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
         {/* Content */}
         <p className="text-muted-foreground mb-6 leading-relaxed">
-          "{testimonial.content}"
+          &quot;{testimonial.content}&quot;
         </p>
 
         {/* Author */}

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
     Car, Calendar, Palette, Gauge, MapPin,
     DollarSign, Edit2, Trash2, Loader2
@@ -74,7 +75,7 @@ export function VehicleInventoryCard({
                 {/* Vehicle Image */}
                 <div className="h-48 bg-gray-200 dark:bg-gray-800 relative overflow-hidden shrink-0">
                     {vehicle.imageUrl ? (
-                        <img
+                        <Image
                             src={vehicle.imageUrl}
                             alt={`${vehicle.make} ${vehicle.model}`}
                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"

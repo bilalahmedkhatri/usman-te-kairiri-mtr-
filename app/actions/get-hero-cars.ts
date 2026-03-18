@@ -24,7 +24,7 @@ export async function getHeroCars(): Promise<HeroCar[]> {
             include: {
                 images: {
                     orderBy: {
-                        order: 'asc'
+                        sortOrder: 'asc'
                     }
                 }
             }

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { JapanTime } from "@/components/japan-time";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Logo } from "@/components/Logo";
@@ -62,7 +61,6 @@ export function Header() {
 
           {/* Actions */}
           <div className="hidden md:flex items-center gap-4">
-            {/* <JapanTime /> */}
             <div className="h-6 w-px bg-border/50" />
             {/* <ModeToggle /> */}
             <Link href="/login">

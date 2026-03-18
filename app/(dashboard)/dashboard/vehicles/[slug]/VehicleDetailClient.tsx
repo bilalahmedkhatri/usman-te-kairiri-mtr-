@@ -3,14 +3,14 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    Calendar, MapPin, Gauge, Fuel, Settings, BadgeInfo,
-    DollarSign, Share2, Printer, Heart, ArrowLeft, CheckCircle2,
+    Calendar, MapPin, Gauge, Settings, BadgeInfo,
+    Share2, Printer, Heart, ArrowLeft,
     Ship, FileCheck, CircleDollarSign, X, ChevronLeft, ChevronRight,
-    Info, Package, Clock, TrendingUp, Shield, ExternalLink,
-    Navigation, Zap, Weight, Ruler, Droplets, Users, Car,
-    Palette
+    Info, Clock, Shield, ExternalLink, Navigation, Zap, Car
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 
 // Define comprehensive types matching the data passed from server
 export type VehicleImage = {
@@ -197,6 +197,7 @@ const ImageLightbox = ({
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen, onClose, onNext, onPrev]);
 
     if (!isOpen) return null;
@@ -212,27 +213,27 @@ const ImageLightbox = ({
                 className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
                 onClick={onClose}
             >
-                <button
+                <Button
                     onClick={onClose}
                     className="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors z-10"
                 >
                     <X className="w-8 h-8" />
-                </button>
+                </Button>
 
                 {images.length > 1 && (
                     <>
-                        <button
+                        <Button
                             onClick={(e) => { e.stopPropagation(); onPrev(); }}
                             className="absolute left-4 top-1/2 -translate-y-1/2 p-3 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-all"
                         >
                             <ChevronLeft className="w-8 h-8" />
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             onClick={(e) => { e.stopPropagation(); onNext(); }}
                             className="absolute right-4 top-1/2 -translate-y-1/2 p-3 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-all"
                         >
                             <ChevronRight className="w-8 h-8" />
-                        </button>
+                        </Button>
                     </>
                 )}
 
@@ -304,27 +305,28 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                         <span className="sm:hidden">Back</span>
                     </Link>
                     <div className="flex items-center gap-2 sm:gap-3">
-                        <button
+                        <Button
                             onClick={() => navigator.share?.({ title: `${vehicle.make} ${vehicle.model}`, url: window.location.href })}
                             className="p-2 text-gray-400 hover:text-blue-500 transition-colors"
                             title="Share"
+                            aria-label="Share vehicle"
                         >
                             <Share2 className="w-5 h-5" />
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             onClick={() => window.print()}
                             className="p-2 text-gray-400 hover:text-blue-500 transition-colors hidden sm:block"
                             title="Print"
                         >
                             <Printer className="w-5 h-5" />
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             onClick={() => setIsWishlisted(!isWishlisted)}
                             className={`p-2 transition-colors ${isWishlisted ? 'text-red-500' : 'text-gray-400 hover:text-red-500'}`}
                             title="Add to wishlist"
                         >
                             <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-current' : ''}`} />
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </div>
@@ -369,7 +371,7 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                         >
                             {activeImage ? (
                                 <>
-                                    <img
+                                    <Image
                                         src={activeImage.url}
                                         alt={activeImage.altText || `${vehicle.make} ${vehicle.model}`}
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -403,18 +405,18 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                             {/* Image Navigation Arrows (visible on hover for desktop) */}
                             {sortedImages.length > 1 && (
                                 <>
-                                    <button
+                                    <Button
                                         onClick={(e) => { e.stopPropagation(); handlePrevImage(); }}
                                         className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white dark:bg-black/50 dark:hover:bg-black/70 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all hidden sm:block"
                                     >
                                         <ChevronLeft className="w-5 h-5" />
-                                    </button>
-                                    <button
+                                    </Button>
+                                    <Button
                                         onClick={(e) => { e.stopPropagation(); handleNextImage(); }}
                                         className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white dark:bg-black/50 dark:hover:bg-black/70 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all hidden sm:block"
                                     >
                                         <ChevronRight className="w-5 h-5" />
-                                    </button>
+                                    </Button>
                                 </>
                             )}
                         </motion.div>
@@ -423,7 +425,7 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                         {sortedImages.length > 1 && (
                             <motion.div variants={fadeInUp} className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
                                 {sortedImages.map((img, idx) => (
-                                    <button
+                                    <Button
                                         key={img.id}
                                         onClick={() => setActiveImageIndex(idx)}
                                         className={`flex-shrink-0 w-20 h-14 sm:w-24 sm:h-20 rounded-lg overflow-hidden border-2 transition-all ${activeImageIndex === idx
@@ -431,12 +433,12 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                                             : 'border-transparent opacity-60 hover:opacity-100'
                                             }`}
                                     >
-                                        <img
+                                        <Image
                                             src={img.url}
                                             alt={img.altText || `View ${idx + 1}`}
                                             className="w-full h-full object-cover"
                                         />
-                                    </button>
+                                    </Button>
                                 ))}
                             </motion.div>
                         )}
@@ -492,13 +494,13 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                             </div>
 
                             <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                                <button className="w-full py-3 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-lg shadow-blue-600/20 transition-all active:scale-95 flex items-center justify-center gap-2">
+                                <Button className="w-full py-3 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-lg shadow-blue-600/20 transition-all active:scale-95 flex items-center justify-center gap-2">
                                     <CircleDollarSign className="w-5 h-5" />
                                     Buy Now
-                                </button>
-                                <button className="w-full py-3 sm:py-4 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 transition-all active:scale-95">
+                                </Button>
+                                <Button className="w-full py-3 sm:py-4 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 transition-all active:scale-95">
                                     Make Offer
-                                </button>
+                                </Button>
                             </div>
                         </motion.div>
 
@@ -514,13 +516,13 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                                 <span className="text-xs text-gray-500">FOB</span>
                             </div>
                             <div className="grid grid-cols-2 gap-3">
-                                <button className="py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold shadow-lg shadow-blue-600/20 transition-all active:scale-95 flex items-center justify-center gap-2">
+                                <Button className="py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold shadow-lg shadow-blue-600/20 transition-all active:scale-95 flex items-center justify-center gap-2">
                                     <CircleDollarSign className="w-4 h-4" />
                                     Buy Now
-                                </button>
-                                <button className="py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-all active:scale-95">
+                                </Button>
+                                <Button className="py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-all active:scale-95">
                                     Make Offer
-                                </button>
+                                </Button>
                             </div>
                         </motion.div>
 
@@ -736,9 +738,9 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                                     <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
                                         Our team is here to assist you with any questions about this vehicle.
                                     </p>
-                                    <button className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+                                    <Button className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
                                         Contact Sales Team →
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                         </motion.div>

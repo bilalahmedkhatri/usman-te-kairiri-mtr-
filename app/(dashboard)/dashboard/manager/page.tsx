@@ -5,13 +5,12 @@ import { motion } from 'framer-motion';
 import {
     MessageSquare,
     Calendar,
-    Users,
-    Car,
     TrendingUp,
     Store,
     AlertCircle,
     CheckCircle,
     Clock,
+    LucideIcon,
 } from 'lucide-react';
 
 const MotionDiv = motion.div;
@@ -95,7 +94,7 @@ export default function ManagerDashboard() {
     const getStatusBadge = (status: string) => {
         const statusConfig: Record<
             string,
-            { bg: string; text: string; icon: any }
+            { bg: string; text: string; icon: LucideIcon }
         > = {
             OPEN: {
                 bg: 'bg-red-100 dark:bg-red-900/20',

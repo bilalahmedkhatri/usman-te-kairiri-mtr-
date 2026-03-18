@@ -13,7 +13,6 @@ import { Logo } from '@/components/Logo'
 import toast from 'react-hot-toast'
 
 const MotionDiv = motion.div
-const MotionInput = motion.input
 const MotionButton = motion.button
 
 // Beautiful vehicle images

@@ -9,7 +9,6 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { registerSchema, type RegisterInput } from '@/lib/validations/auth';
 import { registerAction } from '@/app/actions/auth';
 import { Logo } from '@/components/Logo';
@@ -29,7 +28,6 @@ const vehicleImages = [
 ];
 
 export default function RegisterPage() {
-    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [bgImage, setBgImage] = useState('');
     const [imageOnLeft, setImageOnLeft] = useState(true);

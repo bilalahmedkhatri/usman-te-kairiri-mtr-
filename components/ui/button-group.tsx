@@ -13,11 +13,15 @@ function ButtonGroup({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+interface ButtonGroupItemProps extends React.ComponentProps<typeof Button> {
+    "data-active"?: boolean | string;
+}
+
 function ButtonGroupItem({
   className,
   "data-active": dataActive,
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: ButtonGroupItemProps) {
   return (
     <Button
       data-slot="button-group-item"

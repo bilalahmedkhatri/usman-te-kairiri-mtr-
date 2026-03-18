@@ -12,6 +12,7 @@
   - Requires Node >= 16 and Playwright installed (npx playwright install to add browsers).
 */
 
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');

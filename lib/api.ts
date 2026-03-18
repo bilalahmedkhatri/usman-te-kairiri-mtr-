@@ -117,6 +117,9 @@ export interface VehicleFilters {
   skip?: number;
   limit?: number;
   sort?: string;
+  body_type?: string;
+  fuel_type?: string;
+  location?: string;
 }
 
 export interface ShippingCalculation {
@@ -193,16 +196,11 @@ export const taxonomyApi = {
     return response.data;
   },
 
-  getModels: async (): Promise<string[]> => {
+  getModels: async (make?: string): Promise<string[]> => {
     // Models might be global or site specific, for now using global structure if not isolated in API
-    // If main.py defined models inside tenant path, update here. 
-    // Assuming taxonomy handles models logic or generic listing.
-    // Let's assume we query vehicles to get models for the site
     const slug = getTenantSlug();
-    // Re-using taxonomy for models or a raw vehicle query if no specific models endpoint
-    await api.get(`/api/${slug}/taxonomy`);
-    // In a real app we'd have a specific /api/{slug}/models endpoint
-    return [];
+    const response = await api.get(`/api/${slug}/taxonomy`, { params: { make } });
+    return response.data?.models || [];
   },
 };
 

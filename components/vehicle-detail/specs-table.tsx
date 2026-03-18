@@ -8,22 +8,22 @@ interface SpecsTableProps {
 
 export function SpecsTable({ vehicle }: SpecsTableProps) {
     const specs = [
-        { label: "Stock No", value: vehicle.stock_number || `T-${vehicle.id.slice(0, 6).toUpperCase()}` },
-        { label: "Located Port", value: vehicle.specs.located_port || "Yokohama" },
-        { label: "Grade", value: vehicle.specs.grade || vehicle.model.split(" ")[1] || "Base" },
-        { label: "Seats", value: vehicle.specs.seats || 5 },
-        { label: "Chassis", value: vehicle.specs.chassis_no || `ACU${vehicle.year}-${vehicle.id.slice(0, 5)}` },
-        { label: "Shift", value: vehicle.specs.transmission || "Automatic" },
-        { label: "Mileage", value: vehicle.specs.mileage ? `${(vehicle.specs.mileage).toLocaleString()}km` : "N/A" },
-        { label: "Fuel Type", value: vehicle.specs.fuel_type || "Petrol" },
-        { label: "Color", value: vehicle.specs.color || "Black" },
-        { label: "Door", value: vehicle.specs.doors || 5 },
-        { label: "Max loading", value: vehicle.specs.max_loading ? `${vehicle.specs.max_loading}kg` : "-" },
-        { label: "Engine CC", value: vehicle.specs.engine_cc ? `${vehicle.specs.engine_cc}cc` : "2400cc" },
-        { label: "Dimension", value: vehicle.specs.dimensions ? `${vehicle.specs.dimensions.length}×${vehicle.specs.dimensions.width}×${vehicle.specs.dimensions.height}` : "4.73×1.85×1.68" },
-        { label: "m3", value: vehicle.specs.cargo_capacity ? `${vehicle.specs.cargo_capacity}` : "14.701" },
-        { label: "Registration Year", value: vehicle.specs.registration_year || vehicle.year },
-        { label: "Manufacture Year", value: vehicle.specs.manufacture_year || vehicle.year },
+        { label: "Stock No", value: vehicle.stock_number || `T-${String(vehicle.id).toUpperCase()}` },
+        { label: "Located Port", value: vehicle.logistics?.current_port?.name || "Yokohama" },
+        { label: "Grade", value: vehicle.specs?.trim_grade || vehicle.model.split(" ")[1] || "Base" },
+        { label: "Seats", value: vehicle.specs?.seats || 5 },
+        { label: "Chassis", value: vehicle.vin_chassis || `ACU${vehicle.year || vehicle.year_manufacture}-${String(vehicle.id)}` },
+        { label: "Shift", value: vehicle.specs?.transmission || "Automatic" },
+        { label: "Mileage", value: vehicle.specs?.mileage_km ? `${(vehicle.specs.mileage_km).toLocaleString()}km` : "N/A" },
+        { label: "Fuel Type", value: vehicle.specs?.fuel_type || "Petrol" },
+        { label: "Color", value: vehicle.specs?.color_exterior || "Black" },
+        { label: "Door", value: vehicle.specs?.doors || 5 },
+        { label: "Max loading", value: vehicle.logistics?.max_loading_kg ? `${vehicle.logistics.max_loading_kg}kg` : "-" },
+        { label: "Engine CC", value: vehicle.specs?.engine_cc ? `${vehicle.specs.engine_cc}cc` : "2400cc" },
+        { label: "Dimension", value: vehicle.logistics?.length_cm ? `${vehicle.logistics.length_cm}×${vehicle.logistics.width_cm}×${vehicle.logistics.height_cm}` : "4.73×1.85×1.68" },
+        { label: "m3", value: vehicle.logistics?.m3 ? `${vehicle.logistics.m3}` : "14.701" },
+        { label: "Registration Year", value: vehicle.year_registration || vehicle.year || vehicle.year_manufacture },
+        { label: "Manufacture Year", value: vehicle.year_manufacture || vehicle.year },
     ];
 
     return (

@@ -3,6 +3,8 @@ import {
   FormProvider,
   useForm as useHookForm,
   type UseFormReturn,
+  type UseFormProps,
+  type FieldValues,
 } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
@@ -44,6 +46,12 @@ function FormFieldLabel({
   return <FieldLabel {...props} />
 }
 
+function FormFieldControlLabel({
+  ...props
+}: React.ComponentProps<typeof FieldLabel>) {
+  return <FieldLabel {...props} />
+}
+
 function FormFieldError({
   ...props
 }: React.ComponentProps<typeof FieldError>) {
@@ -59,10 +67,10 @@ const FormInputGroupLeft = InputGroupLeft
 const FormInputGroupRight = InputGroupRight
 const FormInputGroupText = InputGroupText
 
-function useForm<T extends object>(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+function useForm<T extends FieldValues>(
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   schema: any,
-  options?: Parameters<typeof useHookForm>[0]
+  options?: Omit<UseFormProps<T>, "resolver">
 ) {
   return useHookForm<T>({
     resolver: zodResolver(schema),
@@ -75,6 +83,7 @@ export {
   FormField,
   FormFieldControl,
   FormFieldLabel,
+  FormFieldControlLabel,
   FormFieldError,
   useFormField,
   FormInputGroup,
