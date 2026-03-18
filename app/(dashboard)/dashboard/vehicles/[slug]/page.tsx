@@ -113,6 +113,7 @@ export default async function VehicleDetailPage({ params }: PageProps) {
         },
       },
       // Include other common relations that may exist
+      documents: true,
       history: true,
       // pricing: true,
     },
@@ -185,7 +186,12 @@ export default async function VehicleDetailPage({ params }: PageProps) {
     } : undefined,
 
     // Additional data if available
-    documents: [], // Empty array as documents relation doesn't exist in the schema
+    documents: vehicle.documents?.map(doc => ({
+      id: doc.id,
+      type: doc.type,
+      url: doc.url,
+      title: doc.title || undefined,
+    })) || [],
 
     history: vehicle.history ? {
       previousOwners: vehicle.history.previousOwners ? parseInt(vehicle.history.previousOwners) || undefined : undefined,

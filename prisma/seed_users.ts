@@ -11,7 +11,7 @@ async function main() {
     // Create 10 users with different roles
     const users = [
         {
-            email: 'admin@carexport.com',
+            email: 'admin@tekairiri.com',
             name: 'Admin User',
             password: hashedPassword,
             role: UserRole.ADMIN,

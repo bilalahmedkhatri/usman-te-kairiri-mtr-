@@ -101,6 +101,7 @@ export default function ProfilePage() {
                 <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
+                  title='full name of the user'
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   disabled={!isEditing}
@@ -115,6 +116,7 @@ export default function ProfilePage() {
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="email"
+                  title="add proper and valid email address"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   disabled={!isEditing}
@@ -129,6 +131,7 @@ export default function ProfilePage() {
                 <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="tel"
+                  title="add telephone"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   disabled={!isEditing}
@@ -142,6 +145,7 @@ export default function ProfilePage() {
               <div className="relative">
                 <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <select
+                  title="select your country"
                   value={formData.country}
                   onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                   disabled={!isEditing}
@@ -160,6 +164,7 @@ export default function ProfilePage() {
               <div className="relative">
                 <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
+                  title='add your company'
                   type="text"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
@@ -172,6 +177,7 @@ export default function ProfilePage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Role</label>
               <select
+                title='what is your role in this comapny'
                 value={formData.role}
                 disabled
                 className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border-none focus:outline-none dark:text-white disabled:opacity-50"
@@ -242,3 +248,7 @@ export default function ProfilePage() {
     </MotionDiv>
   );
 }
+
+
+
+

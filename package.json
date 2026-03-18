@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "record:header": "node scripts/record-header.js",
-    "record:header:install": "npx playwright install --with-deps"
+    "record:header:install": "npx playwright install --with-deps",
+    "seed:sql": "npx prisma db execute --file ./prisma/seed.sql --schema ./prisma/schema.prisma",
+    "seed:all": "npm run seed:sql && npx prisma db seed"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
@@ -71,6 +73,6 @@
     "typescript": "^5.3.3"
   },
   "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "seed": "ts-node --project prisma/tsconfig.json prisma/seed.ts"
   }
 }

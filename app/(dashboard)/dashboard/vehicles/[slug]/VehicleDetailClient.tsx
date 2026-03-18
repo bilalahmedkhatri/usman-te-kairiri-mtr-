@@ -331,7 +331,7 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                 </div>
             </div>
 
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-2 py-4 sm:py-8">
                 {/* Mobile Title (visible only on small screens) */}
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
@@ -374,7 +374,10 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                                     <Image
                                         src={activeImage.url}
                                         alt={activeImage.altText || `${vehicle.make} ${vehicle.model}`}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        fill
+                                        sizes="(max-width: 1024px) 100vw, 60vw"
+                                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                        priority
                                     />
                                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
                                     <div className="absolute bottom-3 right-3 p-2 bg-black/50 rounded-lg text-white opacity-0 group-hover:opacity-100 transition-opacity">
@@ -428,15 +431,18 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                                     <Button
                                         key={img.id}
                                         onClick={() => setActiveImageIndex(idx)}
-                                        className={`flex-shrink-0 w-20 h-14 sm:w-24 sm:h-20 rounded-lg overflow-hidden border-2 transition-all ${activeImageIndex === idx
+                                        className={`flex-shrink-0 w-20 h-14 sm:w-24 sm:h-20 p-0 rounded-lg overflow-hidden border-2 transition-all ${activeImageIndex === idx
                                             ? 'border-blue-500 ring-2 ring-blue-500/20'
                                             : 'border-transparent opacity-60 hover:opacity-100'
                                             }`}
                                     >
+                                        {/* <img */}
                                         <Image
                                             src={img.url}
                                             alt={img.altText || `View ${idx + 1}`}
-                                            className="w-full h-full object-cover"
+                                            width={96}
+                                            height={96}
+                                            className="object-cover"
                                         />
                                     </Button>
                                 ))}
@@ -738,7 +744,7 @@ export default function VehicleDetailClient({ vehicle }: { vehicle: VehicleDetai
                                     <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
                                         Our team is here to assist you with any questions about this vehicle.
                                     </p>
-                                    <Button className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+                                    <Button className="text-sm font-medium text-white hover:text-grey-700 dark:text-white dark:hover:text-black-300 transition-colors">
                                         Contact Sales Team →
                                     </Button>
                                 </div>

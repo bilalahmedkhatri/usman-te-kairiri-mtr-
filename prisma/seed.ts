@@ -1,12 +1,39 @@
 import { PrismaClient, VehicleStatus } from '@prisma/client';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 const prisma = new PrismaClient();
 
-async function main() {
-    console.log('🚗 Seeding vehicles...');
+async function executeSeedSql() {
+  try {
+    const sqlPath = join(__dirname, 'seed.sql');
+    const sql = readFileSync(sqlPath, 'utf8');
 
-    // Get siteId (use the first site or create a default one)
-    let site = await prisma.site.findFirst();
+    console.log('📝 Executing seed.sql...');
+
+    // Execute the SQL script. 
+    // Note: We use executeRawUnsafe. In some environments, multiple statements might need splitting.
+    // For PostgreSQL, this usually works for the whole script.
+    await prisma.$executeRawUnsafe(sql);
+    console.log('✅ seed.sql executed successfully');
+  } catch (error: any) {
+    if (error.code === 'P2010' || error.message.includes('already exists') || error.message.includes('unique constraint')) {
+      console.warn('⚠️ seed.sql execution finished (some data might already exist)');
+    } else {
+      console.error('❌ Error executing seed.sql:', error);
+      // We don't throw here to allow the vehicle seeding to attempt to run
+    }
+  }
+}
+
+async function main() {
+  // 1. Run the SQL seed first
+  await executeSeedSql();
+
+  console.log('🚗 Seeding vehicles...');
+
+  // Get siteId (use the first site or create a default one)
+  let site = await prisma.site.findFirst();
     if (!site) {
         site = await prisma.site.create({
             data: {
@@ -329,6 +356,16 @@ async function main() {
     for (const vehicleData of vehiclesData) {
         // Distribute vehicles among dealers
         const currentDealer = dealers[dealerIndex % dealers.length];
+
+        const existingVehicle = await prisma.vehicle.findFirst({
+            where: { stockNumber: vehicleData.stockNumber }
+        });
+
+        if (existingVehicle) {
+            console.log(`ℹ️ Vehicle already exists: ${vehicleData.stockNumber} - Skipping`);
+            dealerIndex++;
+            continue;
+        }
 
         const vehicle = await prisma.vehicle.create({
             data: {
