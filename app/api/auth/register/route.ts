@@ -77,8 +77,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json(
                 {
                     error: 'Validation failed',
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    details: (error as any).errors.map((err: any) => ({
+                    details: error.errors.map((err) => ({
                         field: err.path.join('.'),
                         message: err.message,
                     })),

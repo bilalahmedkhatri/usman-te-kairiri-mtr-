@@ -234,13 +234,13 @@ export default function UsersPage() {
             className="px-4 py-2 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm border-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
           >
             <option value="all">All Roles</option>
-            <option value="admin">Admins</option>
-            <option value="manager">Managers</option>
-            <option value="user">Users</option>
-            <option value="dealer">Dealers</option>
-            <option value="supplier">Suppliers</option>
-            <option value="buyer">Buyers</option>
-            <option value="viewer">Viewers</option>
+            <option value="ADMIN">Admins</option>
+            <option value="MANAGER">Managers</option>
+            <option value="USER">Users</option>
+            <option value="DEALER">Dealers</option>
+            <option value="SUPPLIER">Suppliers</option>
+            <option value="BUYER">Buyers</option>
+            <option value="VIEWER">Viewers</option>
           </select>
 
           <label htmlFor="status-filters">Filters</label>

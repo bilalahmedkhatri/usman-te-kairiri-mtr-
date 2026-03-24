@@ -46,13 +46,13 @@ export interface Dealer {
 }
 
 export type UserRole =
-  | 'admin'
-  | 'manager'
-  | 'user'
-  | 'dealer'
-  | 'supplier'
-  | 'buyer'
-  | 'viewer';
+  | 'ADMIN'
+  | 'MANAGER'
+  | 'USER'
+  | 'DEALER'
+  | 'SUPPLIER'
+  | 'BUYER'
+  | 'VIEWER';
 
 export interface User {
   id: string;

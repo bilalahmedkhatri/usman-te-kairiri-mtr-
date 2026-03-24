@@ -1,6 +1,108 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@theme {
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Japanese Theme Colors */
+  --color-red-50: hsl(0 86% 97%);
+  --color-red-100: hsl(0 93% 94%);
+  --color-red-200: hsl(0 96% 89%);
+  --color-red-300: hsl(0 94% 82%);
+  --color-red-400: hsl(0 91% 71%);
+  --color-red-500: hsl(0 72% 51%);
+  --color-red-600: hsl(0 84% 60%);
+  --color-red-700: hsl(0 70% 50%);
+  --color-red-800: hsl(0 65% 45%);
+  --color-red-900: hsl(0 63% 31%);
+  --color-red: hsl(0 72% 51%);
+
+  --color-orange-50: hsl(24 100% 97%);
+  --color-orange-100: hsl(24 100% 94%);
+  --color-orange-200: hsl(24 100% 88%);
+  --color-orange-300: hsl(24 100% 79%);
+  --color-orange-400: hsl(24 98% 64%);
+  --color-orange-500: hsl(24 95% 53%);
+  --color-orange-600: hsl(24 90% 48%);
+  --color-orange-700: hsl(24 85% 43%);
+  --color-orange-800: hsl(24 80% 38%);
+  --color-orange-900: hsl(24 75% 28%);
+  --color-orange: hsl(24 95% 53%);
+
+  --color-green-50: hsl(142 76% 97%);
+  --color-green-100: hsl(142 77% 94%);
+  --color-green-200: hsl(142 76% 88%);
+  --color-green-300: hsl(142 77% 78%);
+  --color-green-400: hsl(142 69% 58%);
+  --color-green-500: hsl(142 71% 45%);
+  --color-green-600: hsl(142 76% 36%);
+  --color-green-700: hsl(142 72% 29%);
+  --color-green-800: hsl(142 64% 24%);
+  --color-green-900: hsl(142 61% 20%);
+  --color-green: hsl(142 71% 45%);
+
+  --color-blue-50: hsl(221 100% 97%);
+  --color-blue-100: hsl(221 96% 94%);
+  --color-blue-200: hsl(221 96% 89%);
+  --color-blue-300: hsl(221 96% 78%);
+  --color-blue-400: hsl(221 89% 64%);
+  --color-blue-500: hsl(221 83% 53%);
+  --color-blue-600: hsl(221 83% 48%);
+  --color-blue-700: hsl(221 78% 43%);
+  --color-blue-800: hsl(221 73% 38%);
+  --color-blue-900: hsl(221 68% 28%);
+  --color-blue: hsl(221 83% 53%);
+
+  /* Keyframes and Animations */
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+  @keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in-up: fade-in-up 0.5s ease-out forwards;
+}
 
 @layer base {
   :root {
@@ -130,7 +232,6 @@
     box-shadow: 0 4px 20px rgba(239, 68, 68, 0.15), 0 2px 4px rgba(239, 68, 68, 0.1);
   }
 }
-
 
 .logo {
   height: 6em;

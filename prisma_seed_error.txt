@@ -1,0 +1,67 @@
+﻿node.exe : warn The configuration property 
+`package.json#prisma` is deprecated and will 
+be removed in Prisma 7. Please migrate to a 
+Prisma config file (e.g., `prisma.config.ts`).
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" 
+"C:\Users\Bilal\AppData\Roaming\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (w 
+   arn The config...ma.config.ts`).:String) [  
+  ], RemoteException
+    + FullyQualifiedErrorId : NativeCommandErr 
+   or
+ 
+For more information, see: 
+https://pris.ly/prisma-config
+
+Loaded Prisma config from prisma.config.ts.
+
+warn The Prisma config file in 
+prisma.config.ts overrides the deprecated 
+`package.json#prisma` property in package.json.
+  For more information, see: 
+https://pris.ly/prisma-config
+
+Prisma config detected, skipping environment 
+variable loading.
+Running seed command `ts-node --project prisma/tsconfig.json prisma/seed.ts` ...
+D:\usman_app\frontend\node_modules\ts-node\src\
+index.ts:859
+    return new TSError(diagnosticText, 
+diagnosticCodes, diagnostics);
+           ^
+TSError: Γ¿» Unable to compile TypeScript:
+error TS5083: Cannot read file 
+'D:\usman_app\frontend\prisma\tsconfig.json'.
+
+    at createTSError (D:\usman_app\frontend\nod
+e_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\usman_app\frontend\nod
+e_modules\ts-node\src\index.ts:863:19)
+    at createFromPreloadedConfig (D:\usman_app\
+frontend\node_modules\ts-node\src\index.ts:874:
+36)
+    at phase4 (D:\usman_app\frontend\node_modul
+es\ts-node\src\bin.ts:543:44)
+    at bootstrap (D:\usman_app\frontend\node_mo
+dules\ts-node\src\bin.ts:95:10)
+    at main (D:\usman_app\frontend\node_modules
+\ts-node\src\bin.ts:55:10)
+    at Object.<anonymous> (D:\usman_app\fronten
+d\node_modules\ts-node\src\bin.ts:800:3)
+    at Module._compile 
+(node:internal/modules/cjs/loader:1688:14)
+    at Object..js 
+(node:internal/modules/cjs/loader:1820:10)
+    at Module.load 
+(node:internal/modules/cjs/loader:1423:32) {
+  diagnosticCodes: [ 5083 ]
+}
+
+An error occurred while running the seed 
+command:
+Error: Command failed with exit code 1: 
+ts-node --project prisma/tsconfig.json 
+prisma/seed.ts

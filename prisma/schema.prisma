@@ -37,12 +37,14 @@ model User {
   emailVerified     DateTime?         @map("email_verified")
   image             String?
   siteId            Int?              @map("site_id")
+  companyId         Int?              @map("company_id")
   createdAt         DateTime          @default(now()) @map("created_at")
   updatedAt         DateTime          @updatedAt @map("updated_at")
   accounts          Account[]
   bookings          Booking[]
   cartItems         CartItem[]
   dealerProfile     DealerProfile?
+  company           Company?          @relation(fields: [companyId], references: [id])
   inquiriesManaged  Inquiry[]         @relation("InquiryManager")
   inquiriesAsDealer Inquiry[]         @relation("InquiryDealer")
   inquiriesSent     Inquiry[]         @relation("InquiryUser")
@@ -95,6 +97,33 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+model Company {
+  id                Int       @id @default(autoincrement())
+  name              String
+  registrationNumber String?   @map("registration_number")
+  address           String?
+  phone             String?
+  email             String?
+  website           String?
+  logo              String?
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+  users             User[]
+
+  @@map("companies")
+}
+
+model Website {
+  id        Int      @id @default(autoincrement())
+  url       String
+  type      String?  // e.g., 'PERSONAL', 'BUSINESS'
+  userId    Int?     @map("user_id")
+  companyId Int?     @map("company_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("websites")
 }
 
 model Vehicle {

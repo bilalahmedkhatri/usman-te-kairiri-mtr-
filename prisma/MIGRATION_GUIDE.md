@@ -17,7 +17,7 @@ First, find the name of your PostgreSQL container:
 docker ps
 ```
 
-Look for the container running PostgreSQL (usually named something like `postgres`, `car_export_db`, or similar).
+Look for the container running PostgreSQL (usually named something like `postgres`, `azeemlab_db`, or similar).
 
 ## Step 2: Apply the Migration
 
@@ -25,12 +25,12 @@ Run the migration script to drop existing tables and create new ones with intege
 
 ```powershell
 # Replace <container-name> with your actual container name
-docker exec -i <container-name> psql -U car_export_user -d car_export_db < prisma/migrations/convert_to_integer_ids.sql
+docker exec -i <container-name> psql -U azeemlab_user -d azeemlab_db < prisma/migrations/convert_to_integer_ids.sql
 ```
 
 **Example:**
 ```powershell
-docker exec -i postgres psql -U car_export_user -d car_export_db < prisma/migrations/convert_to_integer_ids.sql
+docker exec -i postgres psql -U azeemlab_user -d azeemlab_db < prisma/migrations/convert_to_integer_ids.sql
 ```
 
 ## Step 3: Apply Seed Data
@@ -39,12 +39,12 @@ After the migration completes successfully, run the seed script:
 
 ```powershell
 # Replace <container-name> with your actual container name
-docker exec -i <container-name> psql -U car_export_user -d car_export_db < prisma/seed.sql
+docker exec -i <container-name> psql -U azeemlab_user -d azeemlab_db < prisma/seed.sql
 ```
 
 **Example:**
 ```powershell
-docker exec -i postgres psql -U car_export_user -d car_export_db < prisma/seed.sql
+docker exec -i postgres psql -U azeemlab_user -d azeemlab_db < prisma/seed.sql
 ```
 
 ## Step 4: Verify the Changes
@@ -53,13 +53,13 @@ Check that the data was inserted correctly:
 
 ```powershell
 # Check users count
-docker exec -it <container-name> psql -U car_export_user -d car_export_db -c "SELECT id, email, role FROM users;"
+docker exec -it <container-name> psql -U azeemlab_user -d azeemlab_db -c "SELECT id, email, role FROM users;"
 
 # Check vehicles count
-docker exec -it <container-name> psql -U car_export_user -d car_export_db -c "SELECT id, make, model, year_manufacture FROM vehicles LIMIT 5;"
+docker exec -it <container-name> psql -U azeemlab_user -d azeemlab_db -c "SELECT id, make, model, year_manufacture FROM vehicles LIMIT 5;"
 
 # Verify ID types (should show integer)
-docker exec -it <container-name> psql -U car_export_user -d car_export_db -c "SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'users' AND column_name = 'id';"
+docker exec -it <container-name> psql -U azeemlab_user -d azeemlab_db -c "SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'users' AND column_name = 'id';"
 ```
 
 ## Step 5: Restart Your Application
@@ -105,14 +105,14 @@ The seed script includes:
 ### Error: "relation already exists"
 This means tables weren't dropped properly. Try running:
 ```powershell
-docker exec -it <container-name> psql -U car_export_user -d car_export_db -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
+docker exec -it <container-name> psql -U azeemlab_user -d azeemlab_db -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
 ```
 Then re-run the migration.
 
 ### Error: "database does not exist"
 Create the database first:
 ```powershell
-docker exec -it <container-name> psql -U car_export_user -c "CREATE DATABASE car_export_db;"
+docker exec -it <container-name> psql -U azeemlab_user -c "CREATE DATABASE azeemlab_db;"
 ```
 
 ### TypeScript Errors

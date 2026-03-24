@@ -217,6 +217,28 @@ export default function RegisterPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
                     >
+                        {/* <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Password *
+                        </label>
+                        <div className="relative">
+                            <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder="••••••••"
+                                autoComplete="new-password"
+                                className={`w-full pl-10 pr-12 py-3 bg-white dark:bg-gray-800 rounded-lg border ${errors.password ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'
+                                    } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white transition-all`}
+                                {...register('password')}
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                            >
+                                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                            </button>
+                        </div> */}
+
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Password *
                         </label>

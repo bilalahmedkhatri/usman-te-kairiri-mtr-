@@ -80,7 +80,7 @@ export default function RegisterPage() {
       // Site would be auto-detected here
       const registrationData = {
         ...formData,
-        role: 'buyer',
+        role: 'BUYER',
         created_at: new Date().toISOString(),
         // site_id would be auto-detected from domain
       };

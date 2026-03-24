@@ -5,35 +5,35 @@ import { join } from 'path';
 const prisma = new PrismaClient();
 
 async function executeSeedSql() {
-  try {
-    const sqlPath = join(__dirname, 'seed.sql');
-    const sql = readFileSync(sqlPath, 'utf8');
+    try {
+        const sqlPath = join(__dirname, 'seed.sql');
+        const sql = readFileSync(sqlPath, 'utf8');
 
-    console.log('📝 Executing seed.sql...');
+        console.log('📝 Executing seed.sql...');
 
-    // Execute the SQL script. 
-    // Note: We use executeRawUnsafe. In some environments, multiple statements might need splitting.
-    // For PostgreSQL, this usually works for the whole script.
-    await prisma.$executeRawUnsafe(sql);
-    console.log('✅ seed.sql executed successfully');
-  } catch (error: any) {
-    if (error.code === 'P2010' || error.message.includes('already exists') || error.message.includes('unique constraint')) {
-      console.warn('⚠️ seed.sql execution finished (some data might already exist)');
-    } else {
-      console.error('❌ Error executing seed.sql:', error);
-      // We don't throw here to allow the vehicle seeding to attempt to run
+        // Execute the SQL script. 
+        // Note: We use executeRawUnsafe. In some environments, multiple statements might need splitting.
+        // For PostgreSQL, this usually works for the whole script.
+        await prisma.$executeRawUnsafe(sql);
+        console.log('✅ seed.sql executed successfully');
+    } catch (error: any) {
+        if (error.code === 'P2010' || error.message.includes('already exists') || error.message.includes('unique constraint')) {
+            console.warn('⚠️ seed.sql execution finished (some data might already exist)');
+        } else {
+            console.error('❌ Error executing seed.sql:', error);
+            // We don't throw here to allow the vehicle seeding to attempt to run
+        }
     }
-  }
 }
 
 async function main() {
-  // 1. Run the SQL seed first
-  await executeSeedSql();
+    // 1. Run the SQL seed first
+    // await executeSeedSql();
 
-  console.log('🚗 Seeding vehicles...');
+    console.log('🚗 Seeding vehicles...');
 
-  // Get siteId (use the first site or create a default one)
-  let site = await prisma.site.findFirst();
+    // Get siteId (use the first site or create a default one)
+    let site = await prisma.site.findFirst();
     if (!site) {
         site = await prisma.site.create({
             data: {

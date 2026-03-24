@@ -4,7 +4,7 @@ import { getToken } from 'next-auth/jwt';
 import { UserRole } from '@prisma/client';
 import { canAccessRoute, getDashboardRoute } from './lib/permissions';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const token = await getToken({
         req: request,
         secret: process.env.NEXTAUTH_SECRET,

@@ -21,7 +21,7 @@ interface UserFormData {
   name: string;
   email: string;
   phone: string;
-  role: 'admin' | 'manager' | 'user' | 'dealer' | 'supplier' | 'buyer' | 'viewer';
+  role: 'ADMIN' | 'MANAGER' | 'USER' | 'DEALER' | 'SUPPLIER' | 'BUYER' | 'VIEWER';
   status: 'active' | 'inactive';
   password: string;
   confirmPassword: string;
@@ -44,7 +44,7 @@ export default function AddUserPage() {
     name: '',
     email: '',
     phone: '',
-    role: 'user',
+    role: 'USER',
     status: 'active',
     password: '',
     confirmPassword: '',
@@ -91,7 +91,7 @@ export default function AddUserPage() {
         email: formData.email,
         name: formData.name,
         phone: formData.phone || undefined,
-        role: formData.role.toUpperCase() as UserRole,
+        role: formData.role as UserRole,
         status: formData.status.toUpperCase() as UserStatus,
         department: formData.department || undefined,
         password: formData.password,
@@ -320,13 +320,13 @@ export default function AddUserPage() {
                     onChange={(e) => handleInputChange('role', e.target.value as UserFormData['role'])}
                     className="w-full mt-1 px-3 py-2 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                   >
-                    <option value="user">User</option>
-                    <option value="manager">Manager</option>
-                    <option value="admin">Admin</option>
-                    <option value="dealer">Dealer</option>
-                    <option value="supplier">Supplier</option>
-                    <option value="buyer">Buyer</option>
-                    <option value="viewer">Viewer</option>
+                    <option value="USER">User</option>
+                    <option value="MANAGER">Manager</option>
+                    <option value="ADMIN">Admin</option>
+                    <option value="DEALER">Dealer</option>
+                    <option value="SUPPLIER">Supplier</option>
+                    <option value="BUYER">Buyer</option>
+                    <option value="VIEWER">Viewer</option>
                   </select>
                 </div>
 

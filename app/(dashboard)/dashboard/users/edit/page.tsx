@@ -21,7 +21,7 @@ interface UserFormData {
   name: string;
   email: string;
   phone: string;
-  role: 'admin' | 'manager' | 'user' | 'dealer' | 'supplier' | 'buyer' | 'viewer';
+  role: 'ADMIN' | 'MANAGER' | 'USER' | 'DEALER' | 'SUPPLIER' | 'BUYER' | 'VIEWER';
   status: 'active' | 'inactive';
   password: string;
   confirmPassword: string;
@@ -50,7 +50,7 @@ export default function EditUserPage() {
     name: '',
     email: '',
     phone: '',
-    role: 'user',
+    role: 'USER',
     status: 'active',
     password: '',
     confirmPassword: '',
@@ -73,8 +73,8 @@ export default function EditUserPage() {
           name: 'John Doe',
           email: 'john.doe@example.com',
           phone: '+1 (555) 123-4567',
-          role: 'manager' as const,
-          status: 'active' as const,
+          role: 'MANAGER' as const,
+          status: 'ACTIVE' as const,
           bio: 'Experienced manager with 10+ years in the industry.',
           address: '123 Main St, New York, NY 10001',
           department: 'Sales',
@@ -337,8 +337,8 @@ export default function EditUserPage() {
 
                 {/* Avatar Upload */}
                 <div className="md:col-span-2">
-                  <div
-                    className="mt-1 border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer"
+                  <Label htmlFor="avatar">Profile Picture</Label>
+                  <div className="mt-1 border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer"
                     role="button"
                     tabIndex={0}
                     onClick={() => document.getElementById('avatar')?.click()}
@@ -348,15 +348,15 @@ export default function EditUserPage() {
                     <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-2" aria-hidden="true" />
                     <p className="text-sm text-muted-foreground">Click to upload new picture or drag and drop</p>
                     <p className="text-xs text-muted-foreground mt-1">PNG, JPG up to 5MB</p>
+                    <label htmlFor="avatar">Profile Picture</label>
+                    <input
+                      id="avatar"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleAvatarChange}
+                      className="hidden"
+                    />
                   </div>
-                  <label htmlFor="avatar">Profile Picture</label>
-                  <input
-                    id="avatar"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleAvatarChange}
-                    className="hidden"
-                  />
                   {formData.avatar && (
                     <p className="text-sm text-muted-foreground mt-2">
                       New file selected: {formData.avatar.name}
@@ -390,15 +390,14 @@ export default function EditUserPage() {
                       value={formData.role}
                       onChange={(e) => handleInputChange('role', e.target.value as UserFormData['role'])}
                       className="w-full mt-1 px-3 py-2 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                      aria-label="User Role"
                     >
-                      <option value="user">User</option>
-                      <option value="manager">Manager</option>
-                      <option value="admin">Admin</option>
-                      <option value="dealer">Dealer</option>
-                      <option value="supplier">Supplier</option>
-                      <option value="buyer">Buyer</option>
-                      <option value="viewer">Viewer</option>
+                      <option value="USER">User</option>
+                      <option value="MANAGER">Manager</option>
+                      <option value="ADMIN">Admin</option>
+                      <option value="DEALER">Dealer</option>
+                      <option value="SUPPLIER">Supplier</option>
+                      <option value="BUYER">Buyer</option>
+                      <option value="VIEWER">Viewer</option>
                     </select>
                   </div>
 
@@ -410,7 +409,6 @@ export default function EditUserPage() {
                       value={formData.status}
                       onChange={(e) => handleInputChange('status', e.target.value as UserFormData['status'])}
                       className="w-full mt-1 px-3 py-2 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                      aria-label="User Status"
                     >
                       <option value="active">Active</option>
                       <option value="inactive">Inactive</option>

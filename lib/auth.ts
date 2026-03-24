@@ -28,6 +28,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                             role: true,
                             image: true,
                             siteId: true,
+                            companyId: true,
                         },
                     })
 
@@ -51,6 +52,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                         role: user.role,
                         image: user.image,
                         siteId: user.siteId,
+                        companyId: user.companyId,
                     }
                 } catch (error) {
                     console.error('Authorization error:', error)
@@ -78,6 +80,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 token.id = user.id
                 token.role = user.role
                 token.siteId = user.siteId
+                token.companyId = user.companyId
             }
             return token
         },
@@ -88,6 +91,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 session.user.id = token.id as string
                 session.user.role = token.role as string
                 session.user.siteId = token.siteId as number | null
+                session.user.companyId = token.companyId as number | null
             }
             return session
         },

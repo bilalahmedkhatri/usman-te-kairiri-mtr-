@@ -8,7 +8,7 @@
   4) Videos will be written to `tmp/desktop/` and `tmp/mobile/` as webm files; convert with ffmpeg to GIF.
 
   Notes:
-  - This script assumes the app is available at http://localhost:3000. Set DEV_URL env var to change.
+  - This script assumes the app is available at http://localhost. Set DEV_URL env var to change.
   - Requires Node >= 16 and Playwright installed (npx playwright install to add browsers).
 */
 
@@ -18,7 +18,7 @@ const path = require('path');
 const { chromium } = require('playwright');
 
 (async () => {
-  const url = process.env.DEV_URL || 'http://localhost:3000';
+  const url = process.env.DEV_URL || 'http://localhost';
   const outDir = path.resolve(process.cwd(), 'tmp');
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir);
 

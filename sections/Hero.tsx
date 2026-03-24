@@ -196,7 +196,7 @@ export default function Hero({ cars = [] }: HeroProps) {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 dark:bg-white/5 border border-border/50 w-fit"
             >
               <Gauge className="w-4 h-4 text-red" />
-              <span className="text-sm font-medium">Premium Japanese Vehicles</span>
+              {/* <span className="text-sm font-medium">Premium Japanese Vehicles</span> */}
             </motion.div>
 
             {/* Headline */}
