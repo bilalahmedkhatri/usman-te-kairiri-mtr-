@@ -63,6 +63,9 @@ export default function RegisterPage() {
                 // The server action handles the redirect to /dashboard.
                 toast.success('Account created successfully!');
             } catch (error) {
+                if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+                    throw error;
+                }
                 console.error('Registration error:', error);
                 toast.error('An error occurred. Please try again.');
             }

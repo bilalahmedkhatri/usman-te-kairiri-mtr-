@@ -62,8 +62,11 @@ export async function registerAction(data: RegisterInput) {
         })
 
     } catch (error) {
+        if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+            throw error // Re-throw redirect errors
+        }
         if (error instanceof AuthError) {
-            throw error // Re-throw redirect errors from signIn
+            throw error // Re-throw auth errors (or handle them)
         }
         console.error('Registration error:', error)
         return { error: 'Registration failed. Please try again.' }

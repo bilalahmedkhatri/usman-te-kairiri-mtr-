@@ -39,6 +39,9 @@ export default function LoginForm() {
                 toast.success('Welcome back!')
             }
         } catch (error) {
+            if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+                throw error;
+            }
             console.error('Login error:', error)
             toast.error('An error occurred. Please try again.')
         } finally {

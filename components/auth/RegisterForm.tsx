@@ -82,6 +82,9 @@ export default function RegisterForm() {
                 toast.success('Account created successfully!')
             }
         } catch (error) {
+            if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+                throw error;
+            }
             console.error('Registration error:', error)
             toast.error('An error occurred. Please try again.')
         } finally {
