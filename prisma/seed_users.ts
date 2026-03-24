@@ -11,13 +11,13 @@ async function main() {
     // Create 10 users with different roles
     const users = [
         {
-            email: 'admin@tekairiri.com',
-            name: 'Admin User',
+            email: 'usman@azeemlab.com',
+            name: 'Usman Ghani',
             password: hashedPassword,
             role: UserRole.ADMIN,
             status: UserStatus.ACTIVE,
-            phone: '+81-3-1234-5678',
-            country: 'Japan',
+            phone: '+92-300-1234567',
+            country: 'Pakistan',
             department: 'Administration',
         },
         {
