@@ -22,7 +22,7 @@ interface UserFormData {
   email: string;
   phone: string;
   role: 'ADMIN' | 'MANAGER' | 'USER' | 'DEALER' | 'SUPPLIER' | 'BUYER' | 'VIEWER';
-  status: 'active' | 'inactive';
+  status: 'ACTIVE' | 'INACTIVE';
   password: string;
   confirmPassword: string;
   bio: string;
@@ -51,7 +51,7 @@ export default function EditUserPage() {
     email: '',
     phone: '',
     role: 'USER',
-    status: 'active',
+    status: 'ACTIVE',
     password: '',
     confirmPassword: '',
     bio: '',
@@ -202,7 +202,7 @@ export default function EditUserPage() {
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-3xl font-bold text-foreground">Edit User</h1>
-            <Badge variant={formData.status === 'active' ? 'default' : 'secondary'}>
+            <Badge variant={formData.status === 'ACTIVE' ? 'default' : 'secondary'}>
               {formData.status}
             </Badge>
           </div>
@@ -410,8 +410,8 @@ export default function EditUserPage() {
                       onChange={(e) => handleInputChange('status', e.target.value as UserFormData['status'])}
                       className="w-full mt-1 px-3 py-2 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                     >
-                      <option value="active">Active</option>
-                      <option value="inactive">Inactive</option>
+                      <option value="ACTIVE">Active</option>
+                      <option value="INACTIVE">Inactive</option>
                     </select>
                   </div>
                 </div>

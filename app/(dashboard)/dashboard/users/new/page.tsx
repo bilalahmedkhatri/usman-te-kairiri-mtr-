@@ -22,7 +22,7 @@ interface UserFormData {
   email: string;
   phone: string;
   role: 'ADMIN' | 'MANAGER' | 'USER' | 'DEALER' | 'SUPPLIER' | 'BUYER' | 'VIEWER';
-  status: 'active' | 'inactive';
+  status: 'ACTIVE' | 'INACTIVE';
   password: string;
   confirmPassword: string;
   bio: string;
@@ -45,7 +45,7 @@ export default function AddUserPage() {
     email: '',
     phone: '',
     role: 'USER',
-    status: 'active',
+    status: 'ACTIVE',
     password: '',
     confirmPassword: '',
     bio: '',
@@ -92,7 +92,7 @@ export default function AddUserPage() {
         name: formData.name,
         phone: formData.phone || undefined,
         role: formData.role as UserRole,
-        status: formData.status.toUpperCase() as UserStatus,
+        status: formData.status as UserStatus,
         department: formData.department || undefined,
         password: formData.password,
       });
@@ -339,8 +339,8 @@ export default function AddUserPage() {
                     onChange={(e) => handleInputChange('status', e.target.value as UserFormData['status'])}
                     className="w-full mt-1 px-3 py-2 bg-background border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                   >
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
+                    <option value="ACTIVE">Active</option>
+                    <option value="INACTIVE">Inactive</option>
                   </select>
                 </div>
 
