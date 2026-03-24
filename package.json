@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "prisma generate && prisma migrate deploy && next build",
     "lint": "next lint app components lib types",
     "record:header": "node scripts/record-header.js",
     "record:header:install": "npx playwright install --with-deps",
