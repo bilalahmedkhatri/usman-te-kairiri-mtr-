@@ -92,7 +92,7 @@ export default function AddUserPage() {
         name: formData.name,
         phone: formData.phone || undefined,
         role: formData.role as UserRole,
-        status: formData.status as UserStatus,
+        status: formData.status.toUpperCase() as UserStatus,
         department: formData.department || undefined,
         password: formData.password,
       });
