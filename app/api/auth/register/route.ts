@@ -1,9 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { registerSchema } from '@/lib/validations/auth'
 import { ZodError } from 'zod'
 
+function formatAppName(domain: string): string {
+    return domain
+        .replace('.vercel.app', '')
+        .replace('.com', '')
+        .replace(/[-.]/g, ' ')
+        .toUpperCase()
+}
 export async function POST(request: NextRequest) {
     try {
         // Parse request body
@@ -11,6 +18,16 @@ export async function POST(request: NextRequest) {
 
         // Validate input
         const validatedData = registerSchema.parse(body)
+
+        // Get domain from request headers (Vercel-safe)
+        const host = request.headers.get('x-forwarded-host') ||
+            request.headers.get('host') ||
+            'localhost'
+
+        const domain = host.split(':')[0]
+
+        // Determine app/site name
+        const appName = formatAppName(domain) || process.env.APP_NAME || "Te-Kairiri-Motor Japan"    // auto fallback
 
         // Check if user already exists
         const existingUser = await prisma.user.findUnique({
@@ -29,14 +46,14 @@ export async function POST(request: NextRequest) {
 
         // Get default site (or create one if needed)
         let site = await prisma.site.findFirst({
-            where: { domain: 'localhost' },
+            where: { domain: domain },
         })
 
         if (!site) {
             site = await prisma.site.create({
                 data: {
-                    domain: 'localhost',
-                    name: 'TE KAIRIRI MOTORS',
+                    domain: domain,
+                    name: appName,
                     isActive: true,
                 },
             })

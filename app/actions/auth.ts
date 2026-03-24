@@ -3,7 +3,7 @@
 import { signIn } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { loginSchema, registerSchema, type LoginInput, type RegisterInput } from '@/lib/validations/auth'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { AuthError } from 'next-auth'
 
 export async function loginAction(data: LoginInput) {
