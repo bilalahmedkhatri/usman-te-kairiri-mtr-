@@ -1,7 +1,6 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 
 export type UserRole = 'ADMIN' | 'MANAGER' | 'USER' | 'DEALER' | 'SUPPLIER' | 'BUYER' | 'VIEWER';
@@ -41,7 +40,8 @@ export async function getUsers(params: GetUsersParams = {}): Promise<GetUsersRes
 
     try {
         // Build where clause for filtering
-        const where: Prisma.UserWhereInput = {};
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const where: Record<string, any> = {};
 
         // Search across multiple fields
         if (params.search && params.search.trim()) {

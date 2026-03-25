@@ -5,30 +5,49 @@ import { prisma } from '@/lib/prisma'
 import { loginSchema, registerSchema, type LoginInput, type RegisterInput } from '@/lib/validations/auth'
 import bcrypt from 'bcryptjs'
 import { AuthError } from 'next-auth'
+import { redirect } from 'next/navigation'
 
 export async function loginAction(data: LoginInput) {
-    try {
-        const validatedFields = loginSchema.parse(data)
+    let success = false;
 
+    try {
+        // Validate input data
+        const validatedFields = loginSchema.parse(data);
+
+        // Call NextAuth signIn
         await signIn('credentials', {
             email: validatedFields.email,
             password: validatedFields.password,
-            redirectTo: '/dashboard',
-        })
+            redirect: false, // Prevent NextAuth from throwing Next.js redirect
+        });
+
+        // If we reach here, signIn didn't throw an AuthError
+        success = true;
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {
                 case 'CredentialsSignin':
-                    return { error: 'Invalid credentials!' }
+                    return { error: 'Invalid credentials!' };
                 default:
-                    return { error: 'Something went wrong!' }
+                    return { error: 'Something went wrong!' };
             }
         }
-        throw error // Re-throw redirect errors
+
+        // Handle unexpected errors (excluding NEXT_REDIRECT since we used redirect: false)
+        console.error('Login error:', error);
+        return { error: 'Something went wrong!' };
+    }
+
+    // Redirect must be called outside the try-catch block 
+    // down here it will throw NEXT_REDIRECT and Next.js will handle it properly
+    if (success) {
+        redirect('/dashboard');
     }
 }
 
 export async function registerAction(data: RegisterInput) {
+    let success = false;
+
     try {
         const validatedFields = registerSchema.parse(data)
 
@@ -58,17 +77,24 @@ export async function registerAction(data: RegisterInput) {
         await signIn('credentials', {
             email: validatedFields.email,
             password: validatedFields.password,
-            redirectTo: '/dashboard',
+            redirect: false,
         })
 
+        success = true;
+
     } catch (error) {
-        if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
-            throw error // Re-throw redirect errors
-        }
         if (error instanceof AuthError) {
-            throw error // Re-throw auth errors (or handle them)
+            console.log('Registration error:', error)
+            return { error: 'Registration succeeded, but auto-login failed.' }
         }
+
         console.error('Registration error:', error)
         return { error: 'Registration failed. Please try again.' }
+    }
+
+    // Redirect must be called outside the try-catch block 
+    // down here it will throw NEXT_REDIRECT and Next.js will handle it properly
+    if (success) {
+        redirect('/dashboard');
     }
 }
