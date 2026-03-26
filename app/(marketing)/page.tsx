@@ -11,7 +11,7 @@ export default async function MarketingPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900 transition-colors duration-300">
       <main className="relative">
-        <div className="max-w-7xl mx-auto p-8 text-center">
+        <div className="mx-auto text-center">
           <Hero cars={heroCars} />
           <FeaturedMakes />
           <FeaturedInventory />
