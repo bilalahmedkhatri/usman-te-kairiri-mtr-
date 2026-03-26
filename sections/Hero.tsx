@@ -241,16 +241,6 @@ export default function Hero({ cars: propCars }: HeroProps) {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[calc(100vh-6rem)]">
           {/* Left Content */}
           <div className="flex flex-col justify-center space-y-6">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50 border border-gray-200 w-fit"
-            >
-              <Gauge className="w-3.5 h-3.5 text-red-600" />
-              <span className="text-xs font-medium text-gray-700">Premium Japanese Vehicles</span>
-            </motion.div>
 
             {/* Headline */}
             <div className="space-y-4">

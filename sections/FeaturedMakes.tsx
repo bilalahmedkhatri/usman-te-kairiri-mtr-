@@ -54,7 +54,6 @@ export default function FeaturedMakes() {
       <div className="w-full section-padding relative">
         {/* Section Header */}
         <FadeIn className="text-center max-w-3xl mx-auto mb-16">
-          <Badge className="bg-red-50 text-red-600 border-0 mb-4 hover:bg-red-100 inline-flex">Browse by Make</Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-7xl font-bold mb-4 text-gray-900">
             Popular <span className="bg-linear-to-r from-red-600 to-orange-500 bg-clip-text text-transparent">Japanese</span> Brands
           </h2>
