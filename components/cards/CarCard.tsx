@@ -77,7 +77,7 @@ export function CarCard({
         <motion.div
           animate={{ y: isHovered ? -6 : 0 }}
           transition={{ duration: 0.3 }}
-          className="flex gap-4 bg-card rounded-2xl overflow-hidden border border-border/30 shadow-soft hover:shadow-soft-lg transition-shadow duration-300"
+          className="flex gap-4 bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300"
         >
           {/* Image */}
           <div className="relative w-48 h-36 flex-shrink-0 overflow-hidden">
@@ -89,7 +89,7 @@ export function CarCard({
               transition={{ duration: 0.5 }}
             />
             {car.badge && (
-              <Badge className="absolute top-2 left-2 bg-red text-white border-0 text-xs">
+              <Badge className="absolute top-2 left-2 bg-red-600 text-white border-0 text-xs">
                 {car.badge}
               </Badge>
             )}
@@ -98,25 +98,25 @@ export function CarCard({
           {/* Content */}
           <div className="flex-1 p-4 flex flex-col justify-center">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs text-muted-foreground">{car.year}</span>
-              <span className="text-xs text-muted-foreground">•</span>
-              <span className="text-xs text-muted-foreground">{formatMileage(car.mileage)} km</span>
+              <span className="text-xs text-gray-500">{car.year}</span>
+              <span className="text-xs text-gray-500">•</span>
+              <span className="text-xs text-gray-500">{formatMileage(car.mileage)} km</span>
             </div>
-            <h3 className="font-bold text-lg group-hover:text-red transition-colors">
+            <h3 className="font-bold text-lg group-hover:text-red-600 transition-colors text-gray-900">
               {car.make} {car.model}
             </h3>
-            <p className="text-2xl font-bold text-red mt-1">{formatPrice(car.price)}</p>
+            <p className="text-2xl font-bold text-red-600 mt-1">{formatPrice(car.price)}</p>
             <div className="flex items-center gap-1 mt-2">
               <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-              <span className="text-sm font-medium">{car.rating}</span>
-              <span className="text-sm text-muted-foreground">({car.reviews})</span>
+              <span className="text-sm font-medium text-gray-700">{car.rating}</span>
+              <span className="text-sm text-gray-500">({car.reviews})</span>
             </div>
           </div>
 
           {/* Actions */}
           {showActions && (
             <div className="flex flex-col justify-center p-4 gap-2">
-              <Button size="sm" className="bg-red hover:bg-red/90 text-white rounded-lg">
+              <Button size="sm" className="bg-red-600 hover:bg-red-700 text-white rounded-lg">
                 <ShoppingCart className="w-4 h-4 mr-1" />
                 Inquire
               </Button>
@@ -124,9 +124,9 @@ export function CarCard({
                 size="sm"
                 variant="outline"
                 onClick={() => toggleWishlist(car.id)}
-                className={isWishlisted ? 'bg-red/10 border-red text-red' : ''}
+                className={isWishlisted ? 'bg-red-50 border-red-600 text-red-600' : 'border-gray-200 text-gray-600 hover:bg-gray-50'}
               >
-                <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red' : ''}`} />
+                <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red-600' : ''}`} />
               </Button>
             </div>
           )}
@@ -150,7 +150,7 @@ export function CarCard({
         <motion.div
           animate={{ y: isHovered ? -4 : 0 }}
           transition={{ duration: 0.3 }}
-          className="bg-card rounded-xl overflow-hidden border border-border/30 shadow-soft hover:shadow-soft-lg transition-shadow duration-300"
+          className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300"
         >
           {/* Image */}
           <div className="relative aspect-[4/3] overflow-hidden">
@@ -162,16 +162,16 @@ export function CarCard({
               transition={{ duration: 0.5 }}
             />
             {car.badge && (
-              <Badge className="absolute top-2 left-2 bg-red text-white border-0 text-xs">
+              <Badge className="absolute top-2 left-2 bg-red-600 text-white border-0 text-xs">
                 {car.badge}
               </Badge>
             )}
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => toggleWishlist(car.id)}
-              className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/90 dark:bg-black/50 backdrop-blur-sm flex items-center justify-center shadow-sm transition-colors"
+              className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm transition-colors"
             >
-              <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-foreground'}`} />
+              <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red-600 text-red-600' : 'text-gray-600'}`} />
             </motion.button>
           </div>
 
@@ -179,16 +179,16 @@ export function CarCard({
           <div className="p-3 space-y-2">
             <div className="flex items-center gap-1">
               <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-              <span className="text-xs font-medium">{car.rating}</span>
-              <span className="text-xs text-muted-foreground">({car.reviews})</span>
+              <span className="text-xs font-medium text-gray-700">{car.rating}</span>
+              <span className="text-xs text-gray-500">({car.reviews})</span>
             </div>
-            <h3 className="font-semibold text-sm line-clamp-1 group-hover:text-red transition-colors">
+            <h3 className="font-semibold text-sm line-clamp-1 group-hover:text-red-600 transition-colors text-gray-900">
               {car.make} {car.model}
             </h3>
             <div className="flex items-center justify-between">
-              <span className="font-bold text-red">{formatPrice(car.price)}</span>
+              <span className="font-bold text-red-600">{formatPrice(car.price)}</span>
               {car.originalPrice && (
-                <Badge className="bg-green/20 text-green-dark text-[10px] border-0">
+                <Badge className="bg-green-50 text-green-700 text-[10px] border-0">
                   SALE
                 </Badge>
               )}
@@ -218,7 +218,7 @@ export function CarCard({
           scale: isHovered ? 1.02 : 1,
         }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className="bg-card rounded-2xl overflow-hidden border border-border/30 shadow-soft hover:shadow-soft-xl transition-shadow duration-300"
+        className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-shadow duration-300"
       >
         {/* Image Container */}
         <div className="relative aspect-[16/10] overflow-hidden">
@@ -236,12 +236,12 @@ export function CarCard({
           {/* Badges */}
           <div className="absolute top-4 left-4 flex flex-col gap-2">
             {car.badge && (
-              <Badge className="bg-red text-white border-0">
+              <Badge className="bg-red-600 text-white border-0">
                 {car.badge}
               </Badge>
             )}
             {car.condition === 'Certified Pre-Owned' && (
-              <Badge className="bg-green text-white border-0">
+              <Badge className="bg-green-600 text-white border-0">
                 <Check className="w-3 h-3 mr-1" />
                 Certified
               </Badge>
@@ -252,9 +252,9 @@ export function CarCard({
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => toggleWishlist(car.id)}
-            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 dark:bg-black/50 backdrop-blur-sm flex items-center justify-center transition-colors"
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center transition-colors shadow-sm"
           >
-            <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-foreground'}`} />
+            <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-red-600 text-red-600' : 'text-gray-600'}`} />
           </motion.button>
 
           {/* Quick Actions */}
@@ -266,7 +266,7 @@ export function CarCard({
           >
             <Button
               size="sm"
-              className="flex-1 bg-white/90 hover:bg-white text-foreground rounded-lg"
+              className="flex-1 bg-white/90 hover:bg-white text-gray-900 rounded-lg border border-gray-200"
               onClick={() => addToCart(car.id)}
               disabled={isInCartList}
             >
@@ -285,7 +285,7 @@ export function CarCard({
             <Button
               size="sm"
               variant="outline"
-              className="bg-white/90 hover:bg-white rounded-lg px-3"
+              className="bg-white/90 hover:bg-white rounded-lg px-3 border-gray-200"
             >
               <ArrowRight className="w-4 h-4" />
             </Button>
@@ -296,16 +296,16 @@ export function CarCard({
         <div className="p-5 space-y-3">
           {/* Make & Model */}
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-xs">{car.year}</Badge>
-            <span className="text-xs text-muted-foreground">{car.transmission}</span>
+            <Badge variant="outline" className="text-xs border-gray-200 text-gray-600">{car.year}</Badge>
+            <span className="text-xs text-gray-500">{car.transmission}</span>
           </div>
 
-          <h3 className="text-xl font-bold group-hover:text-red transition-colors">
+          <h3 className="text-xl font-bold group-hover:text-red-600 transition-colors text-gray-900">
             {car.make} {car.model}
           </h3>
 
           {/* Specs */}
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-4 text-sm text-gray-500">
             <span>{car.engine}</span>
             <span>•</span>
             <span>{formatMileage(car.mileage)} km</span>
@@ -318,21 +318,21 @@ export function CarCard({
                 <Star key={star} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-            <span className="text-sm text-muted-foreground">({car.reviews})</span>
+            <span className="text-sm text-gray-500">({car.reviews})</span>
           </div>
 
           {/* Price & CTA */}
-          <div className="flex items-center justify-between pt-2 border-t border-border/50">
+          <div className="flex items-center justify-between pt-2 border-t border-gray-100">
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-red">{formatPrice(car.price)}</span>
+              <span className="text-2xl font-bold text-red-600">{formatPrice(car.price)}</span>
               {car.originalPrice && (
-                <span className="text-sm text-muted-foreground line-through">
+                <span className="text-sm text-gray-400 line-through">
                   {formatPrice(car.originalPrice)}
                 </span>
               )}
             </div>
             {car.originalPrice && (
-              <Badge className="bg-green text-white border-0">
+              <Badge className="bg-green-50 text-green-700 border-0">
                 Save {formatPrice(car.originalPrice - car.price)}
               </Badge>
             )}
