@@ -14,15 +14,19 @@ export default function FeaturedInventory() {
   const featuredCars = cars.slice(0, 6);
 
   return (
-    <section id="inventory" ref={sectionRef} className="w-full py-24 relative overflow-hidden">
+    <section id="inventory" ref={sectionRef} className="w-full py-24 relative overflow-hidden bg-white">
       <div className="w-full section-padding relative">
-        {/* Section Header */}
+        {/* Section Header - Centered */}
         <FadeIn className="text-center max-w-3xl mx-auto mb-12">
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-7xl font-bold mb-4">
-              Premium <span className="gradient-text">Selection</span>
+            <Badge className="bg-red-50 text-red-600 border-0 mb-4 hover:bg-red-100 inline-flex">
+              <Sparkles className="w-3 h-3 mr-1" />
+              Featured Inventory
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl lg:text-7xl font-bold mb-4 text-gray-900">
+              Premium <span className="bg-linear-to-r from-red-600 to-orange-500 bg-clip-text text-transparent">Selection</span>
             </h2>
-            <p className="text-muted-foreground text-base max-w-2xl mx-auto">
+            <p className="text-gray-600 text-base max-w-2xl mx-auto">
               Hand-picked vehicles from our verified dealer network,
               featuring the finest Japanese automobiles available for export.
             </p>
@@ -48,7 +52,7 @@ export default function FeaturedInventory() {
         >
           <Button
             size="lg"
-            className="bg-gradient-to-r from-red to-orange hover:from-red/90 hover:to-orange/90 text-white font-semibold rounded-xl px-8 shadow-Japanese transition-all duration-300 group"
+            className="bg-linear-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white font-semibold rounded-xl px-8 shadow-md hover:shadow-lg transition-all duration-300 group"
           >
             Browse Full Inventory
             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
