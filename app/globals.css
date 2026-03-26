@@ -36,7 +36,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  /* Japanese Theme Colors */
+  /* car tekairiri Theme Colors */
   --color-red-50: hsl(0 86% 97%);
   --color-red-100: hsl(0 93% 94%);
   --color-red-200: hsl(0 96% 89%);
@@ -87,16 +87,35 @@
 
   /* Keyframes and Animations */
   @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
   }
+
   @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
   }
+
   @keyframes fade-in-up {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
@@ -115,7 +134,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 221 83% 53%; /* Royal Blue */
+    --primary: 221 83% 53%;
+    /* Royal Blue */
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -172,10 +192,17 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading tracking-tight text-foreground;
   }
 }
@@ -184,16 +211,16 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   /* Container and Padding Utilities */
   .section-padding {
     @apply px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto;
   }
-  
+
   .container-custom {
     @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   .glass {
     @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-sm;
   }
@@ -206,28 +233,28 @@
   .bg-gradient-premium {
     @apply bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900;
   }
-  
+
   .text-gradient-gold {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-yellow-500;
   }
-  
+
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500;
   }
-  
+
   /* Shadow Utilities */
   .shadow-soft {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
   }
-  
+
   .shadow-soft-lg {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.08);
   }
-  
+
   .shadow-soft-xl {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
+
   .shadow-Japanese {
     box-shadow: 0 4px 20px rgba(239, 68, 68, 0.15), 0 2px 4px rgba(239, 68, 68, 0.1);
   }
@@ -239,9 +266,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -250,6 +279,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

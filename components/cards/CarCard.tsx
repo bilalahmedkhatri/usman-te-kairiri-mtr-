@@ -13,16 +13,16 @@ interface CarCardProps {
   showActions?: boolean;
 }
 
-export function CarCard({ 
-  car, 
-  index = 0, 
+export function CarCard({
+  car,
+  index = 0,
   variant = 'default',
-  showActions = true 
+  showActions = true
 }: CarCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const { toggleWishlist, isInWishlist, addToCart, isInCart } = useStore();
-  
+
   const isWishlisted = isInWishlist(car.id);
   const isInCartList = isInCart(car.id);
 
@@ -94,7 +94,7 @@ export function CarCard({
               </Badge>
             )}
           </div>
-          
+
           {/* Content */}
           <div className="flex-1 p-4 flex flex-col justify-center">
             <div className="flex items-center gap-2 mb-1">
@@ -112,7 +112,7 @@ export function CarCard({
               <span className="text-sm text-muted-foreground">({car.reviews})</span>
             </div>
           </div>
-          
+
           {/* Actions */}
           {showActions && (
             <div className="flex flex-col justify-center p-4 gap-2">
@@ -174,7 +174,7 @@ export function CarCard({
               <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-foreground'}`} />
             </motion.button>
           </div>
-          
+
           {/* Content */}
           <div className="p-3 space-y-2">
             <div className="flex items-center gap-1">
@@ -213,7 +213,7 @@ export function CarCard({
       className="group"
     >
       <motion.div
-        animate={{ 
+        animate={{
           y: isHovered ? -8 : 0,
           scale: isHovered ? 1.02 : 1,
         }}
@@ -229,10 +229,10 @@ export function CarCard({
             animate={{ scale: isHovered ? 1.1 : 1 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           />
-          
+
           {/* Overlay Gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          
+
           {/* Badges */}
           <div className="absolute top-4 left-4 flex flex-col gap-2">
             {car.badge && (
@@ -299,11 +299,11 @@ export function CarCard({
             <Badge variant="outline" className="text-xs">{car.year}</Badge>
             <span className="text-xs text-muted-foreground">{car.transmission}</span>
           </div>
-          
+
           <h3 className="text-xl font-bold group-hover:text-red transition-colors">
             {car.make} {car.model}
           </h3>
-          
+
           {/* Specs */}
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <span>{car.engine}</span>

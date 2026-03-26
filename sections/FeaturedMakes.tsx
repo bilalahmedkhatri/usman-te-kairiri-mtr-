@@ -22,7 +22,7 @@ function MakeCard({ make }: MakeCardProps) {
         {/* Logo */}
         <div className="w-20 h-20 rounded-xl bg-white/90 group-hover:bg-white flex items-center justify-center mb-4 transition-all duration-300 p-3">
           <Image
-            src={`/companies_icons/${make.id}.png`}
+            src={make.logo}
             alt={`${make.name} logo`}
             width={80}
             height={80}
@@ -76,7 +76,7 @@ export default function FeaturedMakes() {
 
         {/* All Makes Grid */}
         <div>
-          <h3 className="text-2xl font-bold text-center mb-12">All Brands</h3>
+          <h3 className="text-2xl font-baold text-center mb-12">All Brands</h3>
           <StaggerContainer staggerDelay={0.05} className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
             {carMakes.map((make, index) => (
               <motion.a
@@ -90,7 +90,7 @@ export default function FeaturedMakes() {
               >
                 <div className="w-12 h-12 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-all duration-200 p-2">
                   <Image
-                    src={`/companies_icons/${make.id}.png`}
+                    src={make.logo}
                     alt={`${make.name} logo`}
                     width={48}
                     height={48}
