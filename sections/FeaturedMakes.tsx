@@ -29,11 +29,11 @@ function MakeCard({ make }: MakeCardProps) {
             className="object-contain w-full h-full"
           />
         </div>
-        <h3 className="font-semibold text-lg group-hover:text-red transition-colors">{make.name}</h3>
-        <p className="text-sm text-muted-foreground mt-1">{make.country}</p>
+        <h3 className="font-semibold text-base group-hover:text-red transition-colors">{make.name}</h3>
+        <p className="text-xs text-muted-foreground mt-1">{make.country}</p>
 
         {make.popular && (
-          <Badge className="absolute top-3 right-3 bg-red/10 text-red border-0 text-[10px]">
+          <Badge className="absolute top-3 right-3 bg-red/10 text-red border-0 text-[8px]">
             Popular
           </Badge>
         )}
@@ -54,11 +54,10 @@ export default function FeaturedMakes() {
       <div className="w-full section-padding relative">
         {/* Section Header */}
         <FadeIn className="text-center max-w-2xl mx-auto mb-16">
-          <Badge className="bg-red/20 text-red border-0 mb-4 hover:bg-red/20 hover:text-red">Browse by Make</Badge>
-          <h2 className="text-5xl sm:text-6xl lg:text-9xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-7xl font-bold mb-4">
             Popular <span className="gradient-text">Japanese</span> Brands
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-base">
             Explore vehicles from Japan&apos;s most prestigious automotive manufacturers,
             from legendary sports cars to luxury sedans.
           </p>
@@ -66,7 +65,7 @@ export default function FeaturedMakes() {
 
         {/* Popular Makes Grid */}
         <div className="mb-12">
-          <h3 className="text-lg font-semibold mb-6">Top Brands</h3>
+          <h3 className="text-base font-semibold mb-6">Top Brands</h3>
           <StaggerContainer staggerDelay={0.08} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {popularMakes.map((make) => (
               <MakeCard key={make.id} make={make} />
@@ -76,7 +75,7 @@ export default function FeaturedMakes() {
 
         {/* All Makes Grid */}
         <div>
-          <h3 className="text-2xl font-baold text-center mb-12">All Brands</h3>
+          <h3 className="text-xl font-bold text-center mb-12">All Brands</h3>
           <StaggerContainer staggerDelay={0.05} className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
             {carMakes.map((make, index) => (
               <motion.a

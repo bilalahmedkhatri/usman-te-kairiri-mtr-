@@ -17,32 +17,16 @@ export default function FeaturedInventory() {
     <section id="inventory" ref={sectionRef} className="w-full py-24 relative overflow-hidden">
       <div className="w-full section-padding relative">
         {/* Section Header */}
-        <FadeIn className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+        <FadeIn className="text-center max-w-3xl mx-auto mb-12">
           <div>
-            {/* <Badge className="bg-red/20 text-red border-0 mb-4">
-              <Sparkles className="w-3 h-3 mr-1" />
-              Featured Inventory
-            </Badge> */}
-
-            <Badge className="bg-red/20 text-red border-0 mb-4 hover:bg-red/20 hover:text-red">
-              <Sparkles className="w-3 h-3 mr-1" />
-              Featured Inventory
-            </Badge>
-            {/* <h2 className="text-3xl sm:text-4xl lg:text-9xl font-bold mb-4">
-              Premium <span className="gradient-text">Selection</span>
-            </h2> */}
-            <h2 className="text-5xl sm:text-6xl lg:text-9xl font-bold mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-7xl font-bold mb-4">
               Premium <span className="gradient-text">Selection</span>
             </h2>
-            <p className="text-muted-foreground text-lg max-w-xl">
+            <p className="text-muted-foreground text-base max-w-2xl mx-auto">
               Hand-picked vehicles from our verified dealer network,
               featuring the finest Japanese automobiles available for export.
             </p>
           </div>
-          <Button variant="outline" className="w-fit rounded-xl px-6 border-border/50 hover:bg-secondary/50 group">
-            View All Vehicles
-            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
         </FadeIn>
 
         {/* Car Grid */}

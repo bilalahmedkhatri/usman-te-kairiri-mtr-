@@ -36,7 +36,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
         </div>
 
         {/* Content */}
-        <p className="text-muted-foreground mb-6 leading-relaxed">
+        <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
           &quot;{testimonial.content}&quot;
         </p>
 
@@ -46,8 +46,8 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
             {testimonial.name.charAt(0)}
           </div>
           <div>
-            <p className="font-semibold">{testimonial.name}</p>
-            <p className="text-sm text-muted-foreground">
+            <p className="font-semibold text-sm">{testimonial.name}</p>
+            <p className="text-xs text-muted-foreground">
               {testimonial.role} • {testimonial.company}
             </p>
           </div>
@@ -56,7 +56,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
         {/* Car Bought */}
         <div className="mt-4 pt-4 border-t border-border/50">
           <p className="text-xs text-muted-foreground">Purchased:</p>
-          <p className="text-sm font-medium">{testimonial.carBought}</p>
+          <p className="text-xs font-medium">{testimonial.carBought}</p>
         </div>
       </motion.div>
     </StaggerItem>
@@ -72,13 +72,12 @@ export default function Testimonials() {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/5 to-background" />
 
       <div className="w-full section-padding relative">
-        {/* Section Header */}
-        <FadeIn className="text-center max-w-2xl mx-auto mb-16">
-          <Badge className="bg-red/20 text-red border-0 mb-4 hover:bg-red/20 hover:text-red">Testimonials</Badge>
-          <h2 className="text-5xl sm:text-6xl lg:text-9xl font-bold mb-4">
+        {/* Section Header - Centered */}
+        <FadeIn className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-7xl font-bold mb-4">
             What Our <span className="gradient-text">Customers</span> Say
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-base max-w-2xl mx-auto">
             Join thousands of satisfied customers who found their dream
             Japanese vehicle through our platform.
           </p>

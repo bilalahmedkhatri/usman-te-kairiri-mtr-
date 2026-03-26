@@ -4,11 +4,10 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, Play, Search, Gauge, Shield, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import type { HeroCar } from '@/app/actions/get-hero-cars';
 import { cars } from '@/data/cars';
 
 interface FloatingCarCardProps {
-  car: HeroCar;
+  car: any; // Use any to avoid type conflicts, or create a union type
   index: number;
 }
 
@@ -45,21 +44,21 @@ function FloatingCarCard({ car, index }: FloatingCarCardProps) {
       top: '10%',
       right: '5%',
       rotate: -5,
-      size: 'w-72 md:w-80 lg:w-88', // Increased: w-64 → w-88 (30% larger)
+      size: 'w-72 md:w-80 lg:w-88',
       imageHeight: 'h-44 md:h-48 lg:h-52'
     },
     {
       top: '35%',
       right: '20%',
       rotate: 8,
-      size: 'w-64 md:w-72 lg:w-80', // Increased: w-56 → w-80 (30% larger)
+      size: 'w-64 md:w-72 lg:w-80',
       imageHeight: 'h-40 md:h-44 lg:h-48'
     },
     {
       bottom: '15%',
       right: '10%',
       rotate: -3,
-      size: 'w-56 md:w-64 lg:w-72', // Increased: w-52 → w-72 (30% larger)
+      size: 'w-56 md:w-64 lg:w-72',
       imageHeight: 'h-36 md:h-40 lg:h-44'
     },
   ];
@@ -137,7 +136,7 @@ function FloatingCarCard({ car, index }: FloatingCarCardProps) {
 }
 
 interface HeroProps {
-  cars?: HeroCar[];
+  cars?: any[]; // Use any[] to accept both Car and HeroCar types
 }
 
 export default function Hero({ cars: propCars }: HeroProps) {
@@ -242,6 +241,17 @@ export default function Hero({ cars: propCars }: HeroProps) {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[calc(100vh-6rem)]">
           {/* Left Content */}
           <div className="flex flex-col justify-center space-y-6">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50 border border-gray-200 w-fit"
+            >
+              <Gauge className="w-3.5 h-3.5 text-red-600" />
+              <span className="text-xs font-medium text-gray-700">Premium Japanese Vehicles</span>
+            </motion.div>
+
             {/* Headline */}
             <div className="space-y-4">
               <motion.h1
@@ -334,14 +344,14 @@ export default function Hero({ cars: propCars }: HeroProps) {
                 className="bg-linear-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white font-semibold rounded-xl px-6 py-2.5 shadow-xl hover:shadow-2xl transition-all duration-300 group"
               >
                 Browse Inventory
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
                 size="default"
                 variant="outline"
                 className="rounded-xl px-5 py-2.5 border-gray-200 hover:border-red-500 hover:bg-red-50 transition-all duration-200 group shadow-md hover:shadow-lg"
               >
-                <Play className="w-3.5 h-3.5 text-red-600 group-hover:text-red-700" />
+                <Play className="w-3.5 h-3.5 mr-2 text-red-600 group-hover:text-red-700" />
                 Watch How It Works
               </Button>
             </motion.div>
@@ -368,7 +378,7 @@ export default function Hero({ cars: propCars }: HeroProps) {
           <div className="relative h-[500px] lg:h-[600px] hidden lg:block">
             {featuredCars.length > 0 ? (
               featuredCars.map((car, index) => (
-                <FloatingCarCard key={car.id} car={car} index={index} />
+                <FloatingCarCard key={String(car.id)} car={car} index={index} />
               ))
             ) : (
               <div className="flex items-center justify-center h-full">
