@@ -22,19 +22,26 @@ export interface FilterState {
     mileageRange: [number, number];
     condition: string[];
     features: string[];
+    priceRange: [number, number];
+    yearRange: [number, number];
+    make: string[];
 }
 
 interface AdvancedFiltersProps {
     onFilterChange?: (filters: FilterState) => void;
+    availableMakes?: string[];
 }
 
-export function AdvancedFilters({ onFilterChange }: AdvancedFiltersProps) {
+export function AdvancedFilters({ onFilterChange, availableMakes = [] }: AdvancedFiltersProps) {
     const [filters, setFilters] = useState<FilterState>({
         transmission: [],
         fuelType: [],
         mileageRange: [0, 200000],
         condition: [],
         features: [],
+        priceRange: [0, 200000],
+        yearRange: [1990, 2024],
+        make: [],
     });
 
     const transmissionOptions = ["Automatic", "Manual", "CVT", "Semi-Automatic"];
@@ -80,6 +87,9 @@ export function AdvancedFilters({ onFilterChange }: AdvancedFiltersProps) {
             mileageRange: [0, 200000],
             condition: [],
             features: [],
+            priceRange: [0, 200000],
+            yearRange: [1990, 2024],
+            make: [],
         };
         setFilters(resetFilters);
         onFilterChange?.(resetFilters);
@@ -90,7 +100,10 @@ export function AdvancedFilters({ onFilterChange }: AdvancedFiltersProps) {
         filters.fuelType.length +
         filters.condition.length +
         filters.features.length +
-        (filters.mileageRange[0] !== 0 || filters.mileageRange[1] !== 200000 ? 1 : 0);
+        filters.make.length +
+        (filters.mileageRange[0] !== 0 || filters.mileageRange[1] !== 200000 ? 1 : 0) +
+        (filters.priceRange[0] !== 0 || filters.priceRange[1] !== 200000 ? 1 : 0) +
+        (filters.yearRange[0] !== 1990 || filters.yearRange[1] !== 2024 ? 1 : 0);
 
     const FilterContent = () => (
         <div className="space-y-6 pb-6">

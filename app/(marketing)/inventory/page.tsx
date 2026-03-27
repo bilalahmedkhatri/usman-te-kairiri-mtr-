@@ -9,7 +9,7 @@ import { SortDropdown, type SortOption } from "@/components/sort-dropdown";
 import { ViewToggle, type ViewMode } from "@/components/view-toggle";
 import { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
-import { Search, Home, ChevronRight, Grid3x3, List, SlidersHorizontal, X } from "lucide-react";
+import { Search, Home, ChevronRight, SlidersHorizontal } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
@@ -131,8 +131,6 @@ export default function InventoryPage() {
                 return sorted.sort((a, b) => (b.price || 0) - (a.price || 0));
             case "year-desc":
                 return sorted.sort((a, b) => (b.year || 0) - (a.year || 0));
-            case "year-asc":
-                return sorted.sort((a, b) => (a.year || 0) - (b.year || 0));
             case "mileage-asc":
                 return sorted.sort((a, b) => (a.specs?.mileage || 0) - (b.specs?.mileage || 0));
             case "popular":
@@ -185,25 +183,6 @@ export default function InventoryPage() {
     return (
         <div className="bg-white min-h-screen">
             <div className="container mx-auto px-4 py-8">
-                {/* Breadcrumbs */}
-                <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-                    <Link href="/" className="hover:text-red-600 transition-colors flex items-center gap-1">
-                        <Home className="w-4 h-4" />
-                        Home
-                    </Link>
-                    <ChevronRight className="w-4 h-4" />
-                    <span className="text-gray-900 font-medium">Inventory</span>
-                </nav>
-
-                {/* Header */}
-                <div className="mb-8">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-3 text-gray-900">
-                        Vehicle Inventory
-                    </h1>
-                    <p className="text-lg text-gray-600">
-                        Browse our premium collection of Japanese vehicles
-                    </p>
-                </div>
 
                 {/* Search Bar */}
                 <div className="mb-8">

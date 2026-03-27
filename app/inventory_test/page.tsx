@@ -18,6 +18,9 @@ interface FilterState {
   mileageRange: [number, number];
   condition: string[];
   features: string[];
+  priceRange: [number, number];
+  yearRange: [number, number];
+  make: string[];
 }
 
 export default function InventoryPage() {
@@ -30,6 +33,9 @@ export default function InventoryPage() {
     mileageRange: [0, 200000],
     condition: [],
     features: [],
+    priceRange: [0, 200000],
+    yearRange: [1990, 2024],
+    make: [],
   });
 
   const { data: vehicles = [], isLoading, error } = useQuery<Vehicle[]>({
@@ -50,6 +56,11 @@ export default function InventoryPage() {
         if (!matchesSearch) return false;
       }
 
+      // Make filter
+      if (filters.make.length > 0) {
+        if (!filters.make.includes(vehicle.make || "")) return false;
+      }
+
       // Transmission filter
       if (filters.transmission.length > 0) {
         const vehicleTransmission = vehicle.specs?.transmission || "Automatic";
@@ -67,6 +78,26 @@ export default function InventoryPage() {
         if (
           vehicle.specs.mileage < filters.mileageRange[0] ||
           vehicle.specs.mileage > filters.mileageRange[1]
+        ) {
+          return false;
+        }
+      }
+
+      // Price range filter
+      if (vehicle.price) {
+        if (
+          vehicle.price < filters.priceRange[0] ||
+          vehicle.price > filters.priceRange[1]
+        ) {
+          return false;
+        }
+      }
+
+      // Year range filter
+      if (vehicle.year) {
+        if (
+          vehicle.year < filters.yearRange[0] ||
+          vehicle.year > filters.yearRange[1]
         ) {
           return false;
         }
@@ -114,6 +145,9 @@ export default function InventoryPage() {
       mileageRange: [0, 200000],
       condition: [],
       features: [],
+      priceRange: [0, 200000],
+      yearRange: [1990, 2024],
+      make: [],
     });
   };
 

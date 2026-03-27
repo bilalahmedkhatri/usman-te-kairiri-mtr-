@@ -152,7 +152,7 @@ const shippingMethods = [
 
 // Insurance options
 const insuranceOptions = [
-    { id: "none", name: "No Insurance", multiplier: 1.0 },
+    { id: "none", name: "No Insurance", multiplier: 1.0, rate: 0 },
     { id: "basic", name: "Basic Coverage (1% of value)", multiplier: 1.01, rate: 0.01 },
     { id: "premium", name: "Premium Coverage (2% of value)", multiplier: 1.02, rate: 0.02 }
 ];

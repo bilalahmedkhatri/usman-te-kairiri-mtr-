@@ -9,9 +9,10 @@ import { formatCurrency } from "@/lib/format";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
+  variant?: "default" | "horizontal";
 }
 
-export function VehicleCard({ vehicle }: VehicleCardProps) {
+export function VehicleCard({ vehicle, variant = "default" }: VehicleCardProps) {
   const mainImage =
     vehicle.image_urls && vehicle.image_urls.length > 0
       ? vehicle.image_urls[0]

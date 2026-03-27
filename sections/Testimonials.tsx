@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/animations/FadeIn';
 import { testimonials } from '@/data/cars';
 import { Star, Quote } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
 
 interface TestimonialCardProps {
   testimonial: typeof testimonials[0];

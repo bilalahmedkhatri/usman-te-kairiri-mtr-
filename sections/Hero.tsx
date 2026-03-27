@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ArrowRight, Play, Search, Gauge, Shield, Globe } from 'lucide-react';
+import { ArrowRight, Play, Search, Shield, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { cars } from '@/data/cars';

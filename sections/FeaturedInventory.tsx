@@ -4,9 +4,8 @@ import { motion } from 'framer-motion';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/animations/FadeIn';
 import { CarCard } from '@/components/cards/CarCard';
 import { cars } from '@/data/cars';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function FeaturedInventory() {
   const sectionRef = useRef<HTMLDivElement>(null);
