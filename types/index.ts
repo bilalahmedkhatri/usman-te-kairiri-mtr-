@@ -1,5 +1,201 @@
+// types/index.ts
+
+// ============================================
+// Enums from Prisma Schema
+// ============================================
+
+export type UserRole =
+  | 'ADMIN'
+  | 'MANAGER'
+  | 'USER'
+  | 'DEALER'
+  | 'SUPPLIER'
+  | 'BUYER'
+  | 'VIEWER';
+
+export type UserStatus = 'ACTIVE' | 'INACTIVE';
+
+export type VehicleStatus = 'AVAILABLE' | 'RESERVED' | 'SOLD' | 'SHIPPED';
+
+export type PaymentStatus = 'PENDING' | 'PARTIAL' | 'PAID';
+
+export type CartStatus = 'ACTIVE' | 'EXPIRED' | 'CONVERTED_TO_BOOKING';
+
+export type BookingStatus =
+  | 'PENDING'
+  | 'CONFIRMED'
+  | 'CANCELLED'
+  | 'EXPIRED'
+  | 'CONVERTED_TO_SALE';
+
+export type InquiryType =
+  | 'GENERAL'
+  | 'VEHICLE_INQUIRY'
+  | 'DEALER_CONTACT'
+  | 'SUPPORT';
+
+export type InquiryStatus = 'OPEN' | 'IN_PROGRESS' | 'RESOLVED' | 'CLOSED';
+
+export type DocumentType =
+  | 'TITLE'
+  | 'INSPECTION'
+  | 'EXPORT_CERT'
+  | 'CUSTOMS'
+  | 'AUCTION_SHEET'
+  | 'SERVICE_RECORD'
+  | 'OTHER';
+
+// ============================================
+// Database Model Interfaces
+// ============================================
+
+export interface Site {
+  id: number;
+  domain: string;
+  name: string;
+  themeConfig?: any;
+  contactInfo?: any;
+  defaultCurrency?: string | null;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface User {
+  id: number;
+  email: string;
+  name: string | null;
+  phone: string | null;
+  country: string | null;
+  department: string | null;
+  role: UserRole;
+  status: UserStatus;
+  image: string | null;
+  siteId: number | null;
+  companyId: number | null;
+  createdAt: string;
+  updatedAt: string;
+  dealerProfile?: DealerProfile | null;
+}
+
+export interface Vehicle {
+  id: number;
+  siteId: number;
+  stockNumber: string;
+  vinChassis: string | null;
+  make: string;
+  model: string;
+  yearManufacture: number;
+  yearRegistration: number | null;
+  priceFob: number; // Decimal in DB
+  priceRetail: number | null; // Decimal in DB
+  currency: string | null;
+  description: string | null;
+  status: VehicleStatus;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+  // Relationships
+  images?: VehicleImage[];
+  specs?: VehicleSpec | null;
+  logistics?: VehicleLogistics | null;
+  site?: Site;
+}
+
+export interface VehicleSpec {
+  id: number;
+  vehicleId: number;
+  engineCode: string | null;
+  engineCc: number | null;
+  fuelType: string | null;
+  transmission: string | null;
+  driveType: string | null;
+  steering: string | null;
+  seats: number | null;
+  doors: number | null;
+  colorExterior: string | null;
+  colorInterior: string | null;
+  trimGrade: string | null;
+  mileageKm: number | null;
+  vehicleType: string | null;
+  powerKw: number | null;
+  powerHp: number | null;
+  torqueNm: number | null;
+  weightKg: number | null;
+  dimensions: string | null;
+  fuelConsumption: string | null;
+  emissionStandard: string | null;
+  options: any;
+}
+
+export interface VehicleLogistics {
+  id: number;
+  vehicleId: number;
+  lengthCm: number | null;
+  widthCm: number | null;
+  heightCm: number | null;
+  m3: number | null; // Decimal in DB
+  weightKg: number | null;
+  currentPortId: string | null;
+  currentPortName: string | null;
+  originCountry: string | null;
+  originPort: string | null;
+  hsCode: string | null;
+  exportCertStatus: boolean;
+  inspectionStatus: string | null;
+  inspectionDate: string | null;
+  importDate: string | null;
+  shippingStatus: string | null;
+  etaDestination: string | null;
+}
+
+export interface VehicleImage {
+  id: number;
+  vehicleId: number;
+  url: string;
+  altText: string | null;
+  sortOrder: number;
+  isPrimary: boolean;
+  createdAt: string;
+}
+
+export interface DealerProfile {
+  id: number;
+  userId: number;
+  businessName: string | null;
+  description: string | null;
+  logo: string | null;
+  coverImage: string | null;
+  rating: number | null; // Decimal in DB
+  totalSales: number;
+  yearsInBusiness: number | null;
+  address: string | null;
+  website: string | null;
+  publicEmail: string | null;
+  publicPhone: string | null;
+}
+
+// ============================================
+// UI & Component Types (Mapped from DB Models)
+// ============================================
+
+export interface CartItem {
+  carId: string;
+  addedAt: string;
+}
+
+export interface ComparisonItem {
+  carId: string;
+  addedAt: string;
+}
+
+/**
+ * Car is the primary interface used in frontend components (CarCard, Inventory, etc.)
+ * It acts as a UI-friendly representation of the Vehicle model.
+ */
 export interface Car {
-  id: string;
+  id: string; // Kept as string for UI compatibility if needed, but usually vehicle.id.toString()
+  stockNumber: string;
   make: string;
   model: string;
   year: number;
@@ -7,13 +203,13 @@ export interface Car {
   originalPrice?: number;
   mileage: number;
   engine: string;
-  transmission: 'Manual' | 'Automatic' | 'CVT';
-  fuel: 'Gasoline' | 'Hybrid' | 'Electric' | 'Diesel';
+  transmission: string;
+  fuel: string;
   color: string;
   location: string;
   images: string[];
   features: string[];
-  condition: 'New' | 'Used' | 'Certified Pre-Owned';
+  condition: string;
   status: 'Available' | 'Sold' | 'Reserved';
   rating: number;
   reviews: number;
@@ -43,58 +239,6 @@ export interface Dealer {
     email: string;
     website?: string;
   };
-}
-
-export type UserRole =
-  | 'ADMIN'
-  | 'MANAGER'
-  | 'USER'
-  | 'DEALER'
-  | 'SUPPLIER'
-  | 'BUYER'
-  | 'VIEWER';
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar?: string;
-  role: UserRole;
-  wishlist: string[];
-  inquiries: Inquiry[];
-  createdAt: string;
-}
-
-export interface Inquiry {
-  id: string;
-  carId: string;
-  userId: string;
-  message: string;
-  status: 'pending' | 'responded' | 'closed';
-  createdAt: string;
-  response?: string;
-}
-
-export interface CartItem {
-  carId: string;
-  addedAt: string;
-}
-
-export interface ComparisonItem {
-  carId: string;
-  addedAt: string;
-}
-
-export interface FilterState {
-  make: string[];
-  model: string[];
-  year: [number, number];
-  price: [number, number];
-  transmission: string[];
-  fuel: string[];
-  condition: string[];
-  location: string[];
-  sortBy: 'latest' | 'price-low' | 'price-high' | 'year-newest' | 'year-oldest' | 'mileage-low' | 'mileage-high';
 }
 
 export interface CarMake {
@@ -139,4 +283,23 @@ export interface BlogPost {
   date: string;
   category: string;
   readTime: number;
+}
+
+export interface FilterState {
+  make: string[];
+  model: string[];
+  year: [number, number];
+  price: [number, number];
+  transmission: string[];
+  fuel: string[];
+  condition: string[];
+  location: string[];
+  sortBy:
+    | 'latest'
+    | 'price-low'
+    | 'price-high'
+    | 'year-newest'
+    | 'year-oldest'
+    | 'mileage-low'
+    | 'mileage-high';
 }

@@ -62,6 +62,7 @@ export const dealers: Dealer[] = [
 export const cars: Car[] = [
   {
     id: 'car-001',
+    stockNumber: 'TOK-SUP-001',
     make: 'Toyota',
     model: 'Supra XT GR',
     year: 2024,
@@ -101,6 +102,7 @@ export const cars: Car[] = [
   },
   {
     id: 'car-002',
+    stockNumber: 'OSA-GTR-002',
     make: 'Nissan',
     model: 'GT-R Nismo',
     year: 2023,
@@ -139,6 +141,7 @@ export const cars: Car[] = [
   },
   {
     id: 'car-003',
+    stockNumber: 'NAG-CTR-003',
     make: 'Honda',
     model: 'Civic Type R',
     year: 2024,
@@ -178,6 +181,7 @@ export const cars: Car[] = [
   },
   {
     id: 'car-004',
+    stockNumber: 'HIR-RX7-004',
     make: 'Mazda',
     model: 'RX-7 Spirit R',
     year: 2002,
@@ -216,6 +220,7 @@ export const cars: Car[] = [
   },
   {
     id: 'car-005',
+    stockNumber: 'SAP-WRX-005',
     make: 'Subaru',
     model: 'WRX STI S209',
     year: 2019,
@@ -254,6 +259,7 @@ export const cars: Car[] = [
   },
   {
     id: 'car-006',
+    stockNumber: 'TOK-LC5-006',
     make: 'Lexus',
     model: 'LC 500 Convertible',
     year: 2023,
@@ -293,6 +299,7 @@ export const cars: Car[] = [
   },
   {
     id: 'car-007',
+    stockNumber: 'OSA-LC3-007',
     make: 'Toyota',
     model: 'Land Cruiser 300',
     year: 2024,
@@ -331,6 +338,7 @@ export const cars: Car[] = [
   },
   {
     id: 'car-008',
+    stockNumber: 'YOK-ZPF-008',
     make: 'Nissan',
     model: 'Z Performance',
     year: 2023,

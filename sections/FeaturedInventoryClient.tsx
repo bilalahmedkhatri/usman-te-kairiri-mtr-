@@ -1,16 +1,21 @@
+// sections/FeaturedInventoryClient.tsx
 'use client';
+
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/animations/FadeIn';
 import { CarCard } from '@/components/cards/CarCard';
-import { cars } from '@/data/cars';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import type { Car } from '@/types';
 
-export default function FeaturedInventory() {
+interface FeaturedInventoryClientProps {
+  vehicles: Car[];
+}
+
+export default function FeaturedInventoryClient({ vehicles }: FeaturedInventoryClientProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  const featuredCars = cars.slice(0, 6);
 
   return (
     <section id="inventory" ref={sectionRef} className="w-full py-24 relative overflow-hidden bg-white">
@@ -30,7 +35,7 @@ export default function FeaturedInventory() {
 
         {/* Car Grid */}
         <StaggerContainer staggerDelay={0.1} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {featuredCars.map((car, index) => (
+          {vehicles.map((car, index) => (
             <StaggerItem key={car.id}>
               <CarCard car={car} index={index} />
             </StaggerItem>

@@ -1,9 +1,11 @@
+import { Suspense } from 'react';
 import Hero from '@/sections/Hero';
 import FeaturedMakes from '@/sections/FeaturedMakes';
-import FeaturedInventory from '@/sections/FeaturedInventory';
+import FeaturedInventory from '@/server/components/FeaturedInventory'; // Import server component
 import Testimonials from '@/sections/Testimonials';
 import CTA from '@/sections/CTA';
 import { getHeroCars } from '@/app/actions/get-hero-cars';
+import { FeaturedInventorySkeleton } from '@/components/FeaturedInventorySkeleton';
 
 export default async function MarketingPage() {
   const heroCars = await getHeroCars();
@@ -14,7 +16,9 @@ export default async function MarketingPage() {
         <div className="mx-auto text-center">
           <Hero cars={heroCars} />
           <FeaturedMakes />
-          <FeaturedInventory />
+          <Suspense fallback={<FeaturedInventorySkeleton />}>
+            <FeaturedInventory />
+          </Suspense>
           <Testimonials />
           <CTA />
         </div>

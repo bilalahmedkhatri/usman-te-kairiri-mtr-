@@ -1,0 +1,397 @@
+{
+  "app": {
+    "(auth)": {
+      "login": {
+        "page.tsx": "file"
+      },
+      "register": {
+        "page.tsx": "file"
+      },
+      "error.tsx": "file",
+      "layout.tsx": "file",
+      "loading.tsx": "file",
+      "not-found.tsx": "file"
+    },
+    "(dashboard)": {
+      "dashboard": {
+        "admin": {
+          "page.tsx": "file"
+        },
+        "analytics": {
+          "page.tsx": "file"
+        },
+        "buyer": {
+          "page.tsx": "file"
+        },
+        "dealer": {
+          "page.tsx": "file"
+        },
+        "manager": {
+          "page.tsx": "file"
+        },
+        "ports": {
+          "error.tsx": "file",
+          "loading.tsx": "file",
+          "not-found.tsx": "file",
+          "page.tsx": "file"
+        },
+        "profile": {
+          "error.tsx": "file",
+          "loading.tsx": "file",
+          "not-found.tsx": "file",
+          "page.tsx": "file",
+          "ProfileForm.tsx": "file"
+        },
+        "settings": {
+          "page.tsx": "file"
+        },
+        "supplier": {
+          "page.tsx": "file"
+        },
+        "users": {
+          "edit": {
+            "error.tsx": "file",
+            "loading.tsx": "file",
+            "page.tsx": "file"
+          },
+          "new": {
+            "error.tsx": "file",
+            "loading.tsx": "file",
+            "page.tsx": "file"
+          },
+          "error.tsx": "file",
+          "loading.tsx": "file",
+          "not-found.tsx": "file",
+          "page.tsx": "file"
+        },
+        "vehicles": {
+          "[slug]": {
+            "page.tsx": "file",
+            "VehicleDetailClient.tsx": "file"
+          },
+          "new": {
+            "page.tsx": "file"
+          },
+          "error.tsx": "file",
+          "loading.tsx": "file",
+          "not-found.tsx": "file",
+          "page.tsx": "file",
+          "VehiclesClient.tsx": "file"
+        },
+        "error.tsx": "file",
+        "layout-client.tsx": "file",
+        "layout.tsx": "file",
+        "loading.tsx": "file",
+        "not-found.tsx": "file",
+        "page.tsx": "file"
+      }
+    },
+    "(marketing)": {
+      "about-us": {
+        "page.tsx": "file"
+      },
+      "contact": {
+        "page.tsx": "file"
+      },
+      "customer-review": {
+        "page.tsx": "file"
+      },
+      "faq": {
+        "page.tsx": "file"
+      },
+      "favorites": {
+        "page.tsx": "file"
+      },
+      "how-to-buy": {
+        "page.tsx": "file"
+      },
+      "inventory": {
+        "page.tsx": "file"
+      },
+      "regional-contacts": {
+        "page.tsx": "file"
+      },
+      "shipping-calculator": {
+        "page.tsx": "file"
+      },
+      "terms-payment": {
+        "page.tsx": "file"
+      },
+      "test-gallery": {
+        "page.tsx": "file"
+      },
+      "vehicle-inquiry": {
+        "page.tsx": "file"
+      },
+      "layout.tsx": "file",
+      "page.tsx": "file",
+      "README.md": "file"
+    },
+    "actions": {
+      "auth.ts": "file",
+      "get-hero-cars.ts": "file",
+      "get-users.ts": "file",
+      "profile.ts": "file"
+    },
+    "api": {
+      "auth": {
+        "[...nextauth]": {
+          "route.ts": "file"
+        },
+        "register": {
+          "route.ts": "file"
+        }
+      }
+    },
+    "comparison": {
+      "page.tsx": "file"
+    },
+    "inventory_test": {
+      "[id]": {
+        "loading.tsx": "file",
+        "page.tsx": "file"
+      },
+      "page.tsx": "file"
+    },
+    "login_close": {
+      "page.tsx": "file"
+    },
+    "register_close": {
+      "page.tsx": "file"
+    },
+    "test-filters": {
+      "page.tsx": "file"
+    },
+    "error.tsx": "file",
+    "globals.css": "file",
+    "layout.tsx": "file",
+    "loading.tsx": "file",
+    "not-found.tsx": "file",
+    "robots.ts": "file",
+    "sitemap.ts": "file"
+  },
+  "components": {
+    "analytics": {},
+    "animations": {
+      "FadeIn.tsx": "file"
+    },
+    "auth": {
+      "AuthLayout.tsx": "file",
+      "LoginForm.tsx": "file",
+      "RegisterForm.tsx": "file"
+    },
+    "cards": {
+      "CarCard.tsx": "file"
+    },
+    "dashboard": {
+      "charts.tsx": "file",
+      "dashboard-footer.tsx": "file",
+      "dashboard-header.tsx": "file",
+      "dashboard-sidebar.tsx": "file",
+      "header.tsx": "file",
+      "sidebar.tsx": "file",
+      "vehicle-inventory-card.tsx": "file"
+    },
+    "layout": {
+      "Navigation.tsx": "file"
+    },
+    "ui": {
+      "accordion.tsx": "file",
+      "alert-dialog.tsx": "file",
+      "alert.tsx": "file",
+      "aspect-ratio.tsx": "file",
+      "avatar.tsx": "file",
+      "badge.tsx": "file",
+      "breadcrumb.tsx": "file",
+      "button-group.tsx": "file",
+      "button.tsx": "file",
+      "calendar.tsx": "file",
+      "card.tsx": "file",
+      "carousel.tsx": "file",
+      "chart.tsx": "file",
+      "checkbox.tsx": "file",
+      "collapsible.tsx": "file",
+      "command.tsx": "file",
+      "context-menu.tsx": "file",
+      "dialog.tsx": "file",
+      "drawer.tsx": "file",
+      "dropdown-menu.tsx": "file",
+      "empty.tsx": "file",
+      "field.tsx": "file",
+      "form.tsx": "file",
+      "hover-card.tsx": "file",
+      "input-group.tsx": "file",
+      "input-otp.tsx": "file",
+      "input.tsx": "file",
+      "label.tsx": "file",
+      "select.tsx": "file",
+      "separator.tsx": "file",
+      "sheet.tsx": "file",
+      "skeleton.tsx": "file",
+      "slider.tsx": "file",
+      "table.tsx": "file",
+      "textarea.tsx": "file"
+    },
+    "vehicle-detail": {
+      "features-grid.tsx": "file",
+      "hire-vehicle-dialog.tsx": "file",
+      "import-notice.tsx": "file",
+      "purchase-vehicle-dialog.tsx": "file",
+      "shipping-calculator-widget.tsx": "file",
+      "specs-table.tsx": "file"
+    },
+    "advanced-filters.tsx": "file",
+    "category-grid.tsx": "file",
+    "compare-button.tsx": "file",
+    "comparison-bar.tsx": "file",
+    "enhanced-vehicle-filters.tsx": "file",
+    "favorite-button.tsx": "file",
+    "FeaturedInventorySkeleton.tsx": "file",
+    "features-section.tsx": "file",
+    "filter-chips.tsx": "file",
+    "footer.tsx": "file",
+    "header.tsx": "file",
+    "hero-section.tsx": "file",
+    "image-gallery.tsx": "file",
+    "inquiry-form.tsx": "file",
+    "japan-time.tsx": "file",
+    "login-modal.tsx": "file",
+    "Logo.tsx": "file",
+    "modal-container.tsx": "file",
+    "mode-toggle.tsx": "file",
+    "PermissionGate.tsx": "file",
+    "providers.tsx": "file",
+    "register-modal.tsx": "file",
+    "reviews-carousel.tsx": "file",
+    "shipping-calculator.tsx": "file",
+    "sort-dropdown.tsx": "file",
+    "theme-provider.tsx": "file",
+    "vehicle-card.tsx": "file",
+    "vehicle-filters.tsx": "file",
+    "view-toggle.tsx": "file"
+  },
+  "data": {
+    "cars.ts": "file"
+  },
+  "hooks": {
+    "use-debounce.ts": "file",
+    "use-mobile.ts": "file",
+    "useStore.ts": "file"
+  },
+  "lib": {
+    "mappers": {
+      "vehicleMapper.ts": "file"
+    },
+    "store": {
+      "comparison-store.ts": "file",
+      "favorites-store.ts": "file"
+    },
+    "validations": {
+      "auth.ts": "file"
+    },
+    "api.ts": "file",
+    "auth.ts": "file",
+    "change_file_name.py": "file",
+    "constants.ts": "file",
+    "format.ts": "file",
+    "permissions.ts": "file",
+    "prisma.ts": "file",
+    "utils.ts": "file"
+  },
+  "prisma": {
+    "migrations": {
+      "20260131135704_add_role_based_features": {
+        "migration.sql": "file"
+      },
+      "20260317214200_add_vehicle_fields_and_new_models": {
+        "migration.sql": "file"
+      },
+      "20260319055756_add_company_and_website_models": {
+        "migration.sql": "file"
+      },
+      "convert_to_integer_ids.sql": "file",
+      "migration_lock.toml": "file"
+    },
+    "diag.sql": "file",
+    "MIGRATION_GUIDE.md": "file",
+    "schema.prisma": "file",
+    "seed_users.ts": "file",
+    "seed.sql": "file",
+    "seed.ts": "file",
+    "verify-users.ts": "file"
+  },
+  "public": {
+    "companies_icons": {
+      "acura-1.png": "file",
+      "honda-1.png": "file",
+      "infiniti-1.png": "file",
+      "lexus-1.png": "file",
+      "mazda.png": "file",
+      "mitsubishi-1.png": "file",
+      "nissan-1.png": "file",
+      "subaru-1.png": "file",
+      "suzuki-1.png": "file",
+      "toyota-1.png": "file"
+    },
+    "static": {
+      "vehicle_images": {
+        "Honda_black": {},
+        "Honda_black_CVR": {},
+        "Honda_blue_fit": {},
+        "Nissan_red_juke": {},
+        "Nissan_red_xtrail": {},
+        "not_complate_pictures": {},
+        "Saberu_prostar_XT": {},
+        "Saberu_White": {},
+        "Saberu_white_XV": {},
+        "Toyota_skyblue_vitz": {}
+      }
+    },
+    ".gitkeep": "file",
+    "hero-bg.png": "file"
+  },
+  "scripts": {
+    "record-header.js": "file"
+  },
+  "sections": {
+    "CTA.tsx": "file",
+    "FeaturedInventoryClient.tsx": "file",
+    "FeaturedMakes.tsx": "file",
+    "Footer.tsx": "file",
+    "Hero.tsx": "file",
+    "Stats.tsx": "file",
+    "Testimonials.tsx": "file"
+  },
+  "server": {
+    "components": {
+      "FeaturedInventory.tsx": "file"
+    },
+    "mappers": {
+      "vehicleMapper.ts": "file"
+    },
+    "queries": {
+      "vehicles.ts": "file"
+    }
+  },
+  "src": {},
+  "types": {
+    "index.ts": "file",
+    "next-auth.d.ts": "file"
+  },
+  ".dockerignore": "file",
+  ".eslintrc.json": "file",
+  ".gitignore": "file",
+  "Dockerfile": "file",
+  "hero-data.json": "file",
+  "MIGRATION_INSTRUCTIONS.md": "file",
+  "next.config.js": "file",
+  "package-lock.json": "file",
+  "package.json": "file",
+  "postcss.config.mjs": "file",
+  "prisma_seed_error.txt": "file",
+  "project_tree.json": "file",
+  "proxy.ts": "file",
+  "README_TASKS.md": "file",
+  "tsconfig.json": "file",
+  "tsconfig.seed.json": "file"
+}
