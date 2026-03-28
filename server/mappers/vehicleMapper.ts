@@ -2,11 +2,11 @@ import type { Car, Dealer } from '@/types';
 
 export function mapVehicleToCar(vehicle: any): Car {
     const specs = vehicle.specs;
-    
+
     const primaryImage = vehicle.images?.find((img: any) => img.isPrimary)?.url ||
         vehicle.images?.[0]?.url ||
         '/images/placeholder-car.jpg';
-    
+
     const allImages = vehicle.images?.map((img: any) => img.url) || [primaryImage];
 
     // Example: calculate rating from dealer profile if available

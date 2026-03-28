@@ -5,6 +5,8 @@ import { ArrowRight, Play, Search, Shield, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { cars } from '@/data/cars';
+import { useRouter } from 'next/navigation'; // ✅ Import for navigation
+
 
 interface FloatingCarCardProps {
   car: any; // Use any to avoid type conflicts, or create a union type
@@ -149,6 +151,9 @@ export default function Hero({ cars: propCars }: HeroProps) {
   const availableCars = propCars && propCars.length > 0 ? propCars : cars;
   const featuredCars = availableCars.slice(0, 3);
 
+  const router = useRouter(); // ✅ Initialize router
+
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
@@ -182,6 +187,8 @@ export default function Hero({ cars: propCars }: HeroProps) {
   const handleSearch = () => {
     if (searchQuery.trim()) {
       console.log('Searching for:', searchQuery);
+      // Navigate to inventory page with search query in URL
+      router.push(`/inventory?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 

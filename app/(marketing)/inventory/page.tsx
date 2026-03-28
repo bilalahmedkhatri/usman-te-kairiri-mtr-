@@ -16,10 +16,10 @@ export default async function InventoryPage({
 }) {
     const params = await searchParams;
 
-    // Parse search parameters
+    // Parse search parameters with proper types
     const searchTerm = typeof params.q === 'string' ? params.q : undefined;
     const page = typeof params.page === 'string' ? parseInt(params.page) : 1;
-    const sortBy = typeof params.sort === 'string' ? params.sort as any : 'createdAt';
+    const sortBy = typeof params.sort === 'string' ? (params.sort as any) : 'createdAt';
     const sortOrder = typeof params.order === 'string' && params.order === 'asc' ? 'asc' : 'desc';
 
     // Parse filters

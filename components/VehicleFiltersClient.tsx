@@ -38,7 +38,7 @@ interface VehicleFiltersClientProps {
     currentFilters: Filters;
 }
 
-// Predefined lists (you can fetch these dynamically later)
+// Predefined lists (these can be fetched dynamically later)
 const makes = ['Toyota', 'Honda', 'Nissan', 'Mazda', 'Subaru', 'Suzuki', 'Mitsubishi', 'Lexus', 'Acura', 'Infiniti'];
 const fuelTypes = ['Petrol', 'Diesel', 'Hybrid', 'Electric'];
 const transmissions = ['Manual', 'Automatic', 'CVT'];
@@ -76,7 +76,8 @@ export function VehicleFiltersClient({ currentFilters }: VehicleFiltersClientPro
     const [engineMax, setEngineMax] = useState(currentFilters.engineMax?.toString() || '');
     const [vehicleType, setVehicleType] = useState(currentFilters.type || '');
 
-    const updateFilters = () => {
+    // Build URL with current filters
+    const updateUrl = () => {
         const params = new URLSearchParams();
 
         if (searchTerm) params.set('q', searchTerm);
@@ -98,12 +99,34 @@ export function VehicleFiltersClient({ currentFilters }: VehicleFiltersClientPro
         if (engineMax) params.set('engineMax', engineMax);
         if (vehicleType) params.set('type', vehicleType);
 
-        // Keep sort if present
+        // Preserve sorting if present in currentFilters
         if (currentFilters.sort) params.set('sort', currentFilters.sort);
         if (currentFilters.order) params.set('order', currentFilters.order);
 
         router.push(`${pathname}?${params.toString()}`);
     };
+
+    // Debounced update
+    useEffect(() => {
+        const timer = setTimeout(updateUrl, 500);
+        return () => clearTimeout(timer);
+    }, [
+        searchTerm,
+        make,
+        model,
+        yearRange,
+        priceRange,
+        mileageRange,
+        fuel,
+        transmission,
+        drive,
+        color,
+        seats,
+        doors,
+        engineMin,
+        engineMax,
+        vehicleType,
+    ]);
 
     const clearFilters = () => {
         setSearchTerm('');
@@ -123,28 +146,6 @@ export function VehicleFiltersClient({ currentFilters }: VehicleFiltersClientPro
         setVehicleType('');
         router.push(pathname);
     };
-
-    // Auto-update on input change (debounced later)
-    useEffect(() => {
-        const timer = setTimeout(updateFilters, 500);
-        return () => clearTimeout(timer);
-    }, [
-        searchTerm,
-        make,
-        model,
-        yearRange,
-        priceRange,
-        mileageRange,
-        fuel,
-        transmission,
-        drive,
-        color,
-        seats,
-        doors,
-        engineMin,
-        engineMax,
-        vehicleType,
-    ]);
 
     return (
         <div className="space-y-6 bg-white p-4 rounded-lg border">
